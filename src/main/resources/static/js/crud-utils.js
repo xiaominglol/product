@@ -15,16 +15,18 @@ function add(param) {
         var table = layui.table;
 
         $("[name='id']").val("");
-
-        table.render({
-            elem: '#detailTable'
-            , data: []
-            , id: 'detailTable'
-            , cols: [param.cols]
-            , done: function (res, curr, count) {
-                checkboxMultiSelect($, "detailTable");
-            }
-        });
+        // 如果有明细表格
+        if(param.cols) {
+            table.render({
+                elem: '#detailTable'
+                , data: []
+                , id: 'detailTable'
+                , cols: [param.cols]
+                , done: function (res, curr, count) {
+                    checkboxMultiSelect($, "detailTable");
+                }
+            });
+        }
 
         openAddOrUpdate({
             title: param.title
@@ -49,15 +51,17 @@ function edit(param) {
             for (var i in param.fields) {
                 $("[name='" + param.fields[i].field + "']").val(selectedData.data[0][param.fields[i].field]);
             }
-
-            renderTable({
-                dom: "detailTable"
-                , url: param.url
-                , height: ''
-                , page: false
-                , where: {"pid": selectedData.data[0].id}
-                , cols: [param.cols]
-            });
+            // 如果有明细表格
+            if(param.cols) {
+                renderTable({
+                    dom: "detailTable"
+                    , url: param.url
+                    , height: ''
+                    , page: false
+                    , where: {"pid": selectedData.data[0].id}
+                    , cols: [param.cols]
+                });
+            }
 
             form.render();
 

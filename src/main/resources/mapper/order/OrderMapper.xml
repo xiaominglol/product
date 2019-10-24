@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gemini.business.order.mapper.OrderMapper">
+
+    <resultMap id="resultMap" type="com.gemini.business.order.po.OrderPo">
+                <id column="id" property="id" javaType="Long"/>
+                <result column="business_id" property="businessId" javaType="Long"/>
+                <result column="business_name" property="businessName" javaType="String"/>
+                <result column="store_id" property="storeId" javaType="Long"/>
+                <result column="store_name" property="storeName" javaType="String"/>
+                <result column="customer_id" property="customerId" javaType="Long"/>
+                <result column="customer_name" property="customerName" javaType="String"/>
+                <result column="amount" property="amount" javaType="java.math.BigDecimal"/>
+                <result column="state_id" property="stateId" javaType="Long"/>
+                <result column="state_code" property="stateCode" javaType="String"/>
+                <result column="state_name" property="stateName" javaType="String"/>
+                <result column="create_time" property="createTime" javaType="java.util.Date"/>
+    </resultMap>
+
+    <sql id="fields">
+                            o.business_id,
+                    o.business_name,
+                    o.store_id,
+                    o.store_name,
+                    o.customer_id,
+                    o.customer_name,
+                    o.amount,
+                    o.state_id,
+                    o.state_code,
+                    o.state_name,
+                    o.create_time
+    </sql>
+
+    <sql id="table">
+        d_l_risk_dict o
+    </sql>
+
+    <sql id="where">
+        <where>
+                    <if test="businessId != null and businessId != ''">
+                        and o.business_id = #{businessId}
+                    </if>
+                    <if test="businessName != null and businessName != ''">
+                        and o.business_name = #{businessName}
+                    </if>
+                    <if test="storeId != null and storeId != ''">
+                        and o.store_id = #{storeId}
+                    </if>
+                    <if test="storeName != null and storeName != ''">
+                        and o.store_name = #{storeName}
+                    </if>
+                    <if test="customerId != null and customerId != ''">
+                        and o.customer_id = #{customerId}
+                    </if>
+                    <if test="customerName != null and customerName != ''">
+                        and o.customer_name = #{customerName}
+                    </if>
+                    <if test="amount != null and amount != ''">
+                        and o.amount = #{amount}
+                    </if>
+                    <if test="stateId != null and stateId != ''">
+                        and o.state_id = #{stateId}
+                    </if>
+                    <if test="stateCode != null and stateCode != ''">
+                        and o.state_code = #{stateCode}
+                    </if>
+                    <if test="stateName != null and stateName != ''">
+                        and o.state_name = #{stateName}
+                    </if>
+                    <if test="createTime != null and createTime != ''">
+                        and o.create_time = #{createTime}
+                    </if>
+        </where>
+    </sql>
+
+    <sql id="order">
+        <if test="(ascs != null ascs != '') or (descs != null descs != '')">
+            order by
+            <if test="ascs != null and ascs != ''">
+                ${ascs} asc
+            </if>
+            <if test="descs != null and descs != ''">
+                ${descs} desc
+            </if>
+        </if>
+    </sql>
+
+    <select id="get" parameterType="java.lang.Long" resultType="java.util.HashMap">
+        select
+        <include refid="fields"/>
+        from
+        <include refid="table"/>
+        where rd.id = #{id}
+    </select>
+
+    <select id="list" resultType="java.util.HashMap">
+        select
+        <include refid="fields"/>
+        from
+        <include refid="table"/>
+        <include refid="where"/>
+        <include refid="order"/>
+    </select>
+
+    <insert id="insert">
+        insert into t_order (
+                            business_id,
+                    business_name,
+                    store_id,
+                    store_name,
+                    customer_id,
+                    customer_name,
+                    amount,
+                    state_id,
+                    state_code,
+                    state_name,
+                    create_time
+        ) values (
+                            #{businessId},
+                    #{businessName},
+                    #{storeId},
+                    #{storeName},
+                    #{customerId},
+                    #{customerName},
+                    #{amount},
+                    #{stateId},
+                    #{stateCode},
+                    #{stateName},
+                    #{createTime}
+        )
+    </insert>
+
+    <update id="update" parameterType="java.lang.Long">
+        update t_order
+        <set>
+                                    business_id = #{businessId},
+                        business_name = #{businessName},
+                        store_id = #{storeId},
+                        store_name = #{storeName},
+                        customer_id = #{customerId},
+                        customer_name = #{customerName},
+                        amount = #{amount},
+                        state_id = #{stateId},
+                        state_code = #{stateCode},
+                        state_name = #{stateName},
+                        create_time = #{createTime}
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="java.lang.Long">
+        delete from
+        <include refid="table"/>
+        where o.id = #{id}
+    </delete>
+
+</mapper>

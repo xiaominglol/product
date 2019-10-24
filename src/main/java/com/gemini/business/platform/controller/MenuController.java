@@ -37,7 +37,7 @@ public class MenuController {
 
     @GetMapping("/gotoList")
     public String gotoList() {
-        return "module/sys/menu/menu_list";
+        return "platform/menu/menu_list";
     }
 
     /**

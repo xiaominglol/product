@@ -7,7 +7,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.gemini.boot.framework.mybatis.utils.BeanUtils;
 import com.gemini.boot.framework.mybatis.utils.StringUtils;
-import com.gemini.business.common.enums.StateEnum;
+import com.gemini.business.platform.enums.StateEnum;
 import com.gemini.business.platform.po.UserPo;
 import com.gemini.business.platform.utils.UserUtils;
 import org.slf4j.Logger;

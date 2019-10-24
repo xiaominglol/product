@@ -160,16 +160,10 @@ function getDictByCode(param) {
                         }
 
                     } else {
-                        console.log("no isRadio")
                         //否则下拉框
                         html += "<option value=''>请选择</option>";
-                        /*if (param.isParent) {
-                            html += "<option value='0'>请选择</option>";
-                        } else {
-                            html += "<option value=''>请选择</option>";
-                        }*/
                         for (var i in data) {
-                            html += "<option value='" + data[i].code;
+                            html += "<option value='" + data[i].id;
                             //是否默认选中
                             if (data[i].isDefault == 1) {
                                 html += "' selected>" + data[i].name + "</option>";

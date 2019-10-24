@@ -40,7 +40,7 @@ public class LogController {
 
     @GetMapping("/loginLog/gotoList")
     public String loginLogGotoList() {
-        return "module/sys/log/login_log_list";
+        return "platform/log/login_log_list";
     }
 
     @GetMapping("/loginLog")

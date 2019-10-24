@@ -37,7 +37,7 @@ public class OrgController {
 
     @GetMapping("/gotoList")
     public String gotoList() {
-        return "module/sys/org/org_list";
+        return "platform/org/org_list";
     }
 
     /**
@@ -97,7 +97,6 @@ public class OrgController {
                 return Message.fail(CommonFailInfo.Id_CAN_NOT_BE_EMPTY);
             }
         } catch (Exception e) {
-//            excpLogService.save(ExcpLog.saveExcpLog(this.getClass().getName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName() + "()", e.getMessage(), logger));
             return Message.fail(e.getMessage());
         }
     }
@@ -108,13 +107,13 @@ public class OrgController {
     public Message add(@RequestBody OrgPo orgPo) {
         try {
             if (StringUtils.isEmpty(orgPo.getId())) {
+                orgPo.initDict();
                 orgService.insertSync(orgPo, orgPo.getDetailList(), true);
                 return Message.success(orgPo);
             } else {
                 return Message.fail(CommonFailInfo.Id_ALREADY_EXIST);
             }
         } catch (Exception e) {
-//            excpLogService.save(ExcpLog.saveExcpLog(this.getClass().getName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName() + "()", e.getMessage(), logger));
             return Message.fail(e.getMessage());
         }
     }
@@ -125,13 +124,13 @@ public class OrgController {
     public Message update(@RequestBody OrgPo orgPo) {
         try {
             if (!StringUtils.isEmpty(orgPo.getId())) {
+                orgPo.initDict();
                 orgService.updateSync(orgPo, orgPo.getDetailList(), true);
                 return Message.success(orgPo);
             } else {
                 return Message.fail(CommonFailInfo.Id_CAN_NOT_BE_EMPTY);
             }
         } catch (Exception e) {
-//            excpLogService.save(ExcpLog.saveExcpLog(this.getClass().getName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName() + "()", e.getMessage(), logger));
             return Message.fail(e.getMessage());
         }
     }
@@ -148,7 +147,6 @@ public class OrgController {
                 return Message.fail(CommonFailInfo.Id_CAN_NOT_BE_EMPTY);
             }
         } catch (Exception e) {
-//            excpLogService.save(ExcpLog.saveExcpLog(this.getClass().getName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName() + "()", e.getMessage(), logger));
             return Message.fail(e.getMessage());
         }
     }

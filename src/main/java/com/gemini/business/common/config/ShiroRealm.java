@@ -1,6 +1,6 @@
 package com.gemini.business.common.config;
 
-import com.gemini.business.common.enums.StateEnum;
+import com.gemini.business.platform.enums.StateEnum;
 import com.gemini.business.common.utils.MD5Util;
 import com.gemini.business.platform.po.LoginLogPo;
 import com.gemini.business.platform.po.UserPo;

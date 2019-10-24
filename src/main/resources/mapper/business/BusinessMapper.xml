@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gemini.business.business.mapper.BusinessMapper">
+
+    <resultMap id="resultMap" type="com.gemini.business.business.po.BusinessPo">
+                <id column="id" property="id" javaType="Long"/>
+                <result column="name" property="name" javaType="String"/>
+    </resultMap>
+
+    <sql id="fields">
+                            b.name
+    </sql>
+
+    <sql id="table">
+        d_l_risk_dict b
+    </sql>
+
+    <sql id="where">
+        <where>
+                    <if test="name != null and name != ''">
+                        and b.name = #{name}
+                    </if>
+        </where>
+    </sql>
+
+    <sql id="order">
+        <if test="(ascs != null ascs != '') or (descs != null descs != '')">
+            order by
+            <if test="ascs != null and ascs != ''">
+                ${ascs} asc
+            </if>
+            <if test="descs != null and descs != ''">
+                ${descs} desc
+            </if>
+        </if>
+    </sql>
+
+    <select id="get" parameterType="java.lang.Long" resultType="java.util.HashMap">
+        select
+        <include refid="fields"/>
+        from
+        <include refid="table"/>
+        where rd.id = #{id}
+    </select>
+
+    <select id="list" resultType="java.util.HashMap">
+        select
+        <include refid="fields"/>
+        from
+        <include refid="table"/>
+        <include refid="where"/>
+        <include refid="order"/>
+    </select>
+
+    <insert id="insert">
+        insert into t_business (
+                            name
+        ) values (
+                            #{name}
+        )
+    </insert>
+
+    <update id="update" parameterType="java.lang.Long">
+        update t_business
+        <set>
+                                    name = #{name}
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="java.lang.Long">
+        delete from
+        <include refid="table"/>
+        where b.id = #{id}
+    </delete>
+
+</mapper>

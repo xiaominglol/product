@@ -1,7 +1,9 @@
 package com.gemini.business.platform.po;
 
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.gemini.boot.framework.mybatis.entity.Dict;
 import com.gemini.boot.framework.mybatis.po.BaseSubPo;
+import com.gemini.business.platform.enums.Dicts;
 import lombok.Data;
 
 /**
@@ -37,4 +39,10 @@ public class OrgPo extends BaseSubPo<OrgPo> {
      * 排序
      */
     private String sort;
+
+    public void initDict() {
+        Dict orgType = Dicts.get(getOrgTypeId());
+        setOrgTypeCode(orgType.getCode());
+        setOrgTypeName(orgType.getName());
+    }
 }

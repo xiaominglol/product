@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gemini.business.customer.mapper.CustomerMapper">
+
+    <resultMap id="resultMap" type="com.gemini.business.customer.po.CustomerPo">
+                <id column="id" property="id" javaType="Long"/>
+                <result column="name" property="name" javaType="String"/>
+                <result column="account" property="account" javaType="String"/>
+                <result column="password" property="password" javaType="String"/>
+                <result column="phone" property="phone" javaType="Integer"/>
+                <result column="create_time" property="createTime" javaType="java.util.Date"/>
+    </resultMap>
+
+    <sql id="fields">
+                            c.name,
+                    c.account,
+                    c.password,
+                    c.phone,
+                    c.create_time
+    </sql>
+
+    <sql id="table">
+        d_l_risk_dict c
+    </sql>
+
+    <sql id="where">
+        <where>
+                    <if test="name != null and name != ''">
+                        and c.name = #{name}
+                    </if>
+                    <if test="account != null and account != ''">
+                        and c.account = #{account}
+                    </if>
+                    <if test="password != null and password != ''">
+                        and c.password = #{password}
+                    </if>
+                    <if test="phone != null and phone != ''">
+                        and c.phone = #{phone}
+                    </if>
+                    <if test="createTime != null and createTime != ''">
+                        and c.create_time = #{createTime}
+                    </if>
+        </where>
+    </sql>
+
+    <sql id="order">
+        <if test="(ascs != null ascs != '') or (descs != null descs != '')">
+            order by
+            <if test="ascs != null and ascs != ''">
+                ${ascs} asc
+            </if>
+            <if test="descs != null and descs != ''">
+                ${descs} desc
+            </if>
+        </if>
+    </sql>
+
+    <select id="get" parameterType="java.lang.Long" resultType="java.util.HashMap">
+        select
+        <include refid="fields"/>
+        from
+        <include refid="table"/>
+        where rd.id = #{id}
+    </select>
+
+    <select id="list" resultType="java.util.HashMap">
+        select
+        <include refid="fields"/>
+        from
+        <include refid="table"/>
+        <include refid="where"/>
+        <include refid="order"/>
+    </select>
+
+    <insert id="insert">
+        insert into t_customer (
+                            name,
+                    account,
+                    password,
+                    phone,
+                    create_time
+        ) values (
+                            #{name},
+                    #{account},
+                    #{password},
+                    #{phone},
+                    #{createTime}
+        )
+    </insert>
+
+    <update id="update" parameterType="java.lang.Long">
+        update t_customer
+        <set>
+                                    name = #{name},
+                        account = #{account},
+                        password = #{password},
+                        phone = #{phone},
+                        create_time = #{createTime}
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="java.lang.Long">
+        delete from
+        <include refid="table"/>
+        where c.id = #{id}
+    </delete>
+
+</mapper>

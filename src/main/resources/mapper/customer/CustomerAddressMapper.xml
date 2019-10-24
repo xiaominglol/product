@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gemini.business.customer.mapper.CustomerAddressMapper">
+
+    <resultMap id="resultMap" type="com.gemini.business.customer.po.CustomerAddressPo">
+                <id column="id" property="id" javaType="Long"/>
+                <result column="customer_id" property="customerId" javaType="Long"/>
+                <result column="customer_name" property="customerName" javaType="String"/>
+                <result column="name" property="name" javaType="String"/>
+                <result column="phone" property="phone" javaType="Integer"/>
+                <result column="province" property="province" javaType="String"/>
+                <result column="city" property="city" javaType="String"/>
+                <result column="area" property="area" javaType="String"/>
+                <result column="address" property="address" javaType="String"/>
+                <result column="is_default" property="isDefault" javaType="Byte"/>
+    </resultMap>
+
+    <sql id="fields">
+                            a.customer_id,
+                    a.customer_name,
+                    a.name,
+                    a.phone,
+                    a.province,
+                    a.city,
+                    a.area,
+                    a.address,
+                    a.is_default
+    </sql>
+
+    <sql id="table">
+        d_l_risk_dict a
+    </sql>
+
+    <sql id="where">
+        <where>
+                    <if test="customerId != null and customerId != ''">
+                        and a.customer_id = #{customerId}
+                    </if>
+                    <if test="customerName != null and customerName != ''">
+                        and a.customer_name = #{customerName}
+                    </if>
+                    <if test="name != null and name != ''">
+                        and a.name = #{name}
+                    </if>
+                    <if test="phone != null and phone != ''">
+                        and a.phone = #{phone}
+                    </if>
+                    <if test="province != null and province != ''">
+                        and a.province = #{province}
+                    </if>
+                    <if test="city != null and city != ''">
+                        and a.city = #{city}
+                    </if>
+                    <if test="area != null and area != ''">
+                        and a.area = #{area}
+                    </if>
+                    <if test="address != null and address != ''">
+                        and a.address = #{address}
+                    </if>
+                    <if test="isDefault != null and isDefault != ''">
+                        and a.is_default = #{isDefault}
+                    </if>
+        </where>
+    </sql>
+
+    <sql id="order">
+        <if test="(ascs != null ascs != '') or (descs != null descs != '')">
+            order by
+            <if test="ascs != null and ascs != ''">
+                ${ascs} asc
+            </if>
+            <if test="descs != null and descs != ''">
+                ${descs} desc
+            </if>
+        </if>
+    </sql>
+
+    <select id="get" parameterType="java.lang.Long" resultType="java.util.HashMap">
+        select
+        <include refid="fields"/>
+        from
+        <include refid="table"/>
+        where rd.id = #{id}
+    </select>
+
+    <select id="list" resultType="java.util.HashMap">
+        select
+        <include refid="fields"/>
+        from
+        <include refid="table"/>
+        <include refid="where"/>
+        <include refid="order"/>
+    </select>
+
+    <insert id="insert">
+        insert into t_customer_address (
+                            customer_id,
+                    customer_name,
+                    name,
+                    phone,
+                    province,
+                    city,
+                    area,
+                    address,
+                    is_default
+        ) values (
+                            #{customerId},
+                    #{customerName},
+                    #{name},
+                    #{phone},
+                    #{province},
+                    #{city},
+                    #{area},
+                    #{address},
+                    #{isDefault}
+        )
+    </insert>
+
+    <update id="update" parameterType="java.lang.Long">
+        update t_customer_address
+        <set>
+                                    customer_id = #{customerId},
+                        customer_name = #{customerName},
+                        name = #{name},
+                        phone = #{phone},
+                        province = #{province},
+                        city = #{city},
+                        area = #{area},
+                        address = #{address},
+                        is_default = #{isDefault}
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="java.lang.Long">
+        delete from
+        <include refid="table"/>
+        where a.id = #{id}
+    </delete>
+
+</mapper>

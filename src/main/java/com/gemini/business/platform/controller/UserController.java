@@ -52,7 +52,7 @@ public class UserController {
     @GetMapping("/gotoList")
     //@RequiresPermissions("3333")
     public String gotoList() {
-        return "module/sys/user/user_list";
+        return "platform/user/user_list";
     }
 
     @GetMapping

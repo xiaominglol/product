@@ -35,7 +35,7 @@ public class RoleController {
 
     @RequestMapping("/gotoList")
     public String gotoList() {
-        return "module/sys/role/role_list";
+        return "platform/role/role_list";
     }
 
     @GetMapping

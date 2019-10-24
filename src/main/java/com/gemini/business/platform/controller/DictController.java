@@ -1,6 +1,5 @@
 package com.gemini.business.platform.controller;
 
-
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -11,6 +10,7 @@ import com.gemini.business.common.annotation.SysLog;
 import com.gemini.business.platform.po.DictPo;
 import com.gemini.business.platform.service.DictService;
 import com.gemini.business.platform.service.ErrorLogService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
@@ -24,6 +24,7 @@ import java.util.List;
  * @author 小明不读书
  * @date 2018-10-24
  */
+@Slf4j
 @Controller
 @RequestMapping("/sys/dict")
 public class DictController {
@@ -35,7 +36,7 @@ public class DictController {
 
     @GetMapping("/gotoList")
     public String gotoList() {
-        return "module/sys/dict/dict_list";
+        return "platform/dict/dict_list";
     }
 
     @GetMapping
@@ -62,7 +63,6 @@ public class DictController {
                 return Message.success(list);
             }
         } catch (Exception e) {
-//            excpLogService.save(ExcpLog.saveExcpLog(this.getClass().getName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName() + "()", e.getMessage(), logger));
             return Message.fail(e.getMessage());
         }
     }
@@ -78,7 +78,6 @@ public class DictController {
                 return Message.fail(CommonFailInfo.Id_CAN_NOT_BE_EMPTY);
             }
         } catch (Exception e) {
-//            excpLogService.save(ExcpLog.saveExcpLog(this.getClass().getName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName() + "()", e.getMessage(), logger));
             return Message.fail(e.getMessage());
         }
     }
@@ -95,7 +94,6 @@ public class DictController {
                 return Message.fail(CommonFailInfo.Id_ALREADY_EXIST);
             }
         } catch (Exception e) {
-//            excpLogService.save(ExcpLog.saveExcpLog(this.getClass().getName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName() + "()", e.getMessage(), logger));
             return Message.fail(e.getMessage());
         }
     }
@@ -112,7 +110,6 @@ public class DictController {
                 return Message.fail(CommonFailInfo.Id_CAN_NOT_BE_EMPTY);
             }
         } catch (Exception e) {
-//            excpLogService.save(ExcpLog.saveExcpLog(this.getClass().getName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName() + "()", e.getMessage(), logger));
             return Message.fail(e.getMessage());
         }
     }
@@ -129,7 +126,6 @@ public class DictController {
                 return Message.fail(CommonFailInfo.Id_CAN_NOT_BE_EMPTY);
             }
         } catch (Exception e) {
-//            excpLogService.save(ExcpLog.saveExcpLog(this.getClass().getName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName() + "()", e.getMessage(), logger));
             return Message.fail(e.getMessage());
         }
     }

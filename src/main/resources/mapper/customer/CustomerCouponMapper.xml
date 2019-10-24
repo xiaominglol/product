@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gemini.business.customer.mapper.CustomerCouponMapper">
+
+    <resultMap id="resultMap" type="com.gemini.business.customer.po.CustomerCouponPo">
+                <id column="id" property="id" javaType="Long"/>
+                <result column="customer_id" property="customerId" javaType="Long"/>
+                <result column="customer_name" property="customerName" javaType="String"/>
+                <result column="coupon_id" property="couponId" javaType="Long"/>
+                <result column="coupon_name" property="couponName" javaType="String"/>
+    </resultMap>
+
+    <sql id="fields">
+                            c.customer_id,
+                    c.customer_name,
+                    c.coupon_id,
+                    c.coupon_name
+    </sql>
+
+    <sql id="table">
+        d_l_risk_dict c
+    </sql>
+
+    <sql id="where">
+        <where>
+                    <if test="customerId != null and customerId != ''">
+                        and c.customer_id = #{customerId}
+                    </if>
+                    <if test="customerName != null and customerName != ''">
+                        and c.customer_name = #{customerName}
+                    </if>
+                    <if test="couponId != null and couponId != ''">
+                        and c.coupon_id = #{couponId}
+                    </if>
+                    <if test="couponName != null and couponName != ''">
+                        and c.coupon_name = #{couponName}
+                    </if>
+        </where>
+    </sql>
+
+    <sql id="order">
+        <if test="(ascs != null ascs != '') or (descs != null descs != '')">
+            order by
+            <if test="ascs != null and ascs != ''">
+                ${ascs} asc
+            </if>
+            <if test="descs != null and descs != ''">
+                ${descs} desc
+            </if>
+        </if>
+    </sql>
+
+    <select id="get" parameterType="java.lang.Long" resultType="java.util.HashMap">
+        select
+        <include refid="fields"/>
+        from
+        <include refid="table"/>
+        where rd.id = #{id}
+    </select>
+
+    <select id="list" resultType="java.util.HashMap">
+        select
+        <include refid="fields"/>
+        from
+        <include refid="table"/>
+        <include refid="where"/>
+        <include refid="order"/>
+    </select>
+
+    <insert id="insert">
+        insert into t_customer_coupon (
+                            customer_id,
+                    customer_name,
+                    coupon_id,
+                    coupon_name
+        ) values (
+                            #{customerId},
+                    #{customerName},
+                    #{couponId},
+                    #{couponName}
+        )
+    </insert>
+
+    <update id="update" parameterType="java.lang.Long">
+        update t_customer_coupon
+        <set>
+                                    customer_id = #{customerId},
+                        customer_name = #{customerName},
+                        coupon_id = #{couponId},
+                        coupon_name = #{couponName}
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="java.lang.Long">
+        delete from
+        <include refid="table"/>
+        where c.id = #{id}
+    </delete>
+
+</mapper>

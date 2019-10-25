@@ -1,7 +1,9 @@
 package com.gemini.business.platform.po;
 
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.gemini.boot.framework.mybatis.entity.Dict;
 import com.gemini.boot.framework.mybatis.po.BaseSubPo;
+import com.gemini.business.platform.enums.Dicts;
 import lombok.Data;
 
 /**
@@ -78,4 +80,15 @@ public class MenuPo extends BaseSubPo<MenuPo> {
      */
     private String sort;
 
+    public void initDict() {
+        Dict menuType = Dicts.get(getMenuTypeId());
+        setMenuTypeCode(menuType.getCode());
+        setMenuTypeName(menuType.getName());
+        Dict target = Dicts.get(getTargetId());
+        setTargetCode(target.getCode());
+        setTargetName(target.getName());
+        Dict permission = Dicts.get(getPermissionId());
+        setPermissionCode(permission.getCode());
+        setPermissionName(permission.getName());
+    }
 }

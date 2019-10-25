@@ -85,7 +85,7 @@ public class LoginController {
             try {
                 currentUser.login(token);
                 //设置有效时间为15分钟
-                SecurityUtils.getSubject().getSession().setTimeout(900000);
+                SecurityUtils.getSubject().getSession().setTimeout(3600000);
                 UserPo user = UserUtils.getCurrentUser();
                 session.setAttribute("user", user);
                 // 成功跳转到主页，防止表单重复提交，应用重定向

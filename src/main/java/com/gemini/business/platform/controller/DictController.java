@@ -41,18 +41,18 @@ public class DictController {
 
     @GetMapping
     @ResponseBody
-    public Message list(LayUiPage layUiPage, DictPo dictPo) {
+    public Message list(LayUiPage layUiPage, DictPo po) {
         try {
             QueryWrapper<DictPo> qw = new QueryWrapper<>();
-            if (!StringUtils.isEmpty(dictPo.getName())) {
-                qw.like("name", dictPo.getName()).or().like("code", dictPo.getCode());
+            if (!StringUtils.isEmpty(po.getName())) {
+                qw.like("name", po.getName()).or().like("code", po.getCode());
             }
-            if (!StringUtils.isEmpty(dictPo.getPid())) {
-                qw.eq("pid", dictPo.getPid());
+            if (!StringUtils.isEmpty(po.getPid())) {
+                qw.eq("pid", po.getPid());
                 qw.eq("state_code", "Enable");
             }
-            if (!StringUtils.isEmpty(dictPo.getCode())) {
-                qw.eq("code", dictPo.getCode());
+            if (!StringUtils.isEmpty(po.getCode())) {
+                qw.eq("code", po.getCode());
                 qw.eq("state_code", "Enable");
             }
             if (layUiPage.getPageNum() != 0 && layUiPage.getPageSize() != 0) {
@@ -72,8 +72,8 @@ public class DictController {
     public Message detail(@PathVariable("id") Long id) {
         try {
             if (!StringUtils.isEmpty(id)) {
-                DictPo dictPo = dictService.getById(id);
-                return Message.success(dictPo);
+                DictPo po = dictService.getById(id);
+                return Message.success(po);
             } else {
                 return Message.fail(CommonFailInfo.Id_CAN_NOT_BE_EMPTY);
             }
@@ -85,11 +85,11 @@ public class DictController {
     @SysLog("添加字典")
     @PostMapping
     @ResponseBody
-    public Message add(@RequestBody DictPo dictPo) {
+    public Message add(@RequestBody DictPo po) {
         try {
-            if (StringUtils.isEmpty(dictPo.getId())) {
-                dictService.insertSync(dictPo, dictPo.getDetailList(), true);
-                return Message.success(dictPo);
+            if (StringUtils.isEmpty(po.getId())) {
+                dictService.insertSync(po, po.getDetailList(), true);
+                return Message.success(po);
             } else {
                 return Message.fail(CommonFailInfo.Id_ALREADY_EXIST);
             }
@@ -101,11 +101,11 @@ public class DictController {
     @SysLog("更新字典")
     @PutMapping
     @ResponseBody
-    public Message update(@RequestBody DictPo dictPo) {
+    public Message update(@RequestBody DictPo po) {
         try {
-            if (!StringUtils.isEmpty(dictPo.getId())) {
-                dictService.updateSync(dictPo, dictPo.getDetailList(), true);
-                return Message.success(dictPo);
+            if (!StringUtils.isEmpty(po.getId())) {
+                dictService.updateSync(po, po.getDetailList(), true);
+                return Message.success(po);
             } else {
                 return Message.fail(CommonFailInfo.Id_CAN_NOT_BE_EMPTY);
             }

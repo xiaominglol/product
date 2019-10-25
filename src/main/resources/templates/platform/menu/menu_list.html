@@ -82,7 +82,7 @@
         var baseCols = [[
             {checkbox: true}
             , {field: 'name', title: '菜单名称'}
-            , {field: 'typeName', title: '类型', width: 80, align: 'center'}
+            , {field: 'menuTypeName', title: '类型', width: 80, align: 'center'}
             , {field: 'url', title: 'URL', width: 180}
             , {
                 field: 'icon', title: '图标', width: 80, align: "center", templet: function (d) {
@@ -95,9 +95,12 @@
         ]];
         var baseDetailCols = [
             {type: 'checkbox', width: 35},
-            {field: 'code', title: '字典编码', width: 200, align: 'left', edit: 'text'},
-            {field: 'name', title: '字典名称', width: 200, align: 'left', edit: 'text'},
-            {field: 'description', title: '描述', align: 'left', edit: 'text'}
+            , {field: 'name', title: '菜单名称', edit: 'text'}
+            , {field: 'menuTypeName', title: '类型', width: 80, align: 'center', edit: 'text'}
+            , {field: 'url', title: 'URL', width: 180, edit: 'text'}
+            , {field: 'icon', title: '图标', width: 80, align: "center", edit: 'text'}
+            , {field: 'permissionsCode', title: '权限编码', width: 160, edit: 'text'}
+            , {field: 'sort', title: '排序', width: 80, edit: 'text'}
         ];
 
         //左侧树
@@ -143,9 +146,11 @@
                 , url: baseUrl
                 , cols: baseDetailCols
                 , fields: [
-                    {field: 'code', type: "text"}
-                    , {field: 'name', type: "text"}
-                    , {field: 'description', type: "text"}
+                    {field: 'name', type: "text"}
+                    , {field: 'menuTypeName', type: "text"}
+                    , {field: 'url', type: "text"}
+                    , {field: 'icon', type: "text"}
+                    , {field: 'permissionsCode', type: "text"}
                 ]
             });
         });
@@ -195,7 +200,6 @@
                 , id: "code"
             })
         });
-
 
     });
 

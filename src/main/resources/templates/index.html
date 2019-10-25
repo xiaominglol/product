@@ -138,7 +138,7 @@
                 //先渲染一级菜单
                 if (!menuData[i].pid) {
                     //如果是目录
-                    if (menuData[i].menuTypeCode == "directory") {
+                    if (menuData[i].menuTypeCode == "Directory") {
                         main_menu_html += "<li class='layui-nav-item'><a href='javascript:void(0);' onclick='loadSubMenu(" + menuData[i].id + ");'>" +
                             "<i class='layui-icon " + menuData[i].icon + "'></i>" + menuData[i].name + "</a></li>";
                     } else {
@@ -182,7 +182,7 @@
                         sub_menu_html += "<li class='layui-nav-item'>";
                     }
                     //如果是目录
-                    if (menuData[i].menuTypeCode == "directory") {
+                    if (menuData[i].menuTypeCode == "Directory") {
                         sub_menu_html += "<a href='javascript:;'><i class='layui-icon " + menuData[i].icon + "'></i>" + menuData[i].name + "</a>";
                     } else {
                         //否则是菜单
@@ -199,7 +199,7 @@
                     for (var j in menuData) {
                         if (menuData[i].id == menuData[j].pid) {
                             //如果是目录
-                            if (menuData[j].menuTypeCode == "directory") {
+                            if (menuData[j].menuTypeCode == "Directory") {
                                 third_menu_html += "<dd><a href='javascript:;'><i class='layui-icon " + menuData[j].icon + "'></i>" + menuData[j].name + "</a></dd>";
                             } else {
                                 //否则是菜单

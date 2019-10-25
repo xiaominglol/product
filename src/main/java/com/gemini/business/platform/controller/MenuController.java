@@ -58,14 +58,14 @@ public class MenuController {
 
     @GetMapping
     @ResponseBody
-    public Message list(LayUiPage layUiPage, MenuPo menuPo) {
+    public Message list(LayUiPage layUiPage, MenuPo po) {
         try {
             QueryWrapper<MenuPo> qw = new QueryWrapper<>();
-            if (!StringUtils.isEmpty(menuPo.getId())) {
-                qw.eq("id", menuPo.getId()).or().eq("pid", menuPo.getId());
+            if (!StringUtils.isEmpty(po.getId())) {
+                qw.eq("id", po.getId()).or().eq("pid", po.getId());
             }
-            if (!StringUtils.isEmpty(menuPo.getName())) {
-                qw.like("name", menuPo.getName());
+            if (!StringUtils.isEmpty(po.getName())) {
+                qw.like("name", po.getName());
             }
             if (layUiPage.getPageNum() != 0 && layUiPage.getPageSize() != 0) {
                 IPage<MenuPo> list = menuService.page(new Page<>(layUiPage.getPageNum(), layUiPage.getPageSize()), qw);
@@ -99,11 +99,12 @@ public class MenuController {
     @SysLog("添加菜单")
     @PostMapping
     @ResponseBody
-    public Message add(@RequestBody MenuPo menuPo) {
+    public Message add(@RequestBody MenuPo po) {
         try {
-            if (StringUtils.isEmpty(menuPo.getId())) {
-                menuService.insertSync(menuPo, menuPo.getDetailList(), true);
-                return Message.success(menuPo);
+            if (StringUtils.isEmpty(po.getId())) {
+                po.initDict();
+                menuService.insertSync(po, po.getDetailList(), true);
+                return Message.success(po);
             } else {
                 return Message.fail(CommonFailInfo.Id_ALREADY_EXIST);
             }
@@ -116,11 +117,12 @@ public class MenuController {
     @SysLog("更新菜单")
     @PutMapping
     @ResponseBody
-    public Message update(@RequestBody MenuPo menuPo) {
+    public Message update(@RequestBody MenuPo po) {
         try {
-            if (!StringUtils.isEmpty(menuPo.getId())) {
-                menuService.updateSync(menuPo, menuPo.getDetailList(), true);
-                return Message.success(menuPo);
+            if (!StringUtils.isEmpty(po.getId())) {
+                po.initDict();
+                menuService.updateSync(po, po.getDetailList(), true);
+                return Message.success(po);
             } else {
                 return Message.fail(CommonFailInfo.Id_CAN_NOT_BE_EMPTY);
             }

@@ -40,13 +40,13 @@ public class RoleController {
 
     @GetMapping
     @ResponseBody
-    public Message list(LayUiPage layUiPage, RolePo rolePo) {
+    public Message list(LayUiPage layUiPage, RolePo po) {
         try {
             QueryWrapper<RolePo> qw = new QueryWrapper<>();
             //如果是分页查询
             if (layUiPage.getPageNum() != 0 && layUiPage.getPageSize() != 0) {
-                if (!StringUtils.isEmpty(rolePo.getName())) {
-                    qw.like("name", rolePo.getName()).or().like("code", rolePo.getName());
+                if (!StringUtils.isEmpty(po.getName())) {
+                    qw.like("name", po.getName()).or().like("code", po.getName());
                 }
                 IPage<RolePo> list = roleService.page(new Page<>(layUiPage.getPageNum(), layUiPage.getPageSize()), qw);
                 return Message.success(list);
@@ -66,8 +66,8 @@ public class RoleController {
     public Message detail(@PathVariable("id") Long id) {
         try {
             if (!StringUtils.isEmpty(id)) {
-                RolePo rolePo = roleService.getById(id);
-                return Message.success(rolePo);
+                RolePo po = roleService.getById(id);
+                return Message.success(po);
             } else {
                 return Message.fail(CommonFailInfo.Id_CAN_NOT_BE_EMPTY);
             }
@@ -80,11 +80,11 @@ public class RoleController {
     @SysLog("添加角色")
     @PostMapping
     @ResponseBody
-    public Message add(@RequestBody RolePo rolePo) {
+    public Message add(@RequestBody RolePo po) {
         try {
-            if (StringUtils.isEmpty(rolePo.getId())) {
-                roleService.insertSync(rolePo, rolePo.getDetailList(), false);
-                return Message.success(rolePo);
+            if (StringUtils.isEmpty(po.getId())) {
+                roleService.insertSync(po, po.getDetailList(), false);
+                return Message.success(po);
             } else {
                 return Message.fail(CommonFailInfo.Id_ALREADY_EXIST);
             }
@@ -97,11 +97,11 @@ public class RoleController {
     @SysLog("更新角色")
     @PutMapping
     @ResponseBody
-    public Message update(@RequestBody RolePo rolePo) {
+    public Message update(@RequestBody RolePo po) {
         try {
-            if (!StringUtils.isEmpty(rolePo.getId())) {
-                roleService.updateSync(rolePo, rolePo.getDetailList(), false);
-                return Message.success(rolePo);
+            if (!StringUtils.isEmpty(po.getId())) {
+                roleService.updateSync(po, po.getDetailList(), false);
+                return Message.success(po);
             } else {
                 return Message.fail(CommonFailInfo.Id_CAN_NOT_BE_EMPTY);
             }

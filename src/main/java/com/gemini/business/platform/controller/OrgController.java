@@ -61,17 +61,17 @@ public class OrgController {
 
     @GetMapping
     @ResponseBody
-    public Message list(LayUiPage layUiPage, OrgPo orgPo) {
+    public Message list(LayUiPage layUiPage, OrgPo po) {
         try {
             QueryWrapper<OrgPo> qw = new QueryWrapper<>();
-            if (!StringUtils.isEmpty(orgPo.getName())) {
-                qw.like("name", orgPo.getName());
+            if (!StringUtils.isEmpty(po.getName())) {
+                qw.like("name", po.getName());
             }
-            if (!StringUtils.isEmpty(orgPo.getOrgTypeCode())) {
-                qw.like("org_type_code", orgPo.getOrgTypeCode());
+            if (!StringUtils.isEmpty(po.getOrgTypeCode())) {
+                qw.like("org_type_code", po.getOrgTypeCode());
             }
-            if (!StringUtils.isEmpty(orgPo.getPid())) {
-                qw.eq("pid", orgPo.getPid());
+            if (!StringUtils.isEmpty(po.getPid())) {
+                qw.eq("pid", po.getPid());
             }
             if (layUiPage.getPageNum() != 0 && layUiPage.getPageSize() != 0) {
                 IPage<OrgPo> list = orgService.page(new Page<>(layUiPage.getPageNum(), layUiPage.getPageSize()), qw);
@@ -91,8 +91,8 @@ public class OrgController {
     public Message detail(@PathVariable("id") Long id) {
         try {
             if (!StringUtils.isEmpty(id)) {
-                OrgPo orgPo = orgService.getById(id);
-                return Message.success(orgPo);
+                OrgPo po = orgService.getById(id);
+                return Message.success(po);
             } else {
                 return Message.fail(CommonFailInfo.Id_CAN_NOT_BE_EMPTY);
             }
@@ -104,12 +104,12 @@ public class OrgController {
     @SysLog("添加组织架构")
     @PostMapping
     @ResponseBody
-    public Message add(@RequestBody OrgPo orgPo) {
+    public Message add(@RequestBody OrgPo po) {
         try {
-            if (StringUtils.isEmpty(orgPo.getId())) {
-                orgPo.initDict();
-                orgService.insertSync(orgPo, orgPo.getDetailList(), true);
-                return Message.success(orgPo);
+            if (StringUtils.isEmpty(po.getId())) {
+                po.initDict();
+                orgService.insertSync(po, po.getDetailList(), true);
+                return Message.success(po);
             } else {
                 return Message.fail(CommonFailInfo.Id_ALREADY_EXIST);
             }
@@ -121,12 +121,12 @@ public class OrgController {
     @SysLog("更新组织架构")
     @PutMapping
     @ResponseBody
-    public Message update(@RequestBody OrgPo orgPo) {
+    public Message update(@RequestBody OrgPo po) {
         try {
-            if (!StringUtils.isEmpty(orgPo.getId())) {
-                orgPo.initDict();
-                orgService.updateSync(orgPo, orgPo.getDetailList(), true);
-                return Message.success(orgPo);
+            if (!StringUtils.isEmpty(po.getId())) {
+                po.initDict();
+                orgService.updateSync(po, po.getDetailList(), true);
+                return Message.success(po);
             } else {
                 return Message.fail(CommonFailInfo.Id_CAN_NOT_BE_EMPTY);
             }

@@ -15,7 +15,7 @@ function add(param) {
         var table = layui.table;
 
         $("[name='id']").val("");
-        // 如果有明细表格
+        // 如果有明细表格，则显示，因为有可能只是单表
         if(param.cols) {
             table.render({
                 elem: '#detailTable'
@@ -27,7 +27,7 @@ function add(param) {
                 }
             });
         }
-
+        // 打开添加框
         openAddOrUpdate({
             title: param.title
         });
@@ -47,9 +47,9 @@ function edit(param) {
         var table = layui.table;
         var selectedData = table.checkStatus('table');
         if (selectedData.data.length == 1) {
-            $("[name='id']").val(selectedData.data[0].id);
+            $("#addOrUpdate [name='id']").val(selectedData.data[0].id);
             for (var i in param.fields) {
-                $("[name='" + param.fields[i].field + "']").val(selectedData.data[0][param.fields[i].field]);
+                $("#addOrUpdate [name='" + param.fields[i].field + "']").val(selectedData.data[0][param.fields[i].field]);
             }
             // 如果有明细表格
             if(param.cols) {
@@ -64,7 +64,7 @@ function edit(param) {
             }
 
             form.render();
-
+            // 打开修改框
             openAddOrUpdate({
                 title: param.title
             });
@@ -94,17 +94,17 @@ function saveOrUpdate(param) {
 
             if (data.success) {
                 renderTree({
-                    url: param.baseUrl
+                    url: param.url
                     , click: function (node) {
                         renderTreeTable({
-                            url: param.baseUrl
+                            url: param.url
                             , data: {id: node.id}
                             , cols: param.baseCols
                         });
                     }
                 });
                 renderTreeTable({
-                    url: param.baseUrl
+                    url: param.url
                     , cols: param.baseCols
                 });
             } else {

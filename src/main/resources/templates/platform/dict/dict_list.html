@@ -90,6 +90,11 @@
             {field: 'name', title: '字典名称', align: 'left', edit: 'text'},
             {field: 'description', title: '描述', align: 'left', edit: 'text'}
         ];
+        var baseUpdateCols = [
+            {field: 'code', type: "text"}
+            , {field: 'name', type: "text"}
+            , {field: 'description', type: "text"}
+        ];
 
         //左侧树
         renderTree({
@@ -133,11 +138,7 @@
                 title: '修改字典'
                 , url: baseUrl
                 , cols: baseDetailCols
-                , fields: [
-                    {field: 'code', type: "text"}
-                    , {field: 'name', type: "text"}
-                    , {field: 'description', type: "text"}
-                ]
+                , fields: baseUpdateCols
             });
         });
 
@@ -146,7 +147,6 @@
             data.field.detailList = table.cache.detailTable;
             saveOrUpdate({
                 url: baseUrl
-                , baseUrl: baseUrl
                 , baseCols: baseCols
                 , type: requestType
                 , data: data.field
@@ -170,11 +170,9 @@
 
         // 新增一行 明细
         $(".add_detail").click(function () {
-            var data = {code: "", name: "", description: ""};
             addRowButton({
                 table: "detailTable"
-                , id: "code"
-                , data: data
+                , cols: baseDetailCols
             })
         });
 
@@ -182,7 +180,7 @@
         $(".delete_detail").click(function () {
             batchDelButton({
                 table: "detailTable"
-                , id: "code"
+                , cols: baseDetailCols
             })
         });
     });

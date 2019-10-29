@@ -219,23 +219,40 @@ function buildChildTree(key, nodes, id, pid, name) {
 function addRowButton(param) {
     layui.use(['table'], function () {
         var table = layui.table;
+
+        var data = {};
+        var id = "";//判断唯一字段,一般就是第一个，除开checkbox
+        for(var i in param.cols) {
+            if(param.cols[i] && param.cols[i].hasOwnProperty("field")){
+                if(!id){
+                    id = param.cols[i].field;
+                }
+                data[param.cols[i].field] = '';
+            }
+        }
+        console.log("data",data);
         var tableData = table.cache[param.table];
         if (tableData && tableData.length > 0) {
             for (var i = 0; i < tableData.length; i++) {
-                if (!tableData[i][param.id]) {
-                    layer.msg("已添加！", {
+                if (!tableData[i][id]) {
+                    layer.msg("必填项不能为空！", {
                         icon: 5
                     });
                     return false;
                 }
             }
         }
-        tableData.unshift(param.data);
-        refreshTable({
-            id: param.table,
-            data: tableData,
-            page: false,
-            done: param.done == null ? "" : param.done
+        console.log("tableData",tableData);
+        tableData.unshift(data);
+
+        table.render({
+            elem: '#'+param.table
+            , data: tableData
+            , id: param.table
+            , cols: [param.cols]
+            , done: function (res, curr, count) {
+                checkboxMultiSelect($, "detailTable");
+            }
         });
     });
 }
@@ -259,9 +276,19 @@ function batchDelButton(param) {
             });
             return false;
         }
+
+        var id = "";//判断唯一字段,一般就是第一个，除开checkbox
+        for(var i in param.cols) {
+            if(param.cols[i] && param.cols[i].hasOwnProperty("field")){
+                if(!id){
+                    id = param.cols[i].field;
+                }
+            }
+        }
+
         for (var i = 0; i < selectedData.data.length; i++) {
             for (var j = 0; j < tableData.length; j++) {
-                if (selectedData.data[i][param.id] == tableData[j][param.id]) {
+                if (selectedData.data[i][id] == tableData[j][id]) {
                     tableData.splice(j, 1);
                 }
             }

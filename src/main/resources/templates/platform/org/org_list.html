@@ -75,6 +75,7 @@
         var form = layui.form;
         var table = layui.table;
         var baseUrl = "/sys/org";
+        var moduleName = "组织架构";
         var requestType;
         var baseCols = [[
             {checkbox: true}
@@ -89,6 +90,11 @@
             {field: 'name', title: '名称', align: 'left', edit: 'text'},
             {field: 'orgTypeName', title: '类型', align: 'left', edit: 'text'},
             {field: 'sort', title: '排序', edit: 'text'}
+        ];
+        var baseUpdateCols = [
+            {field: 'name', type: "text"}
+            , {field: 'orgTypeId', type: "checkbox"}
+            , {field: 'sort', type: "text"}
         ];
 
         //左侧树
@@ -122,7 +128,7 @@
         //添加
         $(".addButton").click(function () {
             requestType = add({
-                title: '添加组织架构'
+                title: '添加' + moduleName
                 , cols: baseDetailCols
             });
         });
@@ -130,24 +136,18 @@
         // 修改
         $(".editButton").click(function () {
             requestType = edit({
-                title: '修改组织架构'
+                title: '修改' + moduleName
                 , url: baseUrl
                 , cols: baseDetailCols
-                , fields: [
-                    {field: 'code', type: "text"}
-                    , {field: 'name', type: "text"}
-                    , {field: 'description', type: "text"}
-                ]
+                , fields: baseUpdateCols
             });
         });
-
 
         // 添加/修改 保存
         form.on('submit(saveButton)', function (data) {
             data.field.detailList = table.cache.detailTable;
             saveOrUpdate({
                 url: baseUrl
-                , baseUrl: baseUrl
                 , baseCols: baseCols
                 , type: requestType
                 , data: data.field
@@ -171,11 +171,9 @@
 
         // 新增一行 明细
         $(".add_detail").click(function () {
-            var data = {name: "", orgTypeName: "", sort: ""};
             addRowButton({
                 table: "detailTable"
-                , id: "code"
-                , data: data
+                , cols: baseDetailCols
             })
         });
 
@@ -183,16 +181,19 @@
         $(".delete_detail").click(function () {
             batchDelButton({
                 table: "detailTable"
-                , id: "code"
+                , cols: baseDetailCols
             })
         });
 
-        // 字典类型
-        getDictByCode({
-            dom: "[name='orgTypeId']"
-            , pid: '402592182904320'
-        })
     });
 
 </script>
 
+<script type="text/html" id="optToolBar">
+    {{#  if(d.stateCode == 'Enable'){ }}
+    <a class="layui-btn layui-btn-sm layui-btn-danger" lay-event="disable"><i
+            class="layui-icon layui-icon-password"></i>禁用</a>
+    {{#  } else { }}
+    <a class="layui-btn layui-btn-sm layui-btn-rest" lay-event="enabled"><i class="layui-icon layui-icon-auz"></i>启用</a>
+    {{#  } }}
+</script>

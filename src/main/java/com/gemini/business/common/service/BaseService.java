@@ -137,7 +137,7 @@ public interface BaseService<Po, Mapper extends BaseMapper<Po>> {
      */
     @Async
     default void insertAsync(Po po, Boolean isBase) {
-        log().info("新增数据：{}", po);
+        log().info("异步 新增数据：{}", po);
         if (isBase) {
             insertBefore(po);
         }
@@ -152,7 +152,7 @@ public interface BaseService<Po, Mapper extends BaseMapper<Po>> {
      * @return 1-成功，0-失败
      */
     default int insertSync(Po po, Boolean isBase) {
-        log().info("新增数据：{}", po);
+        log().info("同步 新增数据：{}", po);
         if (isBase) {
             insertBefore(po);
         }
@@ -181,7 +181,7 @@ public interface BaseService<Po, Mapper extends BaseMapper<Po>> {
      */
     @Async
     default void updateAsync(Po po, Boolean isBase) {
-        log().info("更新数据：{}", po);
+        log().info("异步 更新数据：{}", po);
         if (isBase) {
             updateBefore(po);
         }
@@ -196,7 +196,7 @@ public interface BaseService<Po, Mapper extends BaseMapper<Po>> {
      * @return 1-成功，0-失败
      */
     default int updateSync(Po po, Boolean isBase) {
-        log().info("更新数据：{}", po);
+        log().info("同步 更新数据：{}", po);
         if (isBase) {
             updateBefore(po);
         }
@@ -219,6 +219,7 @@ public interface BaseService<Po, Mapper extends BaseMapper<Po>> {
      */
     @Async
     default void deleteByIdAsync(Long id) {
+        log().info("异步 删除数据：{}", id);
         deleteBefore(id);
         mapper().deleteById(id);
     }
@@ -230,6 +231,7 @@ public interface BaseService<Po, Mapper extends BaseMapper<Po>> {
      * @return
      */
     default int deleteByIdSync(Long id) {
+        log().info("同步 删除数据：{}", id);
         deleteBefore(id);
         int result = mapper().deleteById(id);
         return result;

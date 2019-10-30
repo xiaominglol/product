@@ -51,10 +51,6 @@ public class DictController {
                 qw.eq("pid", po.getPid());
                 qw.eq("state_code", "Enable");
             }
-            if (!StringUtils.isEmpty(po.getCode())) {
-                qw.eq("code", po.getCode());
-                qw.eq("state_code", "Enable");
-            }
             if (layUiPage.getPageNum() != 0 && layUiPage.getPageSize() != 0) {
                 IPage<DictPo> list = dictService.page(new Page<>(layUiPage.getPageNum(), layUiPage.getPageSize()), qw);
                 return Message.success(list);

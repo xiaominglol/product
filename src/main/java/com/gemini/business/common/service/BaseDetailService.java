@@ -84,7 +84,7 @@ public interface BaseDetailService<Po, DetailPo, Mapper extends BaseMapper<Po>, 
      */
     @Async
     default void insertAsync(Po po, List<DetailPo> detailPos, Boolean isBase) {
-        log().info("新增数据：{}", po);
+        log().info("异步 新增数据：{}", po);
         insertBefore(po);
         mapper().insert(po);
         insertAfter(po, detailPos, isBase);
@@ -99,7 +99,7 @@ public interface BaseDetailService<Po, DetailPo, Mapper extends BaseMapper<Po>, 
      * @return 1-成功，0-失败
      */
     default int insertSync(Po po, List<DetailPo> detailPos, Boolean isBase) {
-        log().info("新增数据：{}", po);
+        log().info("同步 新增数据：{}", po);
         insertBefore(po);
         int result = mapper().insert(po);
         insertAfter(po, detailPos, isBase);
@@ -125,15 +125,11 @@ public interface BaseDetailService<Po, DetailPo, Mapper extends BaseMapper<Po>, 
      * @param detailPos 子表pos
      * @param isBase    是否基础po
      */
-    default void updateAfter(List<DetailPo> detailPos, Boolean isBase) {
-        if (null != detailPos && 0 < detailPos.size()) {
-            for (DetailPo detailPo : detailPos) {
-                if (isBase) {
-                    updateDetailBefore(detailPo);
-                }
-                detailMapper().updateById(detailPo);
-            }
-        }
+    default void updateAfter(Po po, List<DetailPo> detailPos, Boolean isBase) {
+        // 先删除子表
+        deleteBefore((Long) BeanUtils.invoke(po, "getId"));
+        // 再插入子表
+        insertAfter(po, detailPos, isBase);
     }
 
     /**
@@ -145,10 +141,10 @@ public interface BaseDetailService<Po, DetailPo, Mapper extends BaseMapper<Po>, 
      */
     @Async
     default void updateAsync(Po po, List<DetailPo> detailPos, Boolean isBase) {
-        log().info("更新数据：{}", po);
+        log().info("异步 更新数据：{}", po);
         updateBefore(po);
         mapper().updateById(po);
-        updateAfter(detailPos, isBase);
+        updateAfter(po, detailPos, isBase);
     }
 
     /**
@@ -160,10 +156,10 @@ public interface BaseDetailService<Po, DetailPo, Mapper extends BaseMapper<Po>, 
      * @return 1-成功，0-失败
      */
     default int updateSync(Po po, List<DetailPo> detailPos, Boolean isBase) {
-        log().info("更新数据：{}", po);
+        log().info("同步 更新数据：{}", po);
         updateBefore(po);
         int result = mapper().updateById(po);
-        updateAfter(detailPos, isBase);
+        updateAfter(po, detailPos, isBase);
         return result;
     }
 
@@ -174,7 +170,19 @@ public interface BaseDetailService<Po, DetailPo, Mapper extends BaseMapper<Po>, 
      * @param id 主表id
      */
     default void deleteBefore(Long id) {
-        detailMapper().delete(detailWrapper().eq("pid", id));
+        List<Po> list = list(wrapper().eq("pid", id));
+        deleteBefore(list, id);
+    }
+
+    default void deleteBefore(List<Po> list, Long id) {
+        if (list.size() > 0) {
+            detailMapper().delete(detailWrapper().eq("pid", id));
+            for (Po po : list) {
+                List<Po> list1 = list(wrapper().eq("pid", BeanUtils.invoke(po, "getId")));
+                // 递归删除子表的子表
+                deleteBefore(list1, (Long) BeanUtils.invoke(po, "getId"));
+            }
+        }
     }
 
 }

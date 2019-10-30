@@ -49,7 +49,11 @@ function edit(param) {
         if (selectedData.data.length == 1) {
             $("#addOrUpdate [name='id']").val(selectedData.data[0].id);
             for (var i in param.fields) {
-                $("#addOrUpdate [name='" + param.fields[i].field + "']").val(selectedData.data[0][param.fields[i].field]);
+                if(param.fields[i].type == 'text'){
+                    $("#addOrUpdate [name='" + param.fields[i].field + "']").val(selectedData.data[0][param.fields[i].field]);
+                }else if(param.fields[i].type == 'checkbox'){
+                    $("#addOrUpdate [name='" + param.fields[i].field + "']").val(selectedData.data[0][param.fields[i].field]);
+                }
             }
             // 如果有明细表格
             if(param.cols) {

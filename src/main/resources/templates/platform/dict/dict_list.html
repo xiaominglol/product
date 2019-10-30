@@ -75,6 +75,7 @@
         var form = layui.form;
         var table = layui.table;
         var baseUrl = "/sys/dict";
+        var moduleName = "字典";
         var requestType;
         var baseCols = [[
             {checkbox: true}
@@ -127,7 +128,7 @@
         //添加
         $(".addButton").click(function () {
             requestType = add({
-                title: '添加字典'
+                title: '添加' + moduleName
                 , cols: baseDetailCols
             });
         });
@@ -135,7 +136,7 @@
         // 修改
         $(".editButton").click(function () {
             requestType = edit({
-                title: '修改字典'
+                title: '修改' + moduleName
                 , url: baseUrl
                 , cols: baseDetailCols
                 , fields: baseUpdateCols
@@ -188,7 +189,7 @@
 </script>
 
 <script type="text/html" id="optToolBar">
-    {{#  if(d.status == 1){ }}
+    {{#  if(d.stateCode == 'Enable'){ }}
     <a class="layui-btn layui-btn-sm layui-btn-danger" lay-event="disable"><i
             class="layui-icon layui-icon-password"></i>禁用</a>
     {{#  } else { }}

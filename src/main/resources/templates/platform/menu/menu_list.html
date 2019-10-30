@@ -78,6 +78,7 @@
         var form = layui.form;
         var table = layui.table;
         var baseUrl = "/sys/menu";
+        var moduleName = "菜单";
         var requestType;
         var baseCols = [[
             {checkbox: true}
@@ -92,6 +93,7 @@
             , {field: 'permissionsCode', title: '权限编码', width: 160}
             , {field: 'sort', title: '排序', width: 80}
             , {field: 'stateName', title: '状态', width: 80}
+            , {title: '操作', width: 260, toolbar: '#optToolBar'}
         ]];
         var baseDetailCols = [
             {type: 'checkbox', width: 35},
@@ -101,6 +103,13 @@
             , {field: 'icon', title: '图标', width: 80, align: "center", edit: 'text'}
             , {field: 'permissionsCode', title: '权限编码', width: 160, edit: 'text'}
             , {field: 'sort', title: '排序', width: 80, edit: 'text'}
+        ];
+        var baseUpdateCols = [
+            {field: 'name', type: "text"}
+            , {field: 'menuTypeName', type: "text"}
+            , {field: 'url', type: "text"}
+            , {field: 'icon', type: "text"}
+            , {field: 'permissionsCode', type: "text"}
         ];
 
         //左侧树
@@ -134,7 +143,7 @@
         //添加
         $(".addButton").click(function () {
             requestType = add({
-                title: '添加菜单'
+                title: '添加' + moduleName
                 , cols: baseDetailCols
             });
         });
@@ -142,16 +151,10 @@
         // 修改
         $(".editButton").click(function () {
             requestType = edit({
-                title: '修改菜单'
+                title: '修改' + moduleName
                 , url: baseUrl
                 , cols: baseDetailCols
-                , fields: [
-                    {field: 'name', type: "text"}
-                    , {field: 'menuTypeName', type: "text"}
-                    , {field: 'url', type: "text"}
-                    , {field: 'icon', type: "text"}
-                    , {field: 'permissionsCode', type: "text"}
-                ]
+                , fields: baseUpdateCols
             });
         });
 
@@ -160,7 +163,6 @@
             data.field.detailList = table.cache.detailTable;
             saveOrUpdate({
                 url: baseUrl
-                , baseUrl: baseUrl
                 , baseCols: baseCols
                 , type: requestType
                 , data: data.field
@@ -182,14 +184,11 @@
             }
         });
 
-
         // 新增一行 明细
         $(".add_detail").click(function () {
-            var data = {code: "", name: "", description: ""};
             addRowButton({
                 table: "detailTable"
-                , id: "code"
-                , data: data
+                , cols: baseDetailCols
             })
         });
 
@@ -197,7 +196,7 @@
         $(".delete_detail").click(function () {
             batchDelButton({
                 table: "detailTable"
-                , id: "code"
+                , cols: baseDetailCols
             })
         });
 
@@ -205,3 +204,11 @@
 
 </script>
 
+<script type="text/html" id="optToolBar">
+    {{#  if(d.stateCode == 'Enable'){ }}
+    <a class="layui-btn layui-btn-sm layui-btn-danger" lay-event="disable"><i
+            class="layui-icon layui-icon-password"></i>禁用</a>
+    {{#  } else { }}
+    <a class="layui-btn layui-btn-sm layui-btn-rest" lay-event="enabled"><i class="layui-icon layui-icon-auz"></i>启用</a>
+    {{#  } }}
+</script>

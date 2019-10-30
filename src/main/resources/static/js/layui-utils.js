@@ -107,11 +107,11 @@ function openAddOrUpdate(param) {
                 /*}, function (index) {
                 });*/
 
-                refreshTable({
-                    id: param.tableId
-                    , data: []
-                    , page: false
-                });
+                // refreshTable({
+                //     id: param.tableId
+                //     , data: []
+                //     , page: false
+                // });
                 return false;
             }
         })
@@ -293,11 +293,14 @@ function batchDelButton(param) {
                 }
             }
         }
-        refreshTable({
-            id: param.table,
-            data: tableData,
-            page: false,
-            done: param.done == null ? "" : param.done
+        table.render({
+            elem: '#'+param.table
+            , data: tableData
+            , id: param.table
+            , cols: [param.cols]
+            , done: function (res, curr, count) {
+                checkboxMultiSelect($, "detailTable");
+            }
         });
     });
 }

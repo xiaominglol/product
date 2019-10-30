@@ -70,7 +70,7 @@ public class LogController {
 
     @GetMapping("/optLog/gotoList")
     public String optLogGotoList() {
-        return "module/sys/log/opt_log_list";
+        return "platform/log/opt_log_list";
     }
 
     @GetMapping("/optLog")
@@ -97,7 +97,7 @@ public class LogController {
 
     @GetMapping("/errorLog/gotoList")
     public String errorLogGotoList() {
-        return "module/sys/log/error_log_list";
+        return "platform/log/error_log_list";
     }
 
     @GetMapping("/errorLog")

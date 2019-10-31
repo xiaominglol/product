@@ -30,6 +30,7 @@ function add(param) {
         // 打开添加框
         openAddOrUpdate({
             title: param.title
+            , area: param.area == null ? ['900px', '550px'] : param.area
         });
     });
     return requestType;
@@ -51,8 +52,10 @@ function edit(param) {
             for (var i in param.fields) {
                 if(param.fields[i].type == 'text'){
                     $("#addOrUpdate [name='" + param.fields[i].field + "']").val(selectedData.data[0][param.fields[i].field]);
-                }else if(param.fields[i].type == 'checkbox'){
+                } else if (param.fields[i].type == 'select') {
                     $("#addOrUpdate [name='" + param.fields[i].field + "']").val(selectedData.data[0][param.fields[i].field]);
+                } else if (param.fields[i].type == 'radio') {
+                    $("#addOrUpdate [name='" + param.fields[i].field + "'][value='" + selectedData.data[0][param.fields[i].field] + "']").prop("checked", true);
                 }
             }
             // 如果有明细表格
@@ -64,6 +67,7 @@ function edit(param) {
                     , page: false
                     , where: {"pid": selectedData.data[0].id}
                     , cols: [param.cols]
+                    , hasSelect: param.hasSelect
                 });
             }
 
@@ -71,6 +75,7 @@ function edit(param) {
             // 打开修改框
             openAddOrUpdate({
                 title: param.title
+                , area: param.area == null ? ['900px', '550px'] : param.area
             });
         } else {
             layer.msg('请选择一条数据', {icon: 0});

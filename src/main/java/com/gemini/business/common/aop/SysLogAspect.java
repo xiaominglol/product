@@ -102,7 +102,6 @@ public class SysLogAspect {
             optLogPoPo.setUserAccount(user.getAccount());
             optLogPoPo.setUserName(user.getName());
         }
-        optLogPoPo.setId(123L);
         //获取request
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = attributes.getRequest();

@@ -140,6 +140,9 @@ public interface BaseService<Po, Mapper extends BaseMapper<Po>> {
         log().info("异步 新增数据：{}", po);
         if (isBase) {
             insertBefore(po);
+        } else {
+            // 主键id
+            BeanUtils.invoke(po, "setId", uid());
         }
         mapper().insert(po);
     }
@@ -155,6 +158,9 @@ public interface BaseService<Po, Mapper extends BaseMapper<Po>> {
         log().info("同步 新增数据：{}", po);
         if (isBase) {
             insertBefore(po);
+        } else {
+            // 主键id
+            BeanUtils.invoke(po, "setId", uid());
         }
         int result = mapper().insert(po);
         return result;

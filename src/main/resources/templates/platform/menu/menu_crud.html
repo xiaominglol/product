@@ -1,53 +1,77 @@
 <div id="addOrUpdate" style="display: none">
     <form class="layui-form layui-form-pane">
+        <div class="layui-row">
+            <div class="layui-col-md6">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">名称
+                        <span class="require">*</span>
+                    </label>
+                    <div class="layui-input-block">
+                        <input type="hidden" name="id">
+                        <input type="text" id="name" name="name" required lay-verify="required" placeholder="名称"
+                               autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-md6">
+                <div id="urlDiv" class="layui-form-item">
+                    <label class="layui-form-label">URL
+                    </label>
+                    <div class="layui-input-block">
+                        <input type="text" name="url" placeholder="URL" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-row">
+            <div class="layui-col-md6">
+                <div class="layui-form-item" pane>
+                    <label class="layui-form-label">类型
+                        <span class="require">*</span>
+                    </label>
+                    <div class="layui-input-block">
+                        <select name="menuTypeId">
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-md6">
+                <div id="iconDiv" class="layui-form-item">
+                    <label class="layui-form-label">图标</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="icon" placeholder="图标" autocomplete="off" class="layui-input">
+                        <span class="require">获取图标：https://www.layui.com/doc/element/icon.html</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-row">
+            <div class="layui-col-md6">
+                <div id="targetDiv" class="layui-form-item">
+                    <label class="layui-form-label">打开方式
+                        <span class="require">*</span>
+                    </label>
+                    <div class="layui-input-block">
+                        <select name="targetId">
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-md6">
+                <div id="permissionsCodeDiv" class="layui-form-item">
+                    <label class="layui-form-label">权限编码
+                    </label>
+                    <div class="layui-input-block">
+                        <input type="text" name="permissionsCode" placeholder="多个用逗号分隔，如：user:add,user:update"
+                               autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">名称<span class="require">*</span></label>
-            <div class="layui-input-block">
-                <input type="hidden" name="id">
-                <input type="text" id="name" name="name" required lay-verify="required" placeholder="名称"
-                       autocomplete="off" class="layui-input">
-            </div>
-        </div>
-        <div class="layui-form-item" pane>
-            <label class="layui-form-label">类型<span class="require">*</span>
-            </label>
-            <div class="layui-input-block">
-                <select name="menuTypeId">
-                </select>
-            </div>
-        </div>
-        <div id="urlDiv" class="layui-form-item">
-            <label class="layui-form-label">URL<span class="require">*</span>
-            </label>
-            <div class="layui-input-block">
-                <input type="text" name="url" placeholder="URL" autocomplete="off" class="layui-input">
-            </div>
-        </div>
-        <div id="targetDiv" class="layui-form-item">
-            <label class="layui-form-label">打开方式<span class="require">*</span>
-            </label>
-            <div class="layui-input-block">
-                <select name="targetId">
-                </select>
-            </div>
-        </div>
-        <div id="iconDiv" class="layui-form-item">
-            <label class="layui-form-label">图标</label>
-            <div class="layui-input-block">
-                <input type="text" name="icon" placeholder="图标" autocomplete="off" class="layui-input">
-                <span class="require">获取图标：https://www.layui.com/doc/element/icon.html</span>
-            </div>
-        </div>
-        <div id="permissionsCodeDiv" class="layui-form-item">
-            <label class="layui-form-label">权限编码
-            </label>
-            <div class="layui-input-block">
-                <input type="text" name="permissionsCode" placeholder="多个用逗号分隔，如：user:add,user:update"
-                       autocomplete="off" class="layui-input">
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <label class="layui-form-label">排序<span class="require">*</span>
+            <label class="layui-form-label">排序
+                <span class="require">*</span>
             </label>
             <div class="layui-input-block">
                 <input type="text" name="sort" required lay-verify="required" value="1" autocomplete="off"

@@ -108,6 +108,9 @@ public class OrgController {
         try {
             if (StringUtils.isEmpty(po.getId())) {
                 po.initDict();
+                for (OrgPo detailPo : po.getDetailList()) {
+                    detailPo.initDict();
+                }
                 orgService.insertSync(po, po.getDetailList(), true);
                 return Message.success(po);
             } else {
@@ -125,6 +128,9 @@ public class OrgController {
         try {
             if (!StringUtils.isEmpty(po.getId())) {
                 po.initDict();
+                for (OrgPo detailPo : po.getDetailList()) {
+                    detailPo.initDict();
+                }
                 orgService.updateSync(po, po.getDetailList(), true);
                 return Message.success(po);
             } else {

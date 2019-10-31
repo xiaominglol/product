@@ -83,17 +83,21 @@
             , {field: 'orgTypeName', title: '类型', width: 140}
             , {field: 'sort', title: '排序', width: 140}
             , {field: 'stateName', title: '状态', width: 140}
-            , {title: '操作', width: 260, toolbar: '#optToolBar'}
+            , {title: '操作', width: 190, toolbar: '#optToolBar'}
         ]];
         var baseDetailCols = [
             {type: 'checkbox', width: 35},
             {field: 'name', title: '名称', align: 'left', edit: 'text'},
-            {field: 'orgTypeName', title: '类型', align: 'left', edit: 'text'},
+            {
+                field: 'orgTypeId', title: '类型', align: 'left', templet: function (d) {
+                    return '<select name="detailOrgTypeId" class=\'layui-input layui-unselect\' lay-ignore></select>'
+                }
+            },
             {field: 'sort', title: '排序', edit: 'text'}
         ];
         var baseUpdateCols = [
             {field: 'name', type: "text"}
-            , {field: 'orgTypeId', type: "checkbox"}
+            , {field: 'orgTypeId', type: "select"}
             , {field: 'sort', type: "text"}
         ];
 
@@ -140,12 +144,24 @@
                 , url: baseUrl
                 , cols: baseDetailCols
                 , fields: baseUpdateCols
+                , hasSelect: [{
+                    dom: "[name='detailOrgTypeId']"
+                    , pid: "402592182904320"
+                    , dataName: "orgTypeId"
+                }]
             });
+
         });
+
 
         // 添加/修改 保存
         form.on('submit(saveButton)', function (data) {
-            data.field.detailList = table.cache.detailTable;
+            var detailList = table.cache.detailTable;
+            for (var i in detailList) {
+                detailList[i].orgTypeId = $("#detailTable").parent().find("tbody tr").eq(i).find("[name='detailOrgTypeId']").val();
+            }
+            data.field.detailList = detailList;
+
             saveOrUpdate({
                 url: baseUrl
                 , baseCols: baseCols
@@ -175,6 +191,12 @@
                 table: "detailTable"
                 , cols: baseDetailCols
             })
+
+            // 组织架构类型
+            getDictByCode({
+                dom: "[name='detailOrgTypeId']"
+                , pid: '402592182904320'
+            });
         });
 
         // 批量删除 明细

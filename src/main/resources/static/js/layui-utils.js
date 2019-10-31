@@ -16,6 +16,21 @@ function renderTable(param) {
             , cols: param.cols
             , where: param.where
             , done: function (res, curr, count) {
+                // 明细表有没有下拉框
+                if (param.hasSelect) {
+                    var tableData = table.cache.detailTable;
+                    for (var i in param.hasSelect) {
+                        // 组织架构类型
+                        getDictByCode({
+                            dom: param.hasSelect[i].dom
+                            , pid: param.hasSelect[i].pid
+                            , async: false
+                        });
+                        for (var j in tableData) {
+                            $("#detailTable").parent().find("tbody tr").eq(j).find(param.hasSelect[i].dom).val(res.data[j][param.hasSelect[i].dataName]);
+                        }
+                    }
+                }
                 // 是否多选
                 if (param.isMultiSelect) {
                     checkboxMultiSelect($, param.dom);
@@ -84,7 +99,7 @@ function openAddOrUpdate(param) {
             , content: $('#' + (param.id == null ? 'addOrUpdate' : param.id))
             //,skin: 'layui-layer-molv'
             , maxmin: true
-            , area: param.area == null ? ['900px', '550px'] : param.area
+            , area: param.area
             , btn: ['保存', '重置']
             , yes: function (index, layero) {
                 layero.find('.save').click();
@@ -230,7 +245,7 @@ function addRowButton(param) {
                 data[param.cols[i].field] = '';
             }
         }
-        console.log("data",data);
+
         var tableData = table.cache[param.table];
         if (tableData && tableData.length > 0) {
             for (var i = 0; i < tableData.length; i++) {
@@ -242,7 +257,7 @@ function addRowButton(param) {
                 }
             }
         }
-        console.log("tableData",tableData);
+
         tableData.unshift(data);
 
         table.render({

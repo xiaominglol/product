@@ -138,6 +138,7 @@ function getDictByCode(param) {
         $.ajax({
             url: '/sys/dict'
             , type: 'GET'
+            , async: param.async
             , data: {
                 pid: param.pid
                 , pageNum: 1
@@ -172,6 +173,7 @@ function getDictByCode(param) {
                             }
                         }
                     }
+
                     $(param.dom).html(html);
                     form.render();
                 }

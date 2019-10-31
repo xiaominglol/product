@@ -67,6 +67,10 @@ public class MenuController {
             if (!StringUtils.isEmpty(po.getName())) {
                 qw.like("name", po.getName());
             }
+            // 菜单列表修改的时候要带出子菜单，会用到
+            if (!StringUtils.isEmpty(po.getPid())) {
+                qw.eq("pid", po.getPid());
+            }
             if (layUiPage.getPageNum() != 0 && layUiPage.getPageSize() != 0) {
                 IPage<MenuPo> list = menuService.page(new Page<>(layUiPage.getPageNum(), layUiPage.getPageSize()), qw);
                 return Message.success(list);
@@ -103,6 +107,9 @@ public class MenuController {
         try {
             if (StringUtils.isEmpty(po.getId())) {
                 po.initDict();
+                for (MenuPo detailPo : po.getDetailList()) {
+                    detailPo.initDict();
+                }
                 menuService.insertSync(po, po.getDetailList(), true);
                 return Message.success(po);
             } else {
@@ -121,6 +128,9 @@ public class MenuController {
         try {
             if (!StringUtils.isEmpty(po.getId())) {
                 po.initDict();
+                for (MenuPo detailPo : po.getDetailList()) {
+                    detailPo.initDict();
+                }
                 menuService.updateSync(po, po.getDetailList(), true);
                 return Message.success(po);
             } else {

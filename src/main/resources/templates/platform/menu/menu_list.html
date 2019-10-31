@@ -79,37 +79,53 @@
         var table = layui.table;
         var baseUrl = "/sys/menu";
         var moduleName = "菜单";
+        var area = ['1280px', '550px'];
         var requestType;
         var baseCols = [[
             {checkbox: true}
             , {field: 'name', title: '菜单名称'}
-            , {field: 'menuTypeName', title: '类型', width: 80, align: 'center'}
-            , {field: 'url', title: 'URL', width: 180}
+            , {field: 'menuTypeName', title: '类型', width: 120}
+            , {field: 'targetName', title: '打开方式', width: 160}
+            , {field: 'url', title: 'URL', width: 160}
             , {
-                field: 'icon', title: '图标', width: 80, align: "center", templet: function (d) {
+                field: 'icon', title: '图标', width: 80, templet: function (d) {
                     return "<i class='layui-icon " + d.icon + "'></i>";
                 }
             }
             , {field: 'permissionsCode', title: '权限编码', width: 160}
+            , {field: 'permissionsName', title: '权限名称', width: 160}
             , {field: 'sort', title: '排序', width: 80}
             , {field: 'stateName', title: '状态', width: 80}
-            , {title: '操作', width: 260, toolbar: '#optToolBar'}
+            , {title: '操作', width: 190, toolbar: '#optToolBar'}
         ]];
         var baseDetailCols = [
-            {type: 'checkbox', width: 35},
+            {type: 'checkbox', width: 35}
             , {field: 'name', title: '菜单名称', edit: 'text'}
-            , {field: 'menuTypeName', title: '类型', width: 80, align: 'center', edit: 'text'}
-            , {field: 'url', title: 'URL', width: 180, edit: 'text'}
-            , {field: 'icon', title: '图标', width: 80, align: "center", edit: 'text'}
+            , {
+                field: 'menuTypeId', title: '类型', width: 120, templet: function (d) {
+                    return '<select name="detailMenuTypeId" class=\'layui-input layui-unselect\' lay-ignore></select>'
+                }
+            }
+            , {
+                field: 'targetId', title: '打开方式', width: 160, templet: function (d) {
+                    return '<select name="detailTargetId" class=\'layui-input layui-unselect\' lay-ignore></select>'
+                }
+            }
+            , {field: 'url', title: 'URL', width: 160, edit: 'text'}
+            , {field: 'icon', title: '图标', width: 80, edit: 'text'}
             , {field: 'permissionsCode', title: '权限编码', width: 160, edit: 'text'}
+            , {field: 'permissionsName', title: '权限名称', width: 160, edit: 'text'}
             , {field: 'sort', title: '排序', width: 80, edit: 'text'}
         ];
         var baseUpdateCols = [
             {field: 'name', type: "text"}
-            , {field: 'menuTypeName', type: "text"}
+            , {field: 'menuTypeId', type: "select"}
+            , {field: 'targetId', type: "select"}
             , {field: 'url', type: "text"}
             , {field: 'icon', type: "text"}
             , {field: 'permissionsCode', type: "text"}
+            , {field: 'permissionsName', type: "text"}
+            , {field: 'sort', type: "text"}
         ];
 
         //左侧树
@@ -145,6 +161,7 @@
             requestType = add({
                 title: '添加' + moduleName
                 , cols: baseDetailCols
+                , area: area
             });
         });
 
@@ -155,12 +172,28 @@
                 , url: baseUrl
                 , cols: baseDetailCols
                 , fields: baseUpdateCols
+                , area: area
+                , hasSelect: [{
+                    dom: "[name='detailTargetId']"
+                    , pid: "402609161446912"
+                    , dataName: "targetId"
+                }, {
+                    dom: "[name='detailMenuTypeId']"
+                    , pid: "402555407246848"
+                    , dataName: "menuTypeId"
+                }]
             });
         });
 
         // 添加/修改 保存
         form.on('submit(saveButton)', function (data) {
-            data.field.detailList = table.cache.detailTable;
+            var detailList = table.cache.detailTable;
+            for (var i in detailList) {
+                detailList[i].menuTypeId = $("#detailTable").parent().find("tbody tr").eq(i).find("[name='detailMenuTypeId']").val();
+                detailList[i].targetId = $("#detailTable").parent().find("tbody tr").eq(i).find("[name='detailTargetId']").val();
+            }
+            data.field.detailList = detailList;
+
             saveOrUpdate({
                 url: baseUrl
                 , baseCols: baseCols
@@ -189,6 +222,17 @@
             addRowButton({
                 table: "detailTable"
                 , cols: baseDetailCols
+            })
+            // 打开方式
+            getDictByCode({
+                dom: "[name='detailTargetId']"
+                , pid: '402609161446912'
+            })
+
+            // 菜单类型
+            getDictByCode({
+                dom: "[name='detailMenuTypeId']"
+                , pid: '402555407246848'
             })
         });
 

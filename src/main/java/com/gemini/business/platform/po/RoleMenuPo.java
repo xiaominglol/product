@@ -16,11 +16,11 @@ public class RoleMenuPo extends BaseObjectPo {
     /**
      * 角色id
      */
-    private Long role_id;
+    private Long roleId;
 
     /**
      * 菜单id
      */
-    private Long menu_id;
+    private Long menuId;
 
 }

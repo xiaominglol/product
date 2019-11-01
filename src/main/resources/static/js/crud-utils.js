@@ -102,27 +102,35 @@ function saveOrUpdate(param) {
         , success: function (data) {
 
             if (data.success) {
-                renderTree({
-                    url: param.url
-                    , click: function (node) {
-                        renderTreeTable({
-                            url: param.url
-                            , data: {id: node.id}
-                            , cols: param.baseCols
-                        });
-                    }
-                });
-                renderTreeTable({
-                    url: param.url
-                    , cols: param.baseCols
-                });
+                if (param.isTable) {
+                    renderTable({
+                        url: param.url
+                        , cols: param.baseCols
+                    });
+                } else {
+                    renderTree({
+                        url: param.url
+                        , click: function (node) {
+                            renderTreeTable({
+                                url: param.url
+                                , data: {id: node.id}
+                                , cols: param.baseCols
+                            });
+                        }
+                    });
+                    renderTreeTable({
+                        url: param.url
+                        , cols: param.baseCols
+                    });
+                }
+
+                layer.msg('保存成功', {icon: 1});
+                layer.closeAll('page');
             } else {
                 layer.msg(data.message, {icon: 5});
             }
 
             $('.reset').click();
-            layer.msg('保存成功', {icon: 1});
-            layer.closeAll('page');
         },
         error: function (data) {
             layer.msg('保存失败', {icon: 5});
@@ -146,27 +154,35 @@ function del(param) {
                 , success: function (data) {
 
                     if (data.success) {
-                        renderTree({
-                            url: param.baseUrl
-                            , click: function (node) {
-                                renderTreeTable({
-                                    url: param.baseUrl
-                                    , data: {id: node.id}
-                                    , cols: param.baseCols
-                                });
-                            }
-                        });
-                        renderTreeTable({
-                            url: param.baseUrl
-                            , cols: param.baseCols
-                        });
+                        if (param.isTable) {
+                            renderTable({
+                                url: param.url
+                                , cols: param.baseCols
+                            });
+                        } else {
+                            renderTree({
+                                url: param.baseUrl
+                                , click: function (node) {
+                                    renderTreeTable({
+                                        url: param.baseUrl
+                                        , data: {id: node.id}
+                                        , cols: param.baseCols
+                                    });
+                                }
+                            });
+                            renderTreeTable({
+                                url: param.baseUrl
+                                , cols: param.baseCols
+                            });
+                        }
+
+                        layer.msg('删除成功', {icon: 1});
+                        layer.closeAll('page');
                     } else {
                         layer.msg(data.message, {icon: 5});
                     }
 
                     $('.reset').click();
-                    layer.msg('删除成功', {icon: 1});
-                    layer.closeAll('page');
 
                 }
                 , error: function (data) {
@@ -193,10 +209,7 @@ function confirmUpdate(param) {
                 , type: 'PUT'
                 , success: function (data) {
                     if (data.success) {
-                        refreshTable({
-                            id: param.tableId
-                            , where: ""
-                        });
+                        refreshTable();
                         layer.msg(param.msg + '成功', {icon: 1});
                         layer.close(index);
                     } else {

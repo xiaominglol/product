@@ -83,8 +83,7 @@
         //查询
         form.on('submit(queryButton)', function (data) {
             refreshTable({
-                id: "table"
-                , where: data.field
+                where: data.field
             });
             return false;
         });

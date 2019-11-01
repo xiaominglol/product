@@ -143,7 +143,7 @@ public class MenuController {
     }
 
     @SysLog("删除菜单")
-    @DeleteMapping("/menu/{id}")
+    @DeleteMapping("/{id}")
     @ResponseBody
     public Message delete(@PathVariable("id") Long id) {
         try {

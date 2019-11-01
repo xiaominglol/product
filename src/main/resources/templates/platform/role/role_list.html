@@ -73,15 +73,21 @@
         var table = layui.table;
         var authTree = layui.authTree;
         var baseUrl = "/sys/role";
+        var moduleName = "角色";
         var requestType;
         var baseCols = [[
             {checkbox: true}
             , {field: 'code', title: '角色编码'}
             , {field: 'name', title: '角色名称'}
-            , {field: 'sort', title: '排序', sort: true}
+            , {field: 'sort', title: '排序'}
             , {field: 'stateName', title: '状态'}
             , {title: '操作', toolbar: '#optToolBar'}
         ]];
+        var baseUpdateCols = [
+            {field: 'code', type: "text"}
+            , {field: 'name', type: "text"}
+            , {field: 'sort', type: "text"}
+        ];
 
         //表格
         renderTable({
@@ -99,7 +105,6 @@
 
         var menuData = getSysData({
             url: "/sys/menu"
-            , isTreeTable: true
         });
 
         for(var i in menuData){
@@ -111,7 +116,7 @@
         //添加
         $(".addButton").click(function () {
             requestType = add({
-                title: '添加字典'
+                title: '添加' + moduleName
             });
 
             initAuthTree({
@@ -123,17 +128,12 @@
         // 修改
         $(".editButton").click(function () {
             requestType = edit({
-                title: '修改字典'
-                , fields: [
-                    {field: 'code', type: "text"}
-                    , {field: 'name', type: "text"}
-                    , {field: 'sort', type: "text"}
-                ]
+                title: '修改' + moduleName
+                , fields: baseUpdateCols
             });
-            //$("[name='status'][value='" + selectedData.data[0].status + "']").prop("checked", true);
             var selectedData = table.checkStatus('table');
             $.ajax({
-                url: '/aut/' + selectedData.data[0].id,
+                url: baseUrl + '/aut/' + selectedData.data[0].id,
                 type: 'GET',
                 success: function (data) {
                     if (data.success) {
@@ -154,15 +154,21 @@
         // 添加/修改 保存
         form.on('submit(saveButton)', function (data) {
             // 获取所有已选中节点
-            var checked = authTree.getChecked('#LAY-auth-tree-index');
-            data.field.ids = checked;
-            data.field.detailList = table.cache.detailTable;
+            var menuIds = authTree.getChecked('#authTree');
+            var detailList = [];
+            for (var i in menuIds) {
+                var menuId = {
+                    menuId: menuIds[i]
+                };
+                detailList.push(menuId);
+            }
+            data.field.detailList = detailList;
             saveOrUpdate({
                 url: baseUrl
-                , baseUrl: baseUrl
                 , baseCols: baseCols
                 , type: requestType
                 , data: data.field
+                , isTable: true
             });
             return false;
         });
@@ -175,18 +181,8 @@
                     url: baseUrl + "/" + selectedData.data[0].id
                     , baseUrl: baseUrl
                     , baseCols: baseCols
+                    , isTable: true
                 });
-            } else {
-                layer.msg('请选择一条数据', {icon: 0});
-            }
-        });
-
-
-        // 授权
-        $(".autButton").click(function () {
-            var selectedData = table.checkStatus('table');
-            if (selectedData.data.length != 0) {
-                layer.msg('授权成功', {icon: 1});
             } else {
                 layer.msg('请选择一条数据', {icon: 0});
             }
@@ -196,3 +192,11 @@
 
 </script>
 
+<script type="text/html" id="optToolBar">
+    {{#  if(d.stateCode == 'Enable'){ }}
+    <a class="layui-btn layui-btn-sm layui-btn-danger" lay-event="disable"><i
+            class="layui-icon layui-icon-password"></i>禁用</a>
+    {{#  } else { }}
+    <a class="layui-btn layui-btn-sm layui-btn-rest" lay-event="enabled"><i class="layui-icon layui-icon-auz"></i>启用</a>
+    {{#  } }}
+</script>

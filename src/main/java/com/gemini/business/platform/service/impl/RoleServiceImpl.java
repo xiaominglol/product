@@ -2,7 +2,7 @@ package com.gemini.business.platform.service.impl;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.extension.toolkit.SqlHelper;
+import com.gemini.boot.framework.mybatis.utils.BeanUtils;
 import com.gemini.business.common.service.BaseDetailServiceImpl;
 import com.gemini.business.platform.mapper.RoleMapper;
 import com.gemini.business.platform.mapper.RoleMenuMapper;
@@ -44,30 +44,21 @@ public class RoleServiceImpl extends BaseDetailServiceImpl<RolePo, RoleMenuPo, R
     }
 
     @Override
-    public void save(RolePo role, Long[] ids) {
-        //添加角色
-        mapper.insert(role);
-        //添加角色权限
-        mapper.addAut(role.getId(), ids);
-    }
-
-    @Override
-    public void updateById(RolePo role, Long[] ids) {
-        //更新角色
-        mapper.updateById(role);
-        //删除角色权限
-        mapper.deleteAut(role.getId());
-        if (!StringUtils.isEmpty(ids)) {
-            //添加角色权限
-            mapper.addAut(role.getId(), ids);
+    public void insertAfter(RolePo po, List<RoleMenuPo> detailPos, Boolean isBase) {
+        if (null != detailPos && 0 < detailPos.size()) {
+            for (RoleMenuPo detailPo : detailPos) {
+                if (isBase) {
+                    insertDetailBefore(detailPo);
+                }
+                BeanUtils.invoke(detailPo, "setRoleId", BeanUtils.invoke(po, "getId"));
+                detailMapper().insert(detailPo);
+            }
         }
     }
 
     @Override
-    public boolean removeById(Long id) {
+    public void deleteBefore(Long id) {
         //删除角色权限
         mapper.deleteAut(id);
-        //删除角色
-        return SqlHelper.delBool(mapper.deleteById(id));
     }
 }

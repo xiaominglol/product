@@ -21,7 +21,6 @@ function getSysData(param) {
         url: param.url,
         type: 'GET',
         async: false,
-        data: param.data,
         success: function (result) {
             data = result.data;
         }
@@ -110,7 +109,6 @@ function getTreeSelect(param) {
 function getMultiSelect(dom) {
     var data = getSysData({
         url: "/sys/role"
-        , isTreeTable: true
     });
     if (data) {
         var multiSelect = [];

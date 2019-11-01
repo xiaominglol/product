@@ -16,11 +16,11 @@ public class UserRolePo extends BaseObjectPo {
     /**
      * 用户id
      */
-    private Long user_id;
+    private Long userId;
 
     /**
      * 角色id
      */
-    private Long role_id;
+    private Long roleId;
 
 }

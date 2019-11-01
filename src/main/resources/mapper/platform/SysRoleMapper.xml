@@ -16,28 +16,27 @@
     </resultMap>
 
     <resultMap id="AutMap" type="hashmap">
-        <id column="menu_id" jdbcType="TINYINT" property="menuId"/>
-        <result column="permissions_id" jdbcType="TINYINT" property="permissionsId"/>
-        <result column="permissions_type" jdbcType="VARCHAR" property="permissionsType"/>
+        <result column="role_id" property="roleId" javaType="Long"/>
+        <result column="menu_id" property="menuId" javaType="Long"/>
     </resultMap>
 
-    <select id="getAut" parameterType="java.lang.Integer" resultMap="AutMap">
+    <select id="getAut" parameterType="java.lang.Long" resultMap="AutMap">
         select
-        menu_id, permissions_id,permissions_type
-        from t__permissions
-        where permissions_id = #{id}
+        role_id, menu_id
+        from t_platform_role_menu
+        where role_id = #{id}
     </select>
 
     <insert id="addAut" parameterType="java.util.Map">
-        insert into t__permissions(menu_id, permissions_id,permissions_type) values
+        insert into t_platform_role_menu(role_id, menu_id) values
         <foreach collection="ids" item="menuId" index="index" separator=",">
-            ( #{menuId}, #{id},'R' )
+            ( #{id}, #{menuId} )
         </foreach>
     </insert>
 
-    <delete id="deleteAut" parameterType="java.lang.Integer">
-        delete from t__permissions
-        where permissions_id=#{id}
+    <delete id="deleteAut" parameterType="java.lang.Long">
+        delete from t_platform_role_menu
+        where role_id=#{id}
     </delete>
 
 </mapper>

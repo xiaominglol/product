@@ -39,7 +39,7 @@
         ORDER BY m.pid,m.sort
     </select>
 
-    <delete id="deleteMenuAut" parameterType="java.lang.Integer">
+    <delete id="deleteMenuAut" parameterType="java.lang.Long">
         delete from t_platform_role_menu
         where menu_id=#{id}
     </delete>

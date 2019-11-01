@@ -5,7 +5,6 @@ import com.gemini.business.platform.po.RolePo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
@@ -23,7 +22,7 @@ public interface RoleMapper extends BaseMapper<RolePo> {
      * @param id 主键id
      * @return
      */
-    List<Map<String, String>> getAut(Long id);
+    List<Map<String, String>> getAut(@Param("id") Long id);
 
     /**
      * 添加权限
@@ -38,5 +37,5 @@ public interface RoleMapper extends BaseMapper<RolePo> {
      *
      * @param id
      */
-    void deleteAut(Serializable id);
+    void deleteAut(@Param("id") Long id);
 }

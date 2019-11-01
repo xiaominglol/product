@@ -7,8 +7,9 @@
 function renderTable(param) {
     layui.use(['table'], function () {
         var table = layui.table;
+        var dom = param.dom == null ? "table" : param.dom;
         table.render({
-            elem: '#' + (param.dom == null ? "table" : param.dom)
+            elem: '#' + dom
             , height: param.height == null ? 'full-220' : param.height
             , url: param.url
             , data: param.data
@@ -33,9 +34,9 @@ function renderTable(param) {
                 }
                 // 是否多选
                 if (param.isMultiSelect) {
-                    checkboxMultiSelect($, param.dom);
+                    checkboxMultiSelect($, dom);
                 } else {
-                    checkboxRadio($, param.dom);
+                    checkboxRadio($, dom);
                 }
             }
             , request: {
@@ -58,6 +59,7 @@ function renderTable(param) {
 function renderTreeTable(param) {
     layui.use(['treetable'], function () {
         var treeTable = layui.treetable;
+        var dom = param.dom == null ? "table" : param.dom;
         treeTable.render({
             treeColIndex: 1,            // 树形图标显示在第几列（必填）
             treeSpid: null,             // 顶级pid（必填）
@@ -65,12 +67,17 @@ function renderTreeTable(param) {
             treePidName: 'pid',         // pid字段名
             treeDefaultClose: true,     // 是否默认折叠
             treeLinkage: false,         // 父级展开时是否自动展开所有子级
-            elem: '#table',
+            elem: '#' + dom,
             url: param.url,
             where: param.data,
             cols: param.cols
             , done: function (res, curr, count) {
-                checkboxRadio($, "table");
+                // 是否多选
+                if (param.isMultiSelect) {
+                    checkboxMultiSelect($, dom);
+                } else {
+                    checkboxRadio($, dom);
+                }
             }
         });
     });
@@ -80,7 +87,8 @@ function renderTreeTable(param) {
 function refreshTable(param) {
     layui.use(['table'], function () {
         var table = layui.table;
-        table.reload(param.id, {
+        var dom = param.dom == null ? "table" : param.dom
+        table.reload(dom, {
             where: param.where
             , data: param.data
             , page: param.page == null ? {curr: 1} : ""     //默认从第一页开始

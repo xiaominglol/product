@@ -15,8 +15,8 @@ function initAuthTree(param) {
             , checkedKey: param.checkedKey
         });
 
-        authTree.render('#LAY-auth-tree-index', trees, {
-            inputname: 'authids[]',
+        authTree.render('#authTree', trees, {
+            inputname: 'ids[]',
             layfilter: 'lay-check-auth',
             autowidth: true
         });

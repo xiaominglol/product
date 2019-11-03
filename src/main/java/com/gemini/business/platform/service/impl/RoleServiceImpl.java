@@ -59,6 +59,6 @@ public class RoleServiceImpl extends BaseDetailServiceImpl<RolePo, RoleMenuPo, R
     @Override
     public void deleteBefore(Long id) {
         //删除角色权限
-        mapper.deleteAut(id);
+        mapper.deleteRoleMenu(id);
     }
 }

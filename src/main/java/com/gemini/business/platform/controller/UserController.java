@@ -184,12 +184,12 @@ public class UserController {
      * @param account 用户账号
      * @return
      */
-    @GetMapping("/userRole/{account}")
+    @GetMapping("/userRole/{userId}")
     @ResponseBody
-    public Message getUserRole(@PathVariable("account") String account) {
+    public Message getUserRole(@PathVariable("userId") Long userId) {
         try {
-            if (!StringUtils.isEmpty(account)) {
-                List<Map<String, String>> list = userService.getUserRole(account);
+            if (!StringUtils.isEmpty(userId)) {
+                List<Map<String, String>> list = userService.getUserRole(userId);
                 List<String> idList = new ArrayList<>();
                 for (Map<String, String> map : list) {
                     idList.add(map.get("roleId"));

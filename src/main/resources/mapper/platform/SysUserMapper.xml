@@ -40,23 +40,17 @@
         where ur.user_account=#{account}
     </select>
 
-    <select id="getUserRole" parameterType="java.lang.String" resultMap="userRoleMap">
+    <select id="getUserRole" parameterType="java.lang.Long" resultMap="userRoleMap">
         select
-        user_account,role_id
-        from t__user_role
-        where user_account=#{account}
+        user_id,role_id
+        from t_platform_user_role
+        where user_id=#{userId}
     </select>
 
-    <insert id="addUserRole" parameterType="java.util.Map">
-        insert into t_platform_user_role(user_account, role_id) values
-        <foreach collection="roleIds" item="roleId" index="index" separator=",">
-            ( #{userId}, #{roleId} )
-        </foreach>
-    </insert>
 
-    <delete id="deleteUserRole" parameterType="java.lang.String">
-        delete from t__user_role
-        where user_account=#{account}
+    <delete id="deleteUserRole" parameterType="java.lang.Long">
+        delete from t_platform_user_role
+        where user_id=#{userId}
     </delete>
 
 </mapper>

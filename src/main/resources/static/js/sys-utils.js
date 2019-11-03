@@ -139,8 +139,6 @@ function getDictByCode(param) {
             , async: param.async
             , data: {
                 pid: param.pid
-                , pageNum: 1
-                , pageSize: 100000000
             }
             , success: function (data) {
                 if (data.success) {

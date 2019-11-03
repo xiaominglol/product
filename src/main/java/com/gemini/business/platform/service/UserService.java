@@ -48,20 +48,5 @@ public interface UserService extends BaseDetailService<UserPo, UserRolePo, UserM
      * @param account
      * @return
      */
-    List<Map<String, String>> getUserRole(String account);
-
-    /**
-     * 添加用户角色
-     *
-     * @param account
-     * @param ids
-     */
-    void addUserRole(Long userId, Long[] roleIds);
-
-    /**
-     * 删除权用户角色
-     *
-     * @param account
-     */
-    void deleteUserRole(String account);
+    List<Map<String, String>> getUserRole(Long account);
 }

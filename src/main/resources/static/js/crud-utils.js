@@ -102,27 +102,7 @@ function saveOrUpdate(param) {
         , success: function (data) {
 
             if (data.success) {
-                if (param.isTable) {
-                    renderTable({
-                        url: param.url
-                        , cols: param.baseCols
-                    });
-                } else {
-                    renderTree({
-                        url: param.url
-                        , click: function (node) {
-                            renderTreeTable({
-                                url: param.url
-                                , data: {id: node.id}
-                                , cols: param.baseCols
-                            });
-                        }
-                    });
-                    renderTreeTable({
-                        url: param.url
-                        , cols: param.baseCols
-                    });
-                }
+                success(param);
 
                 layer.msg('保存成功', {icon: 1});
                 layer.closeAll('page');
@@ -154,27 +134,7 @@ function del(param) {
                 , success: function (data) {
 
                     if (data.success) {
-                        if (param.isTable) {
-                            renderTable({
-                                url: param.url
-                                , cols: param.baseCols
-                            });
-                        } else {
-                            renderTree({
-                                url: param.baseUrl
-                                , click: function (node) {
-                                    renderTreeTable({
-                                        url: param.baseUrl
-                                        , data: {id: node.id}
-                                        , cols: param.baseCols
-                                    });
-                                }
-                            });
-                            renderTreeTable({
-                                url: param.baseUrl
-                                , cols: param.baseCols
-                            });
-                        }
+                        success(param);
 
                         layer.msg('删除成功', {icon: 1});
                         layer.closeAll('page');
@@ -222,4 +182,31 @@ function confirmUpdate(param) {
             });
         }
     });
+}
+
+function success(param) {
+    if (param.isTable) {
+        renderTable({
+            url: param.baseUrl
+            , cols: param.baseCols
+        });
+    } else {
+        renderTree({
+            url: param.baseUrl
+            , click: function (node) {
+                renderTreeTable({
+                    url: param.baseUrl
+                    , data: {id: node.id}
+                    , cols: param.baseCols
+                });
+            }
+        });
+        renderTreeTable({
+            url: param.baseUrl
+            , cols: param.baseCols
+        });
+    }
+
+    layer.msg('保存成功', {icon: 1});
+    layer.closeAll('page');
 }

@@ -34,7 +34,7 @@
         </foreach>
     </insert>
 
-    <delete id="deleteAut" parameterType="java.lang.Long">
+    <delete id="deleteRoleMenu" parameterType="java.lang.Long">
         delete from t_platform_role_menu
         where role_id=#{id}
     </delete>

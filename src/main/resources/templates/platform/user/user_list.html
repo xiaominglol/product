@@ -23,7 +23,7 @@
                                             <div class="layui-inline">
                                                 <label class="layui-form-label">名称</label>
                                                 <div class="layui-input-inline">
-                                                    <input type="text" name="name" placeholder="请输入名称"
+                                                    <input type="text" name="name" placeholder="请输入账号/名称"
                                                            autocomplete="off"
                                                            class="layui-input">
                                                 </div>
@@ -188,7 +188,7 @@
             $("#treeName").text($("#treeId_" + selectedData.data[0].orgId).val());
             $(".pictureUploadButton").attr("src", selectedData.data[0].picture);
             $.ajax({
-                url: baseUrl + '/userRole/' + selectedData.data[0].account,
+                url: baseUrl + '/userRole/' + selectedData.data[0].id,
                 type: 'GET',
                 success: function (data) {
                     if (data.success) {
@@ -209,8 +209,17 @@
         // 添加/修改 保存
         form.on('submit(saveButton)', function (data) {
             data.field.ids = data.field.ids.split(",");
+            var detailList = [];
+            for (var i in data.field.ids) {
+                var menuId = {
+                    roleId: data.field.ids[i]
+                };
+                detailList.push(menuId);
+            }
+            data.field.detailList = detailList;
             saveOrUpdate({
                 url: baseUrl
+                , baseUrl: baseUrl
                 , baseCols: baseCols
                 , type: requestType
                 , data: data.field
@@ -225,7 +234,7 @@
             if (selectedData.data.length > 0) {
                 var ids = [];
                 for (var i in selectedData.data) {
-                    ids.push(selectedData.data[i].account);
+                    ids.push(selectedData.data[i].id);
                 }
                 del({
                     url: baseUrl + '/' + ids

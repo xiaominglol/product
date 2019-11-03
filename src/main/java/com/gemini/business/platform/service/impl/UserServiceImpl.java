@@ -2,9 +2,12 @@ package com.gemini.business.platform.service.impl;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.gemini.boot.framework.mybatis.utils.BeanUtils;
 import com.gemini.business.common.service.BaseDetailServiceImpl;
 import com.gemini.business.platform.mapper.UserMapper;
 import com.gemini.business.platform.mapper.UserRoleMapper;
+import com.gemini.business.platform.po.RoleMenuPo;
+import com.gemini.business.platform.po.RolePo;
 import com.gemini.business.platform.po.UserPo;
 import com.gemini.business.platform.po.UserRolePo;
 import com.gemini.business.platform.service.UserService;
@@ -60,17 +63,27 @@ public class UserServiceImpl extends BaseDetailServiceImpl<UserPo, UserRolePo, U
     }
 
     @Override
-    public List<Map<String, String>> getUserRole(String account) {
+    public List<Map<String, String>> getUserRole(Long account) {
         return mapper.getUserRole(account);
     }
 
+
     @Override
-    public void addUserRole(Long userId, Long[] roleIds) {
-        mapper.addUserRole(userId, roleIds);
+    public void insertAfter(UserPo po, List<UserRolePo> detailPos, Boolean isBase) {
+        if (null != detailPos && 0 < detailPos.size()) {
+            for (UserRolePo detailPo : detailPos) {
+                if (isBase) {
+                    insertDetailBefore(detailPo);
+                }
+                BeanUtils.invoke(detailPo, "setUserId", BeanUtils.invoke(po, "getId"));
+                detailMapper().insert(detailPo);
+            }
+        }
     }
 
     @Override
-    public void deleteUserRole(String account) {
-        mapper.deleteUserRole(account);
+    public void deleteBefore(Long id) {
+        //删除角色权限
+        mapper.deleteUserRole(id);
     }
 }

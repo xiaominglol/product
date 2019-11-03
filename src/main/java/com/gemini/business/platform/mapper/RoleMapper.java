@@ -37,5 +37,5 @@ public interface RoleMapper extends BaseMapper<RolePo> {
      *
      * @param id
      */
-    void deleteAut(@Param("id") Long id);
+    void deleteRoleMenu(@Param("id") Long id);
 }

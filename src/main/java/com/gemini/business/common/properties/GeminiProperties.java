@@ -1,5 +1,7 @@
 package com.gemini.business.common.properties;
 
+import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -14,16 +16,13 @@ import java.io.File;
  * @author 小明不读书
  * @Date 2018-11-09
  */
+@Slf4j
+@Data
 @Component
 @ConfigurationProperties(prefix = GeminiProperties.PREFIX)
 public class GeminiProperties {
 
-    /**
-     * 日志对象
-     */
-    protected Logger logger = LoggerFactory.getLogger(getClass());
-
-    public static final String PREFIX = "gemini";
+    static final String PREFIX = "gemini";
 
     private String pictureUploadPath;
 
@@ -44,13 +43,5 @@ public class GeminiProperties {
 
             return pictureUploadPath;
         }
-    }
-
-    public String getPictureUploadPath() {
-        return pictureUploadPath;
-    }
-
-    public void setPictureUploadPath(String pictureUploadPath) {
-        this.pictureUploadPath = pictureUploadPath;
     }
 }

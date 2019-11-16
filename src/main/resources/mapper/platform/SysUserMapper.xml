@@ -25,19 +25,19 @@
     </resultMap>
 
 
-    <select id="getRoleById" parameterType="java.lang.String" resultType="java.lang.String">
+    <select id="getRoleById" parameterType="java.lang.Long" resultType="java.lang.String">
         select t1.code
-        from t__user_role t left join t__role t1
+        from t_platform_user_role t left join t_platform_role t1
         on t.role_id = t1.id
-        where user_account=#{account}
+        where user_id=#{userId}
     </select>
 
-    <select id="getPermissionsById" parameterType="java.lang.String" resultType="java.lang.String">
-        select m.permissions_code
-        from t__user_role ur left join t__permissions mr
-        on (ur.role_id = mr.permissions_id or ur.user_account = mr.permissions_id)
-        left join t__menu m on mr.menu_id = m.id
-        where ur.user_account=#{account}
+    <select id="getPermissionsById" parameterType="java.lang.Long" resultType="java.lang.Long">
+        select m.permission_code
+        from t_platform_user_role ur left join t_platform_role_menu mr
+        on ur.role_id = mr.role_id
+        left join t_platform_menu m on mr.menu_id = m.id
+        where ur.user_id=#{userId}
     </select>
 
     <select id="getUserRole" parameterType="java.lang.Long" resultMap="userRoleMap">

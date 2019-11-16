@@ -1,6 +1,6 @@
 package com.gemini.business.order.service;
 
-import com.gemini.business.common.service.BaseDetailService;
+import com.gemini.boot.framework.mybatis.service.BaseDetailService;
 import com.gemini.business.order.mapper.OrderMapper;
 import com.gemini.business.order.po.OrderPo;
 

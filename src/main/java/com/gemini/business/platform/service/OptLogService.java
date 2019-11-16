@@ -1,7 +1,7 @@
 package com.gemini.business.platform.service;
 
 
-import com.gemini.business.common.service.BaseService;
+import com.gemini.boot.framework.mybatis.service.BaseService;
 import com.gemini.business.platform.mapper.OptLogMapper;
 import com.gemini.business.platform.po.OptLogPo;
 

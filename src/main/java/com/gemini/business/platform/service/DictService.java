@@ -1,6 +1,6 @@
 package com.gemini.business.platform.service;
 
-import com.gemini.business.common.service.BaseDetailService;
+import com.gemini.boot.framework.mybatis.service.BaseDetailService;
 import com.gemini.business.platform.mapper.DictMapper;
 import com.gemini.business.platform.po.DictPo;
 

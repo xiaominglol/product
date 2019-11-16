@@ -23,7 +23,7 @@ public interface UserMapper extends BaseMapper<UserPo> {
      * @param account
      * @return
      */
-    Set<String> getRoleById(String userId);
+    Set<String> getRoleById(Long userId);
 
     /**
      * 根据account查询用户权限
@@ -31,7 +31,7 @@ public interface UserMapper extends BaseMapper<UserPo> {
      * @param account
      * @return
      */
-    Set<String> getPermissionsById(String userId);
+    Set<String> getPermissionsById(Long userId);
 
     /**
      * 通过用户账号查询用户角色

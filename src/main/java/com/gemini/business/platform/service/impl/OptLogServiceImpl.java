@@ -2,7 +2,7 @@ package com.gemini.business.platform.service.impl;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.gemini.business.common.service.BaseServiceImpl;
+import com.gemini.boot.framework.mybatis.service.impl.BaseServiceImpl;
 import com.gemini.business.platform.mapper.OptLogMapper;
 import com.gemini.business.platform.po.OptLogPo;
 import com.gemini.business.platform.service.OptLogService;

@@ -1,7 +1,7 @@
 package com.gemini.business.business.serviceImpl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.gemini.business.common.service.BaseDetailServiceImpl;
+import com.gemini.boot.framework.mybatis.service.impl.BaseDetailServiceImpl;
 import com.gemini.business.business.mapper.BusinessStoreGoodsMapper;
 import com.gemini.business.business.po.BusinessStoreGoodsPo;
 import com.gemini.business.business.service.BusinessStoreGoodsService;

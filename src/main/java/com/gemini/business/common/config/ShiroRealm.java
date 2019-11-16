@@ -1,7 +1,9 @@
 package com.gemini.business.common.config;
+import com.gemini.boot.framework.shiro.utils.UserUtils;
 
+import com.gemini.boot.framework.shiro.entity.UserInfo;
+import com.gemini.boot.framework.shiro.utils.MD5Util;
 import com.gemini.business.platform.enums.StateEnum;
-import com.gemini.business.common.utils.MD5Util;
 import com.gemini.business.platform.po.LoginLogPo;
 import com.gemini.business.platform.po.UserPo;
 import com.gemini.business.platform.service.LoginLogService;
@@ -86,7 +88,19 @@ public class ShiroRealm extends AuthorizingRealm {
             ByteSource salt = ByteSource.Util.bytes(account);
 
             // 6.根据用户构建SimpleAuthenticationInfo
-            saInfo = new SimpleAuthenticationInfo(user, user.getPassword(), salt, this.getName());
+            UserInfo userInfo = new UserInfo();
+            userInfo.setId(user.getId());
+            userInfo.setAccount(user.getAccount());
+            userInfo.setName(user.getName());
+            userInfo.setPicture(user.getPicture());
+            // 3. 根据account查询用户角色
+            Set<String> roles = userService.getRoleById(user.getId());
+            userInfo.setRoles(roles);
+            // 4. 根据account查询用户权限
+            Set<String> permissions = userService.getPermissionsById(user.getId());
+            userInfo.setPermissions(permissions);
+
+            saInfo = new SimpleAuthenticationInfo(userInfo, user.getPassword(), salt, this.getName());
 
         } catch (Exception e) {
             //java.lang.ClassCastException: com.gemini.core.module.sys.model.User cannot be cast to com.gemini.base.sys.model.User
@@ -109,18 +123,17 @@ public class ShiroRealm extends AuthorizingRealm {
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
         // 1. 从 PrincipalCollection 中来获取登录用户的信息
-        Object account = principals.getPrimaryPrincipal();
+//        Object account = principals.getPrimaryPrincipal();
+        UserInfo currentUser = UserUtils.getCurrentUser();
 
         // 2. 创建 SimpleAuthorizationInfo
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
 
         // 3. 根据account查询用户角色
-        Set<String> roles = userService.getRoleById(account.toString());
-        info.setRoles(roles);
+        info.setRoles(currentUser.getRoles());
 
         // 4. 根据account查询用户权限
-        Set<String> permissions = userService.getPermissionsById(account.toString());
-        info.setStringPermissions(permissions);
+        info.setStringPermissions(currentUser.getPermissions());
 
         return info;
     }

@@ -1,5 +1,7 @@
 package com.gemini.business.common.aop;
 
+import com.gemini.boot.framework.shiro.entity.UserInfo;
+import com.gemini.boot.framework.shiro.utils.UserUtils;
 import com.gemini.business.common.annotation.SysLog;
 import com.gemini.business.common.utils.IPUtils;
 import com.gemini.business.platform.po.ErrorLogPo;
@@ -7,7 +9,6 @@ import com.gemini.business.platform.po.OptLogPo;
 import com.gemini.business.platform.po.UserPo;
 import com.gemini.business.platform.service.ErrorLogService;
 import com.gemini.business.platform.service.OptLogService;
-import com.gemini.business.platform.utils.UserUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
@@ -97,7 +98,7 @@ public class SysLogAspect {
 
     private void saveOptLog(ProceedingJoinPoint joinPoint, long beginTime) {
         //用户名
-        UserPo user = UserUtils.getCurrentUser();
+        UserInfo user = UserUtils.getCurrentUser();
         if (user != null) {
             optLogPoPo.setUserAccount(user.getAccount());
             optLogPoPo.setUserName(user.getName());
@@ -147,7 +148,7 @@ public class SysLogAspect {
 
 
         //用户名
-        UserPo user = UserUtils.getCurrentUser();
+        UserInfo user = UserUtils.getCurrentUser();
         if (user != null) {
             optLogPoPo.setUserAccount(user.getAccount());
             optLogPoPo.setUserName(user.getName());

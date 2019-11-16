@@ -1,9 +1,10 @@
 package com.gemini.business;
 
+import com.gemini.boot.framework.shiro.entity.UserInfo;
+import com.gemini.boot.framework.shiro.utils.UserUtils;
 import com.gemini.business.platform.po.UserPo;
 import com.gemini.business.platform.service.ErrorLogService;
 import com.gemini.business.platform.service.UserService;
-import com.gemini.business.platform.utils.UserUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -86,7 +87,7 @@ public class LoginController {
                 currentUser.login(token);
                 //设置有效时间为15分钟
                 SecurityUtils.getSubject().getSession().setTimeout(3600000);
-                UserPo user = UserUtils.getCurrentUser();
+                UserInfo user = UserUtils.getCurrentUser();
                 session.setAttribute("user", user);
                 // 成功跳转到主页，防止表单重复提交，应用重定向
                 return "redirect:/index";
@@ -103,7 +104,7 @@ public class LoginController {
                 return "redirect:/";
             }
         } else {
-            UserPo user = UserUtils.getCurrentUser();
+            UserInfo user = UserUtils.getCurrentUser();
 
             //如果不是同一个用户，则先退出再登陆
             if (!account.equals(user.getAccount())) {

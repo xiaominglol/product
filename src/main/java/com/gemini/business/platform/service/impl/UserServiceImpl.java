@@ -3,7 +3,7 @@ package com.gemini.business.platform.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.gemini.boot.framework.mybatis.utils.BeanUtils;
-import com.gemini.business.common.service.BaseDetailServiceImpl;
+import com.gemini.boot.framework.mybatis.service.impl.BaseDetailServiceImpl;
 import com.gemini.business.platform.mapper.UserMapper;
 import com.gemini.business.platform.mapper.UserRoleMapper;
 import com.gemini.business.platform.po.RoleMenuPo;
@@ -53,13 +53,13 @@ public class UserServiceImpl extends BaseDetailServiceImpl<UserPo, UserRolePo, U
     }
 
     @Override
-    public Set<String> getRoleById(String account) {
-        return mapper.getRoleById(account);
+    public Set<String> getRoleById(Long userId) {
+        return mapper.getRoleById(userId);
     }
 
     @Override
-    public Set<String> getPermissionsById(String account) {
-        return mapper.getPermissionsById(account);
+    public Set<String> getPermissionsById(Long userId) {
+        return mapper.getPermissionsById(userId);
     }
 
     @Override

@@ -1,7 +1,7 @@
 package com.gemini.business.platform.service;
 
 
-import com.gemini.business.common.service.BaseDetailService;
+import com.gemini.boot.framework.mybatis.service.BaseDetailService;
 import com.gemini.business.platform.mapper.UserMapper;
 import com.gemini.business.platform.mapper.UserRoleMapper;
 import com.gemini.business.platform.po.UserPo;
@@ -32,7 +32,7 @@ public interface UserService extends BaseDetailService<UserPo, UserRolePo, UserM
      * @param account
      * @return
      */
-    Set<String> getRoleById(String account);
+    Set<String> getRoleById(Long userId);
 
     /**
      * 根据account查询用户权限
@@ -40,7 +40,7 @@ public interface UserService extends BaseDetailService<UserPo, UserRolePo, UserM
      * @param account
      * @return
      */
-    Set<String> getPermissionsById(String account);
+    Set<String> getPermissionsById(Long userId);
 
     /**
      * 通过用户账号查询用户角色

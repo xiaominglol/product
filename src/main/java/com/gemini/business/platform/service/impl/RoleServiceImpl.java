@@ -3,7 +3,7 @@ package com.gemini.business.platform.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.gemini.boot.framework.mybatis.utils.BeanUtils;
-import com.gemini.business.common.service.BaseDetailServiceImpl;
+import com.gemini.boot.framework.mybatis.service.impl.BaseDetailServiceImpl;
 import com.gemini.business.platform.mapper.RoleMapper;
 import com.gemini.business.platform.mapper.RoleMenuMapper;
 import com.gemini.business.platform.po.RoleMenuPo;

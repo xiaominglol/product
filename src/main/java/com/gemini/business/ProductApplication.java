@@ -1,7 +1,7 @@
 package com.gemini.business;
 
 import com.gemini.boot.framework.core.CoreApplication;
-import com.gemini.boot.framework.core.exception.CloudCoreException;
+import com.gemini.boot.framework.core.exception.CoreException;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.ComponentScan;
@@ -17,7 +17,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement
 @SpringBootApplication
 public class ProductApplication {
-    public static void main(String[] args) throws CloudCoreException {
+    public static void main(String[] args) throws CoreException {
         CoreApplication.run(ProductApplication.class, args);
     }
 }

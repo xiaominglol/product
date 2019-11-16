@@ -1,6 +1,6 @@
 package com.gemini.business.customer.service;
 
-import com.gemini.business.common.service.BaseDetailService;
+import com.gemini.boot.framework.mybatis.service.BaseDetailService;
 import com.gemini.business.customer.mapper.CustomerCouponMapper;
 import com.gemini.business.customer.po.CustomerCouponPo;
 

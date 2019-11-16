@@ -1,7 +1,7 @@
 package com.gemini.business.order.serviceImpl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.gemini.business.common.service.BaseDetailServiceImpl;
+import com.gemini.boot.framework.mybatis.service.impl.BaseDetailServiceImpl;
 import com.gemini.business.order.mapper.OrderMapper;
 import com.gemini.business.order.po.OrderPo;
 import com.gemini.business.order.service.OrderService;

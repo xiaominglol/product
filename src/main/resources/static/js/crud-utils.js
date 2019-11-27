@@ -97,15 +97,14 @@ function saveOrUpdate(param) {
         , type: param.type
         , data: JSON.stringify(param.data)
         , async: param.async == null ? true : false
-        // , contentType: param.contentType == null ? 'application/x-www-form-urlencoded' : param.contentType
         , contentType: 'application/json;charset=utf-8'
         , success: function (data) {
-
             if (data.success) {
                 success(param);
-
                 layer.msg('保存成功', {icon: 1});
-                layer.closeAll('page');
+                if(param.close){
+                    layer.closeAll('page');
+                }
             } else {
                 layer.msg(data.message, {icon: 5});
             }
@@ -188,6 +187,7 @@ function success(param) {
     if (param.isTable) {
         renderTable({
             url: param.baseUrl
+            , dom: param.dom
             , cols: param.baseCols
         });
     } else {

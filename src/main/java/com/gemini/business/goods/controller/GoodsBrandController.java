@@ -38,9 +38,12 @@ public class GoodsBrandController {
 
     @GetMapping
     @ResponseBody
-    public Message list(LayUiPage layUiPage, GoodsBrandPo goodsBrandPo) {
+    public Message list(LayUiPage layUiPage, GoodsBrandPo po) {
         try {
             QueryWrapper<GoodsBrandPo> qw = new QueryWrapper<>();
+            if (!StringUtils.isEmpty(po.getCategoryId())) {
+                qw.eq("category_id", po.getCategoryId());
+            }
             if (layUiPage.getPageNum() != 0 && layUiPage.getPageSize() != 0) {
                 IPage<GoodsBrandPo> list = goodsBrandService.page(new Page<>(layUiPage.getPageNum(), layUiPage.getPageSize()), qw);
                 return Message.success(list);

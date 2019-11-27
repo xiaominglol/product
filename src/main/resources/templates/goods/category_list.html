@@ -187,6 +187,7 @@
 
         table.on('tool(table)', function (obj) {
             var data = obj.data;
+            console.log("data",data)
             var layEvent = obj.event;
             //启用
             if (layEvent == "enabled") {
@@ -209,17 +210,115 @@
 
             //设置品牌
             if (layEvent == "brand") {
-                layer.alert("brand")
+                $("#brand [name='categoryId']").val(data.id);
+                $("#brand [name='categoryName']").val(data.name);
+                // 打开添加框
+                openAddOrUpdate({
+                    id: "brand"
+                    , title: "设置品牌"
+                    , area: ['900px', '550px']
+                });
+                renderTable({
+                    dom: "brandDetailTable"
+                    , url: "/goods/brand"
+                    , height: ""
+                    , page: false
+                    , where: {"categoryId": data.id}
+                    , cols: [[
+                        {type: 'checkbox', width: 35}
+                        , {field: 'name', title: '名称', edit: 'text'}
+                        , {field: 'logo', title: 'logo', edit: 'text'}
+                        , {field: 'sort', title: '排序', edit: 'text'}
+                    ]]
+                });
             }
             //设置规格
             if (layEvent == "specification") {
-                layer.alert("specification")
+                $("#specification [name='categoryId']").val(data.id);
+                $("#specification [name='categoryName']").val(data.name);
+                // 打开添加框
+                openAddOrUpdate({
+                    id: "specification"
+                    , title: "设置规格"
+                    , area: ['900px', '550px']
+                });
+                renderTable({
+                    dom: "specificationDetailTable"
+                    , url: "/goods/specification"
+                    , height: ""
+                    , page: false
+                    , where: {"categoryId": data.id}
+                    , cols: [[
+                        {type: 'checkbox', width: 35}
+                        , {field: 'name', title: '名称', edit: 'text'}
+                        , {field: 'value', title: '值', edit: 'text'}
+                        , {field: 'sort', title: '排序', edit: 'text'}
+                    ]]
+                });
             }
             //设置参数
             if (layEvent == "param") {
-                layer.alert("param")
+                $("#param [name='categoryId']").val(data.id);
+                $("#param [name='categoryName']").val(data.name);
+                // 打开添加框
+                openAddOrUpdate({
+                    id: "param"
+                    , title: "设置参数"
+                    , area: ['900px', '550px']
+                });
+                renderTable({
+                    dom: "paramDetailTable"
+                    , url: "/goods/param"
+                    , height: ""
+                    , page: false
+                    , where: {"categoryId": data.id}
+                    , cols: [[
+                        {type: 'checkbox', width: 35}
+                        , {field: 'name', title: '名称', edit: 'text'}
+                        , {field: 'value', title: '值', edit: 'text'}
+                        , {field: 'sort', title: '排序', edit: 'text'}
+                    ]]
+                });
             }
 
+        });
+
+        form.on('submit(saveBrandButton)', function (data) {
+            saveOrUpdate({
+                url: "/goods/brand"
+                , baseUrl: "/goods/brand"
+                , dom: "brandDetailTable"
+                , baseCols: [[
+                    {type: 'checkbox', width: 35}
+                    , {field: 'name', title: '名称', edit: 'text'}
+                    , {field: 'logo', title: 'logo', edit: 'text'}
+                    , {field: 'sort', title: '排序', edit: 'text'}
+                ]]
+                , type: "POST"
+                , data: data.field
+                , isTable: true
+                , close: false
+            });
+            return false;
+        });
+
+        form.on('submit(saveSpecificationButton)', function (data) {
+            saveOrUpdate({
+                url: "/goods/specification"
+                , baseUrl: "/goods/specification"
+                , dom: "specificationDetailTable"
+                , baseCols: [[
+                    {type: 'checkbox', width: 35}
+                    , {field: 'name', title: '名称', edit: 'text'}
+                    , {field: 'value', title: '值', edit: 'text'}
+                    , {field: 'sort', title: '排序', edit: 'text'}
+                ]]
+                , type: "POST"
+                , data: data.field
+                , isTable: true
+                , close: false
+            });
+            return false;
         });
     });
 

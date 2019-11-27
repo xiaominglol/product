@@ -1,5 +1,6 @@
 <div id="addOrUpdate" style="display: none">
     <form class="layui-form layui-form-pane">
+        <input type="hidden" name="id">
         <div class="layui-row">
             <div class="layui-col-md6">
                 <div class="layui-form-item">
@@ -7,7 +8,6 @@
                         <span class="require">*</span>
                     </label>
                     <div class="layui-input-block">
-                        <input type="hidden" name="id">
                         <input type="text" id="name" name="name" required lay-verify="required" placeholder="名称"
                                autocomplete="off" class="layui-input">
                     </div>

@@ -38,9 +38,13 @@ public class GoodsCategoryController {
 
     @GetMapping
     @ResponseBody
-    public Message list(LayUiPage layUiPage, GoodsCategoryPo goodsCategoryPo) {
+    public Message list(LayUiPage layUiPage, GoodsCategoryPo po) {
         try {
             QueryWrapper<GoodsCategoryPo> qw = new QueryWrapper<>();
+            // 菜单列表修改的时候要带出子菜单，会用到
+            if (!StringUtils.isEmpty(po.getPid())) {
+                qw.eq("pid", po.getPid());
+            }
             if (layUiPage.getPageNum() != 0 && layUiPage.getPageSize() != 0) {
                 IPage<GoodsCategoryPo> list = goodsCategoryService.page(new Page<>(layUiPage.getPageNum(), layUiPage.getPageSize()), qw);
                 return Message.success(list);

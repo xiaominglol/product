@@ -58,7 +58,7 @@
     </select>
 
     <insert id="insert">
-        insert into t_customer_integral (
+        insert into customer_integral (
                             customer_id,
                     customer_name
         ) values (
@@ -68,7 +68,7 @@
     </insert>
 
     <update id="update" parameterType="java.lang.Long">
-        update t_customer_integral
+        update customer_integral
         <set>
                                     customer_id = #{customerId},
                         customer_name = #{customerName}

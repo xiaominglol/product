@@ -5,11 +5,9 @@ import com.gemini.business.customer.po.CustomerAddressPo;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
-* 
-*
-* @author 小明不读书
-* @date Thu Oct 24 11:45:53 CST 2019
-*/
+ * @author 小明不读书
+ * @date Thu Oct 24 11:45:53 CST 2019
+ */
 @Mapper
 public interface CustomerAddressMapper extends BaseMapper<CustomerAddressPo> {
 }

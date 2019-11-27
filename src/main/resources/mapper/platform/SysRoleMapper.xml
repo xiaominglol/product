@@ -23,19 +23,19 @@
     <select id="getAut" parameterType="java.lang.Long" resultMap="AutMap">
         select
         role_id, menu_id
-        from t_platform_role_menu
+        from platform_role_menu
         where role_id = #{id}
     </select>
 
     <insert id="addAut" parameterType="java.util.Map">
-        insert into t_platform_role_menu(role_id, menu_id) values
+        insert into platform_role_menu(role_id, menu_id) values
         <foreach collection="ids" item="menuId" index="index" separator=",">
             ( #{id}, #{menuId} )
         </foreach>
     </insert>
 
     <delete id="deleteRoleMenu" parameterType="java.lang.Long">
-        delete from t_platform_role_menu
+        delete from platform_role_menu
         where role_id=#{id}
     </delete>
 

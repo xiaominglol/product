@@ -10,7 +10,7 @@ import lombok.Data;
  * @author 小明不读书
  */
 @Data
-@TableName("t_platform_dict")
+@TableName("platform_dict")
 public class DictPo extends BaseSubPo<DictPo> {
 
     /**

@@ -142,7 +142,7 @@ function getDictByCode(param) {
             }
             , success: function (data) {
                 if (data.success) {
-                    var data = data.data.records;
+                    var data = data.data;
                     var html = "";
                     //是否单选框
                     if (param.isRadio) {
@@ -169,7 +169,6 @@ function getDictByCode(param) {
                             }
                         }
                     }
-
                     $(param.dom).html(html);
                     form.render();
                 }

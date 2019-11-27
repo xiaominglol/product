@@ -83,7 +83,7 @@
     </select>
 
     <insert id="insert">
-        insert into t_business_store_coupon (
+        insert into business_store_coupon (
                             name,
                     business_id,
                     business_name,
@@ -103,7 +103,7 @@
     </insert>
 
     <update id="update" parameterType="java.lang.Long">
-        update t_business_store_coupon
+        update business_store_coupon
         <set>
                                     name = #{name},
                         business_id = #{businessId},

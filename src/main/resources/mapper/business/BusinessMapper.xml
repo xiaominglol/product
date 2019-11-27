@@ -53,7 +53,7 @@
     </select>
 
     <insert id="insert">
-        insert into t_business (
+        insert into business (
                             name
         ) values (
                             #{name}
@@ -61,7 +61,7 @@
     </insert>
 
     <update id="update" parameterType="java.lang.Long">
-        update t_business
+        update business
         <set>
                                     name = #{name}
         </set>

@@ -53,7 +53,7 @@
     </select>
 
     <insert id="insert">
-        insert into t_order_history (
+        insert into order_history (
                             oder_id
         ) values (
                             #{oderId}
@@ -61,7 +61,7 @@
     </insert>
 
     <update id="update" parameterType="java.lang.Long">
-        update t_order_history
+        update order_history
         <set>
                                     oder_id = #{oderId}
         </set>

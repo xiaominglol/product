@@ -103,7 +103,7 @@
     </select>
 
     <insert id="insert">
-        insert into t_order (
+        insert into order (
                             business_id,
                     business_name,
                     store_id,
@@ -131,7 +131,7 @@
     </insert>
 
     <update id="update" parameterType="java.lang.Long">
-        update t_order
+        update order
         <set>
                                     business_id = #{businessId},
                         business_name = #{businessName},

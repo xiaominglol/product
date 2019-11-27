@@ -2,7 +2,6 @@ package com.gemini.business;
 
 import com.gemini.boot.framework.shiro.entity.UserInfo;
 import com.gemini.boot.framework.shiro.utils.UserUtils;
-import com.gemini.business.platform.po.UserPo;
 import com.gemini.business.platform.service.ErrorLogService;
 import com.gemini.business.platform.service.UserService;
 import org.apache.shiro.SecurityUtils;

@@ -10,7 +10,7 @@ import lombok.Data;
  * @author 小明不读书
  */
 @Data
-@TableName("t_platform_user_role")
+@TableName("platform_user_role")
 public class UserRolePo extends BaseObjectPo {
 
     /**

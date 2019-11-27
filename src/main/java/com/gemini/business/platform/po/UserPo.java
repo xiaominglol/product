@@ -12,7 +12,7 @@ import java.util.Date;
  * @author 小明不读书
  */
 @Data
-@TableName("t_platform_user")
+@TableName("platform_user")
 public class UserPo extends BaseDetailPo<UserRolePo> {
 
     /**

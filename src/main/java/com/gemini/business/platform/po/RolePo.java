@@ -10,7 +10,7 @@ import lombok.Data;
  * @author 小明不读书
  */
 @Data
-@TableName("t_platform_role")
+@TableName("platform_role")
 public class RolePo extends BaseDetailPo<RoleMenuPo> {
 
     /**

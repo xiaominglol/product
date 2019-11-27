@@ -6,28 +6,23 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.gemini.boot.framework.mybatis.entity.LayUiPage;
 import com.gemini.boot.framework.web.entity.CommonFailInfo;
 import com.gemini.boot.framework.web.entity.Message;
-import com.gemini.business.common.annotation.SysLog;
 import com.gemini.business.business.po.BusinessStoreClassificationPo;
 import com.gemini.business.business.service.BusinessStoreClassificationService;
-import com.gemini.business.platform.service.ErrorLogService;
+import com.gemini.business.common.annotation.SysLog;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
- * 
- *
  * @author 小明不读书
  * @date Thu Oct 24 11:45:53 CST 2019
  */
 @Slf4j
-@RestController
+@Controller
 @RequestMapping("/business/store/classification")
 public class BusinessStoreClassificationController {
 
@@ -43,7 +38,7 @@ public class BusinessStoreClassificationController {
     @ResponseBody
     public Message list(LayUiPage layUiPage, BusinessStoreClassificationPo businessStoreClassificationPo) {
         try {
-            QueryWrapper <BusinessStoreClassificationPo> qw = new QueryWrapper<>();
+            QueryWrapper<BusinessStoreClassificationPo> qw = new QueryWrapper<>();
             if (layUiPage.getPageNum() != 0 && layUiPage.getPageSize() != 0) {
                 IPage<BusinessStoreClassificationPo> list = businessStoreClassificationService.page(new Page<>(layUiPage.getPageNum(), layUiPage.getPageSize()), qw);
                 return Message.success(list);
@@ -118,5 +113,5 @@ public class BusinessStoreClassificationController {
             return Message.fail(e.getMessage());
         }
     }
-            
+
 }

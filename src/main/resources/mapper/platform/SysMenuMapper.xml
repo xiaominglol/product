@@ -30,9 +30,9 @@
         SELECT
 	        distinct m.*
         FROM
-            t_platform_user_role ur
-        LEFT JOIN t_platform_role_menu rm ON ur.role_id = rm.role_id
-        LEFT JOIN t_platform_menu m ON rm.menu_id = m.id
+            platform_user_role ur
+        LEFT JOIN platform_role_menu rm ON ur.role_id = rm.role_id
+        LEFT JOIN platform_menu m ON rm.menu_id = m.id
         WHERE m.menu_type_code != 'button'
         AND state_code = 'Enable'
         AND ur.user_id = #{userId, javaType=Long}
@@ -40,7 +40,7 @@
     </select>
 
     <delete id="deleteMenuAut" parameterType="java.lang.Long">
-        delete from t_platform_role_menu
+        delete from platform_role_menu
         where menu_id=#{id}
     </delete>
 </mapper>

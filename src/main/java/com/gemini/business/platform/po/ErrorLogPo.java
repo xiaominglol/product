@@ -12,7 +12,7 @@ import java.util.Date;
  * @author 小明不读书
  */
 @Data
-@TableName("t_platform_error_log")
+@TableName("platform_error_log")
 public class ErrorLogPo extends BaseObjectPo {
 
     /**

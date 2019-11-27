@@ -73,7 +73,7 @@
     </select>
 
     <insert id="insert">
-        insert into t_customer (
+        insert into customer (
                             name,
                     account,
                     password,
@@ -89,7 +89,7 @@
     </insert>
 
     <update id="update" parameterType="java.lang.Long">
-        update t_customer
+        update customer
         <set>
                                     name = #{name},
                         account = #{account},

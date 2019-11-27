@@ -12,7 +12,7 @@ import java.util.Date;
  * @author 小明不读书
  */
 @Data
-@TableName("t_platform_opt_log")
+@TableName("platform_opt_log")
 public class OptLogPo extends BaseObjectPo {
 
     /**

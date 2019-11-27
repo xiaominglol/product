@@ -1,8 +1,8 @@
 package com.gemini.business.common.config;
-import com.gemini.boot.framework.shiro.utils.UserUtils;
 
 import com.gemini.boot.framework.shiro.entity.UserInfo;
 import com.gemini.boot.framework.shiro.utils.MD5Util;
+import com.gemini.boot.framework.shiro.utils.UserUtils;
 import com.gemini.business.platform.enums.StateEnum;
 import com.gemini.business.platform.po.LoginLogPo;
 import com.gemini.business.platform.po.UserPo;

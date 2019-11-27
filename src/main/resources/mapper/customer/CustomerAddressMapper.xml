@@ -93,7 +93,7 @@
     </select>
 
     <insert id="insert">
-        insert into t_customer_address (
+        insert into customer_address (
                             customer_id,
                     customer_name,
                     name,
@@ -117,7 +117,7 @@
     </insert>
 
     <update id="update" parameterType="java.lang.Long">
-        update t_customer_address
+        update customer_address
         <set>
                                     customer_id = #{customerId},
                         customer_name = #{customerName},

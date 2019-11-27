@@ -42,12 +42,13 @@ public class Dicts {
 
     /**
      * 根據ID獲取字典對象
+     *
      * @param id 字典對象ID
      * @return Dict
      */
     public static Dict get(Long id) {
         Dict dict = dicts.get(id);
-        if(dict == null) {
+        if (dict == null) {
             dict = new Dict();
             dict.setId(id);
         }

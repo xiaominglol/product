@@ -12,7 +12,7 @@ import lombok.Data;
  * @author 小明不读书
  */
 @Data
-@TableName("t_platform_menu")
+@TableName("platform_menu")
 public class MenuPo extends BaseSubPo<MenuPo> {
 
     /**

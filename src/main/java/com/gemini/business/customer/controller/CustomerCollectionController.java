@@ -9,25 +9,20 @@ import com.gemini.boot.framework.web.entity.Message;
 import com.gemini.business.common.annotation.SysLog;
 import com.gemini.business.customer.po.CustomerCollectionPo;
 import com.gemini.business.customer.service.CustomerCollectionService;
-import com.gemini.business.platform.service.ErrorLogService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
- * 
- *
  * @author 小明不读书
  * @date Thu Oct 24 11:45:53 CST 2019
  */
 @Slf4j
-@RestController
+@Controller
 @RequestMapping("/customer/collection")
 public class CustomerCollectionController {
 
@@ -43,7 +38,7 @@ public class CustomerCollectionController {
     @ResponseBody
     public Message list(LayUiPage layUiPage, CustomerCollectionPo customerCollectionPo) {
         try {
-            QueryWrapper <CustomerCollectionPo> qw = new QueryWrapper<>();
+            QueryWrapper<CustomerCollectionPo> qw = new QueryWrapper<>();
             if (layUiPage.getPageNum() != 0 && layUiPage.getPageSize() != 0) {
                 IPage<CustomerCollectionPo> list = customerCollectionService.page(new Page<>(layUiPage.getPageNum(), layUiPage.getPageSize()), qw);
                 return Message.success(list);
@@ -118,5 +113,5 @@ public class CustomerCollectionController {
             return Message.fail(e.getMessage());
         }
     }
-            
+
 }

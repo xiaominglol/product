@@ -6,7 +6,6 @@ import com.gemini.business.common.annotation.SysLog;
 import com.gemini.business.common.utils.IPUtils;
 import com.gemini.business.platform.po.ErrorLogPo;
 import com.gemini.business.platform.po.OptLogPo;
-import com.gemini.business.platform.po.UserPo;
 import com.gemini.business.platform.service.ErrorLogService;
 import com.gemini.business.platform.service.OptLogService;
 import org.aspectj.lang.JoinPoint;

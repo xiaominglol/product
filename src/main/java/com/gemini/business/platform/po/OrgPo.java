@@ -12,7 +12,7 @@ import lombok.Data;
  * @author 小明不读书
  */
 @Data
-@TableName("t_platform_org")
+@TableName("platform_org")
 public class OrgPo extends BaseSubPo<OrgPo> {
 
     /**

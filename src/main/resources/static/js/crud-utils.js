@@ -14,7 +14,7 @@ function add(param) {
     layui.use(['table'], function () {
         var table = layui.table;
 
-        $("[name='id']").val("");
+        $("#addOrUpdate [name='id']").val("");
         // 如果有明细表格，则显示，因为有可能只是单表
         if(param.cols) {
             table.render({
@@ -136,7 +136,9 @@ function del(param) {
                         success(param);
 
                         layer.msg('删除成功', {icon: 1});
-                        layer.closeAll('page');
+                        if (param.close) {
+                            layer.closeAll('page');
+                        }
                     } else {
                         layer.msg(data.message, {icon: 5});
                     }
@@ -188,6 +190,9 @@ function success(param) {
         renderTable({
             url: param.baseUrl
             , dom: param.dom
+            , page: param.page
+            , height: param.height
+            , limit: param.limit
             , cols: param.baseCols
         });
     } else {
@@ -206,7 +211,4 @@ function success(param) {
             , cols: param.baseCols
         });
     }
-
-    layer.msg('保存成功', {icon: 1});
-    layer.closeAll('page');
 }

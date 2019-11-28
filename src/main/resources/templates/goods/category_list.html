@@ -185,9 +185,10 @@
             })
         });
 
+
+        var brandRequestType;
         table.on('tool(table)', function (obj) {
             var data = obj.data;
-            console.log("data",data)
             var layEvent = obj.event;
             //启用
             if (layEvent == "enabled") {
@@ -210,6 +211,8 @@
 
             //设置品牌
             if (layEvent == "brand") {
+                brandRequestType = "POST";
+                $("#brand [name='id']").val("");
                 $("#brand [name='categoryId']").val(data.id);
                 $("#brand [name='categoryName']").val(data.name);
                 // 打开添加框
@@ -222,16 +225,18 @@
                     dom: "brandDetailTable"
                     , url: "/goods/brand"
                     , height: ""
-                    , page: false
+                    , page: true
                     , where: {"categoryId": data.id}
                     , cols: [[
                         {type: 'checkbox', width: 35}
-                        , {field: 'name', title: '名称', edit: 'text'}
-                        , {field: 'logo', title: 'logo', edit: 'text'}
-                        , {field: 'sort', title: '排序', edit: 'text'}
+                        , {field: 'name', title: '名称'}
+                        , {field: 'logo', title: 'logo'}
+                        , {field: 'sort', title: '排序'}
+                        , {title: '操作', toolbar: '#brandToolBar'}
                     ]]
                 });
             }
+
             //设置规格
             if (layEvent == "specification") {
                 $("#specification [name='categoryId']").val(data.id);
@@ -283,6 +288,43 @@
 
         });
 
+
+        table.on('tool(brandDetailTable)', function (obj) {
+            var data = obj.data;
+            var layEvent = obj.event;
+
+            if (layEvent == "deleteBrand") {
+                del({
+                    url: "/goods/brand/" + data.id
+                    , dom: "brandDetailTable"
+                    , baseUrl: "/goods/brand"
+                    , baseCols: [[
+                        {type: 'checkbox', width: 35}
+                        , {field: 'name', title: '名称'}
+                        , {field: 'logo', title: 'logo'}
+                        , {field: 'sort', title: '排序'}
+                        , {title: '操作', toolbar: '#brandToolBar'}
+                    ]]
+                    , height: ""
+                    , isTable: true
+                    , close: false
+                });
+            }
+
+        });
+
+        //监听行单击事件
+        table.on('row(brandDetailTable)', function (obj) {
+            var data = obj.data;
+            brandRequestType = "PUT";
+            //obj.del(); //删除当前行
+            //obj.update(fields) //修改当前行数据
+            $("#brand [name='id']").val(data.id);
+            $("#brand [name='name']").val(data.name);
+            $("#brand [name='logo']").val(data.logo);
+            $("#brand [name='sort']").val(data.sort);
+        });
+
         form.on('submit(saveBrandButton)', function (data) {
             saveOrUpdate({
                 url: "/goods/brand"
@@ -290,12 +332,15 @@
                 , dom: "brandDetailTable"
                 , baseCols: [[
                     {type: 'checkbox', width: 35}
-                    , {field: 'name', title: '名称', edit: 'text'}
-                    , {field: 'logo', title: 'logo', edit: 'text'}
-                    , {field: 'sort', title: '排序', edit: 'text'}
+                    , {field: 'name', title: '名称'}
+                    , {field: 'logo', title: 'logo'}
+                    , {field: 'sort', title: '排序'}
+                    , {title: '操作', toolbar: '#brandToolBar'}
                 ]]
-                , type: "POST"
+                , type: brandRequestType
                 , data: data.field
+                , page: true
+                , height: ""
                 , isTable: true
                 , close: false
             });
@@ -334,4 +379,8 @@
     <a class="layui-btn layui-btn-sm layui-btn-rest" lay-event="brand"><i class="layui-icon layui-icon-auz"></i>设置品牌</a>
     <a class="layui-btn layui-btn-sm layui-btn-rest" lay-event="specification"><i class="layui-icon layui-icon-auz"></i>设置规格</a>
     <a class="layui-btn layui-btn-sm layui-btn-rest" lay-event="param"><i class="layui-icon layui-icon-auz"></i>设置参数</a>
+</script>
+
+<script type="text/html" id="brandToolBar">
+    <a class="layui-btn layui-btn-sm layui-btn-rest" lay-event="deleteBrand"><i class="layui-icon layui-icon-auz"></i>删除</a>
 </script>

@@ -12,6 +12,7 @@ function renderTable(param) {
             elem: '#' + dom
             , height: param.height == null ? 'full-220' : param.height
             , url: param.url
+            , limit: param.limit == null ? 10 : param.limit
             , data: param.data
             , page: param.page == null ? true : param.page      //默认开启分页
             , cols: param.cols
@@ -237,7 +238,6 @@ function buildChildTree(key, nodes, id, pid, name) {
     return child;
 }
 
-
 // 添加一行
 function addRowButton(param) {
     layui.use(['table'], function () {
@@ -245,9 +245,9 @@ function addRowButton(param) {
 
         var data = {};
         var id = "";//判断唯一字段,一般就是第一个，除开checkbox
-        for(var i in param.cols) {
-            if(param.cols[i] && param.cols[i].hasOwnProperty("field")){
-                if(!id){
+        for (var i in param.cols) {
+            if (param.cols[i] && param.cols[i].hasOwnProperty("field")) {
+                if (!id) {
                     id = param.cols[i].field;
                 }
                 data[param.cols[i].field] = '';
@@ -269,7 +269,7 @@ function addRowButton(param) {
         tableData.unshift(data);
 
         table.render({
-            elem: '#'+param.table
+            elem: '#' + param.table
             , data: tableData
             , id: param.table
             , cols: [param.cols]
@@ -279,7 +279,6 @@ function addRowButton(param) {
         });
     });
 }
-
 
 // 批量删除
 function batchDelButton(param) {
@@ -301,9 +300,9 @@ function batchDelButton(param) {
         }
 
         var id = "";//判断唯一字段,一般就是第一个，除开checkbox
-        for(var i in param.cols) {
-            if(param.cols[i] && param.cols[i].hasOwnProperty("field")){
-                if(!id){
+        for (var i in param.cols) {
+            if (param.cols[i] && param.cols[i].hasOwnProperty("field")) {
+                if (!id) {
                     id = param.cols[i].field;
                 }
             }
@@ -317,7 +316,7 @@ function batchDelButton(param) {
             }
         }
         table.render({
-            elem: '#'+param.table
+            elem: '#' + param.table
             , data: tableData
             , id: param.table
             , cols: [param.cols]

@@ -33,7 +33,7 @@ public class GoodsParamController {
 
     @GetMapping("/gotoList")
     public String gotoList() {
-        return "param_list";
+        return "goods/param_list";
     }
 
     @GetMapping

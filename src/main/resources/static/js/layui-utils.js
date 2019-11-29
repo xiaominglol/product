@@ -98,17 +98,29 @@ function refreshTable(param) {
     });
 }
 
-// 打开添加/修改 弹出框
-function openAddOrUpdate(param) {
+// 打开 弹出框
+function openPopup(param) {
+    //0（信息框，默认）1（页面层）2（iframe层）3（加载层）4（tips层）
+    var type;
+    var content;
+    var title = param.title;
+    var area = param.area == null ? ['900px', '550px'] : param.area;
+    if (param.type == 'html') {
+        type = 2;
+        content = param.html;
+    } else {//param.type == 'id'
+        type = 1;
+        content = $('#' + (param.id == null ? 'addOrUpdate' : param.id));
+    }
     layui.use(['layer'], function () {
         var layer = layui.layer;
         layer.open({
-            type: 1
-            , title: param.title
-            , content: $('#' + (param.id == null ? 'addOrUpdate' : param.id))
+            type: type
+            , title: title
+            , content: content
             //,skin: 'layui-layer-molv'
             , maxmin: true
-            , area: param.area
+            , area: area
             , btn: ['保存', '重置']
             , yes: function (index, layero) {
                 layero.find('.save').click();
@@ -123,19 +135,8 @@ function openAddOrUpdate(param) {
                 $(".layui-layer-shade").appendTo(layero.parent());
             }
             , cancel: function (index, layero) {
-                /*layer.confirm('确定要关闭么？', {
-                    btn: ['确定', '取消']
-                }, function (index, layero) {*/
                 layer.close(index);
                 $('.reset').click();
-                /*}, function (index) {
-                });*/
-
-                // refreshTable({
-                //     id: param.tableId
-                //     , data: []
-                //     , page: false
-                // });
                 return false;
             }
         })

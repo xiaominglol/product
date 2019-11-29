@@ -28,9 +28,8 @@ function add(param) {
             });
         }
         // 打开添加框
-        openAddOrUpdate({
+        openPopup({
             title: param.title
-            , area: param.area == null ? ['900px', '550px'] : param.area
         });
     });
     return requestType;
@@ -73,9 +72,8 @@ function edit(param) {
 
             form.render();
             // 打开修改框
-            openAddOrUpdate({
+            openPopup({
                 title: param.title
-                , area: param.area == null ? ['900px', '550px'] : param.area
             });
         } else {
             layer.msg('请选择一条数据', {icon: 0});
@@ -92,6 +90,7 @@ function edit(param) {
  * @returns {*}
  */
 function saveOrUpdate(param) {
+    var close = param.close == null ? true : param.close;
     $.ajax({
         url: param.url
         , type: param.type
@@ -102,7 +101,7 @@ function saveOrUpdate(param) {
             if (data.success) {
                 success(param);
                 layer.msg('保存成功', {icon: 1});
-                if(param.close){
+                if (close) {
                     layer.closeAll('page');
                 }
             } else {
@@ -194,6 +193,7 @@ function success(param) {
             , height: param.height
             , limit: param.limit
             , cols: param.baseCols
+            , where: param.where
         });
     } else {
         renderTree({

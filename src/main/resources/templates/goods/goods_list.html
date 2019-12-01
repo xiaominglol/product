@@ -74,14 +74,15 @@
     layui.use(['form', 'table'], function () {
         var form = layui.form;
         var table = layui.table;
-        var baseUrl = "/sys/dict";
+        var baseUrl = "/goods";
+        var treeUrl = "/goods/category";
+        var moduleName = "商品";
         var requestType;
         var baseCols = [[
             {checkbox: true}
-            , {field: 'code', title: '字典编码', width: 160}
-            , {field: 'name', title: '字典名称', width: 160}
-            , {field: 'description', title: '描述'}
-            , {field: 'stateName', title: '状态', width: 80}
+            , {field: 'name', title: '商品名称'}
+            , {field: 'categoryName', title: '分类名称'}
+            , {field: 'brandName', title: '品牌名称'}
             , {title: '操作', width: 120, toolbar: '#optToolBar'}
         ]];
         var baseDetailCols = [
@@ -90,31 +91,35 @@
             {field: 'name', title: '字典名称', width: 200, align: 'left', edit: 'text'},
             {field: 'description', title: '描述', align: 'left', edit: 'text'}
         ];
+        var baseUpdateCols = [
+            {field: 'name', type: "text"}
+            , {field: 'icon', type: "text"}
+            , {field: 'sort', type: "text"}
+        ];
 
         //左侧树
         renderTree({
-            url: baseUrl
+            url: treeUrl
             , click: function (node) {
-                renderTreeTable({
-                    url: baseUrl
-                    , data: {id: node.id}
-                    , cols: baseCols
+                refreshTable({
+                    where: {
+                        categoryId: node.id
+                    }
                 });
             }
         });
 
         //右侧树形表格
-        renderTreeTable({
+        renderTable({
             url: baseUrl
             , cols: baseCols
+            , isMultiSelect: true
         });
 
         //查询
         form.on('submit(queryButton)', function (data) {
-            renderTreeTable({
-                url: baseUrl
-                , data: data.field
-                , cols: baseCols
+            refreshTable({
+                where: data.field
             });
             return false;
         });
@@ -122,7 +127,7 @@
         //添加
         $(".addButton").click(function () {
             requestType = add({
-                title: '添加字典'
+                title: '添加' + moduleName
                 , cols: baseDetailCols
             });
         });
@@ -130,14 +135,10 @@
         // 修改
         $(".editButton").click(function () {
             requestType = edit({
-                title: '修改字典'
+                title: '修改' + moduleName
                 , url: baseUrl
                 , cols: baseDetailCols
-                , fields: [
-                    {field: 'code', type: "text"}
-                    , {field: 'name', type: "text"}
-                    , {field: 'description', type: "text"}
-                ]
+                , fields: baseUpdateCols
             });
         });
 
@@ -150,6 +151,7 @@
                 , baseCols: baseCols
                 , type: requestType
                 , data: data.field
+                , isTable: true
             });
             return false;
         });
@@ -162,6 +164,7 @@
                     url: baseUrl + "/" + selectedData.data[0].id
                     , baseUrl: baseUrl
                     , baseCols: baseCols
+                    , treeUrl: treeUrl
                 });
             } else {
                 layer.msg('请选择一条数据', {icon: 0});
@@ -170,11 +173,9 @@
 
         // 新增一行 明细
         $(".add_detail").click(function () {
-            var data = {code: "", name: "", description: ""};
             addRowButton({
                 table: "detailTable"
-                , id: "code"
-                , data: data
+                , cols: baseDetailCols
             })
         });
 
@@ -182,7 +183,7 @@
         $(".delete_detail").click(function () {
             batchDelButton({
                 table: "detailTable"
-                , id: "code"
+                , cols: baseDetailCols
             })
         });
     });

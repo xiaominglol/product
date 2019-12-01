@@ -237,7 +237,7 @@
             //设置规格
             if (layEvent == "specification") {
                 requestType = "POST";
-                $("#brand [name='id']").val("");
+                $("#specification [name='id']").val("");
                 $("#specification [name='categoryId']").val(data.id);
                 $("#specification [name='categoryName']").val(data.name);
                 // 打开添加框
@@ -256,7 +256,7 @@
                         , {field: 'name', title: '名称'}
                         , {field: 'value', title: '值'}
                         , {field: 'sort', title: '排序'}
-                        , {title: '操作', toolbar: '#brandToolBar'}
+                        , {title: '操作', toolbar: '#specificationToolBar'}
                     ]]
                 });
             }
@@ -264,7 +264,7 @@
             //设置参数
             if (layEvent == "param") {
                 requestType = "POST";
-                $("#brand [name='id']").val("");
+                $("#param [name='id']").val("");
                 $("#param [name='categoryId']").val(data.id);
                 $("#param [name='categoryName']").val(data.name);
                 // 打开添加框
@@ -283,7 +283,7 @@
                         , {field: 'name', title: '名称'}
                         , {field: 'value', title: '值'}
                         , {field: 'sort', title: '排序'}
-                        , {title: '操作', toolbar: '#brandToolBar'}
+                        , {title: '操作', toolbar: '#paramToolBar'}
                     ]]
                 });
             }
@@ -312,6 +312,7 @@
                     , isTable: true
                     , close: false
                 });
+                $("#brand [name='id']").val("");
             }
 
         });
@@ -374,6 +375,7 @@
                     , isTable: true
                     , close: false
                 });
+                $("#specification [name='id']").val("");
             }
 
         });
@@ -436,6 +438,7 @@
                     , isTable: true
                     , close: false
                 });
+                $("#param [name='id']").val("");
             }
 
         });
@@ -496,7 +499,7 @@
 <script type="text/html" id="brandToolBar">
     <a class="layui-btn layui-btn-sm layui-btn-rest" lay-event="deleteBrand"><i class="layui-icon layui-icon-auz"></i>删除</a>
 </script>
-<script type="text/html" id="specification">
+<script type="text/html" id="specificationToolBar">
     <a class="layui-btn layui-btn-sm layui-btn-rest" lay-event="deleteSpecification"><i
             class="layui-icon layui-icon-auz"></i>删除</a>
 </script>

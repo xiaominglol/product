@@ -25,8 +25,8 @@ public class GoodsServiceImpl extends BaseDetailServiceImpl<GoodsPo, GoodsStockP
                 .eq(!StringUtils.isEmpty(po.getName()), "name", po.getName())
                 .eq(!StringUtils.isEmpty(po.getBrandId()), "brand_id", po.getBrandId())
                 .eq(!StringUtils.isEmpty(po.getBrandName()), "brand_name", po.getBrandName())
-                .eq(!StringUtils.isEmpty(po.getClassificationId()), "classification_id", po.getClassificationId())
-                .eq(!StringUtils.isEmpty(po.getClassificationName()), "classification_name", po.getClassificationName())
+                .eq(!StringUtils.isEmpty(po.getCategoryId()), "category_id", po.getCategoryId())
+                .eq(!StringUtils.isEmpty(po.getCategoryName()), "category_name", po.getCategoryName())
                 .eq(!StringUtils.isEmpty(po.getStockId()), "stock_id", po.getStockId())
                 .eq(!StringUtils.isEmpty(po.getStateId()), "state_id", po.getStateId())
                 .eq(!StringUtils.isEmpty(po.getStateCode()), "state_code", po.getStateCode())
@@ -34,5 +34,8 @@ public class GoodsServiceImpl extends BaseDetailServiceImpl<GoodsPo, GoodsStockP
                 .eq(!StringUtils.isEmpty(po.getModifyUserId()), "modify_user_id", po.getModifyUserId())
                 .eq(!StringUtils.isEmpty(po.getModifyUserName()), "modify_user_name", po.getModifyUserName())
                 .eq(!StringUtils.isEmpty(po.getModifyTime()), "modify_time", po.getModifyTime());
+    }
+    @Override
+    public void deleteBefore(Long id) {
     }
 }

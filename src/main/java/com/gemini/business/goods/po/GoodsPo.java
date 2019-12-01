@@ -20,14 +20,14 @@ public class GoodsPo extends BaseDetailPo<GoodsStockPo> {
     private String name;
 
     /**
-     * 分类id
+     * 分类ID
      */
-    private Long classificationId;
+    private Long categoryId;
 
     /**
      * 分类名称
      */
-    private String classificationName;
+    private String categoryName;
 
     /**
      * 品牌id

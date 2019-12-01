@@ -38,9 +38,12 @@ public class GoodsParamController {
 
     @GetMapping
     @ResponseBody
-    public Message list(LayUiPage layUiPage, GoodsParamPo goodsParamPo) {
+    public Message list(LayUiPage layUiPage, GoodsParamPo po) {
         try {
             QueryWrapper<GoodsParamPo> qw = new QueryWrapper<>();
+            if (!StringUtils.isEmpty(po.getCategoryId())) {
+                qw.eq("category_id", po.getCategoryId());
+            }
             if (layUiPage.getPageNum() != 0 && layUiPage.getPageSize() != 0) {
                 IPage<GoodsParamPo> list = goodsParamService.page(new Page<>(layUiPage.getPageNum(), layUiPage.getPageSize()), qw);
                 return Message.success(list);

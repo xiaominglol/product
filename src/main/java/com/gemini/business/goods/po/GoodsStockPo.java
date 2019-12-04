@@ -17,24 +17,18 @@ import java.math.BigDecimal;
 public class GoodsStockPo extends BasePo {
 
     /**
-     * 分类id
-     */
-    private Long categoryId;
-
-    /**
-     * 分类名称
-     */
-    private String categoryName;
-
-    /**
-     * 规格id
-     */
-    private Long specificationId;
-
-    /**
      * 规格名称
      */
     private String specificationName;
+    /**
+     * 商品id
+     */
+    private Long goodsId;
+
+    /**
+     * 商品名称
+     */
+    private String goodsName;
 
     /**
      * 原价
@@ -50,4 +44,14 @@ public class GoodsStockPo extends BasePo {
      * 剩余库存
      */
     private Long surplusStock;
+
+    /**
+     * 已使用库存
+     */
+    private Long usedStock;
+
+    /**
+     * 锁定库存
+     */
+    private Long lockStock;
 }

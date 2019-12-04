@@ -11,18 +11,19 @@ import com.gemini.business.order.po.OrderHistoryPo;
 import com.gemini.business.order.service.OrderHistoryService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 /**
+ *
+ *
  * @author 小明不读书
- * @date Thu Oct 24 11:45:53 CST 2019
+ * @date Wed Dec 04 09:34:37 CST 2019
  */
 @Slf4j
-@Controller
+@RestController
 @RequestMapping("/order/history")
 public class OrderHistoryController {
 
@@ -36,7 +37,7 @@ public class OrderHistoryController {
 
     @GetMapping
     @ResponseBody
-    public Message list(LayUiPage layUiPage, OrderHistoryPo orderHistoryPo) {
+    public Message list(LayUiPage layUiPage, OrderHistoryPo po) {
         try {
             QueryWrapper<OrderHistoryPo> qw = new QueryWrapper<>();
             if (layUiPage.getPageNum() != 0 && layUiPage.getPageSize() != 0) {

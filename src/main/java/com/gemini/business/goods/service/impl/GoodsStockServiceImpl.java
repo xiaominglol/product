@@ -20,13 +20,14 @@ public class GoodsStockServiceImpl extends BaseServiceImpl<GoodsStockPo, GoodsSt
     @Override
     public QueryWrapper<GoodsStockPo> wrapper(GoodsStockPo po) {
         return super.wrapper(po)
-                .eq(!StringUtils.isEmpty(po.getCategoryId()), "category_id", po.getCategoryId())
-                .eq(!StringUtils.isEmpty(po.getCategoryName()), "category_name", po.getCategoryName())
-                .eq(!StringUtils.isEmpty(po.getSpecificationId()), "specification_id", po.getSpecificationId())
                 .eq(!StringUtils.isEmpty(po.getSpecificationName()), "specification_name", po.getSpecificationName())
+                .eq(!StringUtils.isEmpty(po.getGoodsId()), "goods_id", po.getGoodsId())
+                .eq(!StringUtils.isEmpty(po.getGoodsName()), "goods_name", po.getGoodsName())
                 .eq(!StringUtils.isEmpty(po.getOriginalPrice()), "original_price", po.getOriginalPrice())
                 .eq(!StringUtils.isEmpty(po.getCurrentPrice()), "current_price", po.getCurrentPrice())
                 .eq(!StringUtils.isEmpty(po.getSurplusStock()), "surplus_stock", po.getSurplusStock())
+                .eq(!StringUtils.isEmpty(po.getUsedStock()), "used_stock", po.getUsedStock())
+                .eq(!StringUtils.isEmpty(po.getLockStock()), "lock_stock", po.getLockStock())
                 .eq(!StringUtils.isEmpty(po.getStateId()), "state_id", po.getStateId())
                 .eq(!StringUtils.isEmpty(po.getStateCode()), "state_code", po.getStateCode())
                 .eq(!StringUtils.isEmpty(po.getStateName()), "state_name", po.getStateName())

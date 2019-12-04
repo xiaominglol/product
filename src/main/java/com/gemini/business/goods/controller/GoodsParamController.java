@@ -11,7 +11,6 @@ import com.gemini.business.goods.po.GoodsParamPo;
 import com.gemini.business.goods.service.GoodsParamService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,10 +20,10 @@ import java.util.List;
  * 商品参数表
  *
  * @author 小明不读书
- * @date Tue Nov 26 21:22:00 CST 2019
+ * @date Wed Dec 04 09:34:37 CST 2019
  */
 @Slf4j
-@Controller
+@RestController
 @RequestMapping("/goods/param")
 public class GoodsParamController {
 
@@ -33,7 +32,7 @@ public class GoodsParamController {
 
     @GetMapping("/gotoList")
     public String gotoList() {
-        return "goods/param_list";
+        return "goods/_list";
     }
 
     @GetMapping
@@ -41,9 +40,6 @@ public class GoodsParamController {
     public Message list(LayUiPage layUiPage, GoodsParamPo po) {
         try {
             QueryWrapper<GoodsParamPo> qw = new QueryWrapper<>();
-            if (!StringUtils.isEmpty(po.getCategoryId())) {
-                qw.eq("category_id", po.getCategoryId());
-            }
             if (layUiPage.getPageNum() != 0 && layUiPage.getPageSize() != 0) {
                 IPage<GoodsParamPo> list = goodsParamService.page(new Page<>(layUiPage.getPageNum(), layUiPage.getPageSize()), qw);
                 return Message.success(list);
@@ -77,7 +73,7 @@ public class GoodsParamController {
     public Message add(@RequestBody GoodsParamPo po) {
         try {
             if (StringUtils.isEmpty(po.getId())) {
-                goodsParamService.insertSync(po, po.getDetailList(), true);
+                goodsParamService.insertSync(po, true);
                 return Message.success(po);
             } else {
                 return Message.fail(CommonFailInfo.Id_ALREADY_EXIST);
@@ -93,7 +89,7 @@ public class GoodsParamController {
     public Message update(@RequestBody GoodsParamPo po) {
         try {
             if (!StringUtils.isEmpty(po.getId())) {
-                goodsParamService.updateSync(po, po.getDetailList(), true);
+                goodsParamService.updateSync(po, true);
                 return Message.success(po);
             } else {
                 return Message.fail(CommonFailInfo.Id_CAN_NOT_BE_EMPTY);

@@ -47,7 +47,7 @@ public class GoodsCategoryPo extends BaseSubPo<GoodsCategoryPo> {
     @TableField(
             exist = false
     )
-    private List<GoodsParamPo> paramDetailList;
+    private List<GoodsCategoryParamPo> paramDetailList;
 
     /**
      * 规格明细

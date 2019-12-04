@@ -11,18 +11,19 @@ import com.gemini.business.order.po.OrderPo;
 import com.gemini.business.order.service.OrderService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 /**
+ * 订单表
+ *
  * @author 小明不读书
- * @date Thu Oct 24 11:45:53 CST 2019
+ * @date Wed Dec 04 09:34:37 CST 2019
  */
 @Slf4j
-@Controller
+@RestController
 @RequestMapping("/order")
 public class OrderController {
 
@@ -36,7 +37,7 @@ public class OrderController {
 
     @GetMapping
     @ResponseBody
-    public Message list(LayUiPage layUiPage, OrderPo orderPo) {
+    public Message list(LayUiPage layUiPage, OrderPo po) {
         try {
             QueryWrapper<OrderPo> qw = new QueryWrapper<>();
             if (layUiPage.getPageNum() != 0 && layUiPage.getPageSize() != 0) {
@@ -66,7 +67,7 @@ public class OrderController {
         }
     }
 
-    @SysLog("添加")
+    @SysLog("添加订单表")
     @PostMapping
     @ResponseBody
     public Message add(@RequestBody OrderPo po) {
@@ -82,7 +83,7 @@ public class OrderController {
         }
     }
 
-    @SysLog("更新")
+    @SysLog("更新订单表")
     @PutMapping
     @ResponseBody
     public Message update(@RequestBody OrderPo po) {
@@ -98,7 +99,7 @@ public class OrderController {
         }
     }
 
-    @SysLog("删除")
+    @SysLog("删除订单表")
     @DeleteMapping("/{id}")
     @ResponseBody
     public Message delete(@PathVariable("id") Long id) {

@@ -12,7 +12,7 @@ import org.springframework.util.StringUtils;
  * 商品参数表
  *
  * @author 小明不读书
- * @date Tue Nov 26 21:22:00 CST 2019
+ * @date Wed Dec 04 09:34:37 CST 2019
  */
 @Service
 public class GoodsParamServiceImpl extends BaseDetailServiceImpl<GoodsParamPo, GoodsParamPo, GoodsParamMapper, GoodsParamMapper> implements GoodsParamService {
@@ -20,10 +20,9 @@ public class GoodsParamServiceImpl extends BaseDetailServiceImpl<GoodsParamPo, G
     @Override
     public QueryWrapper<GoodsParamPo> wrapper(GoodsParamPo po) {
         return super.wrapper(po)
-                .eq(!StringUtils.isEmpty(po.getPid()), "pid", po.getPid())
                 .eq(!StringUtils.isEmpty(po.getName()), "name", po.getName())
-                .eq(!StringUtils.isEmpty(po.getCategoryId()), "category_id", po.getCategoryId())
-                .eq(!StringUtils.isEmpty(po.getCategoryName()), "category_name", po.getCategoryName())
+                .eq(!StringUtils.isEmpty(po.getGoodsId()), "goods_id", po.getGoodsId())
+                .eq(!StringUtils.isEmpty(po.getGoodsName()), "goods_name", po.getGoodsName())
                 .eq(!StringUtils.isEmpty(po.getValue()), "value", po.getValue())
                 .eq(!StringUtils.isEmpty(po.getSort()), "sort", po.getSort())
                 .eq(!StringUtils.isEmpty(po.getStateId()), "state_id", po.getStateId())

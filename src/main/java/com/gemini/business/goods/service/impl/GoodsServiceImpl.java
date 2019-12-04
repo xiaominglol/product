@@ -27,7 +27,6 @@ public class GoodsServiceImpl extends BaseDetailServiceImpl<GoodsPo, GoodsStockP
                 .eq(!StringUtils.isEmpty(po.getBrandName()), "brand_name", po.getBrandName())
                 .eq(!StringUtils.isEmpty(po.getCategoryId()), "category_id", po.getCategoryId())
                 .eq(!StringUtils.isEmpty(po.getCategoryName()), "category_name", po.getCategoryName())
-                .eq(!StringUtils.isEmpty(po.getStockId()), "stock_id", po.getStockId())
                 .eq(!StringUtils.isEmpty(po.getStateId()), "state_id", po.getStateId())
                 .eq(!StringUtils.isEmpty(po.getStateCode()), "state_code", po.getStateCode())
                 .eq(!StringUtils.isEmpty(po.getStateName()), "state_name", po.getStateName())
@@ -35,6 +34,7 @@ public class GoodsServiceImpl extends BaseDetailServiceImpl<GoodsPo, GoodsStockP
                 .eq(!StringUtils.isEmpty(po.getModifyUserName()), "modify_user_name", po.getModifyUserName())
                 .eq(!StringUtils.isEmpty(po.getModifyTime()), "modify_time", po.getModifyTime());
     }
+
     @Override
     public void deleteBefore(Long id) {
     }

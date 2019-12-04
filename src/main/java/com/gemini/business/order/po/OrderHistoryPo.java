@@ -6,15 +6,22 @@ import lombok.Data;
 
 
 /**
+ *
+ *
  * @author 小明不读书
- * @date Thu Oct 24 11:45:53 CST 2019
+ * @date Wed Dec 04 09:34:37 CST 2019
  */
 @Data
 @TableName("order_history")
 public class OrderHistoryPo extends BaseDetailPo<OrderHistoryPo> {
 
     /**
-     *
+     * 订单id
      */
-    private Long oderId;
+    private Long orderId;
+
+    /**
+     * 订单号
+     */
+    private String orderNo;
 }

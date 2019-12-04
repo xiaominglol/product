@@ -274,7 +274,7 @@
                 });
                 renderTable({
                     dom: "paramDetailTable"
-                    , url: "/goods/param"
+                    , url: "/goods/category/param"
                     , height: ""
                     , page: true
                     , where: {"categoryId": data.id}
@@ -423,9 +423,9 @@
 
             if (layEvent == "deleteParam") {
                 del({
-                    url: "/goods/param/" + data.id
+                    url: "/goods/category/param/" + data.id
                     , dom: "paramDetailTable"
-                    , baseUrl: "/goods/param"
+                    , baseUrl: "/goods/category/param"
                     , baseCols: [[
                         {type: 'checkbox', width: 35}
                         , {field: 'name', title: '名称'}
@@ -458,8 +458,8 @@
         // 参数保存
         form.on('submit(saveParamButton)', function (data) {
             saveOrUpdate({
-                url: "/goods/param"
-                , baseUrl: "/goods/param"
+                url: "/goods/category/param"
+                , baseUrl: "/goods/category/param"
                 , dom: "paramDetailTable"
                 , baseCols: [[
                     {type: 'checkbox', width: 35}

@@ -9,8 +9,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 /**
+ *
+ *
  * @author 小明不读书
- * @date Thu Oct 24 11:45:53 CST 2019
+ * @date Wed Dec 04 09:34:37 CST 2019
  */
 @Service
 public class OrderHistoryServiceImpl extends BaseDetailServiceImpl<OrderHistoryPo, OrderHistoryPo, OrderHistoryMapper, OrderHistoryMapper> implements OrderHistoryService {
@@ -18,6 +20,7 @@ public class OrderHistoryServiceImpl extends BaseDetailServiceImpl<OrderHistoryP
     @Override
     public QueryWrapper<OrderHistoryPo> wrapper(OrderHistoryPo po) {
         return super.wrapper(po)
-                .eq(!StringUtils.isEmpty(po.getOderId()), "oder_id", po.getOderId());
+                .eq(!StringUtils.isEmpty(po.getOrderId()), "order_id", po.getOrderId())
+                .eq(!StringUtils.isEmpty(po.getOrderNo()), "order_no", po.getOrderNo());
     }
 }

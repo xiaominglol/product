@@ -17,7 +17,7 @@ public class GoodsParamPo extends BasePo {
     /**
      * 名称
      */
-    private Long name;
+    private String name;
 
     /**
      * 商品id

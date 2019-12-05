@@ -78,6 +78,8 @@
         var form = layui.form;
         var table = layui.table;
         var specificationName = [];
+
+        // 遍历分类
         $.ajax({
             url: '/goods/category'
             , type: 'GET'
@@ -98,6 +100,7 @@
         });
 
 
+        // 下拉分类带出品牌和规格
         form.on('select(categoryId)', function (data) {
             $("[name='categoryName']").val($("[name='categoryId']").find("option:selected").text());
             $.ajax({
@@ -146,6 +149,10 @@
                     }
                 }
             });
+        });
+
+        form.on('select(brandId)', function (data) {
+            $("[name='brandName']").val($("[name='brandId']").find("option:selected").text());
         });
 
         form.on('checkbox(specification)', function(data){

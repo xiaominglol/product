@@ -33,7 +33,7 @@ public class MemberAddressPo extends BaseDetailPo<MemberAddressPo> {
     /**
      * 收货人电话号码
      */
-    private Integer phone;
+    private String phone;
 
     /**
      * 省/直辖市

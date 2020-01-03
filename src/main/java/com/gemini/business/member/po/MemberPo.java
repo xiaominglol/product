@@ -24,7 +24,7 @@ public class MemberPo extends BaseDetailPo<MemberPo> {
     /**
      * 号码
      */
-    private Integer phone;
+    private String phone;
 
     /**
      * 密码

@@ -7,7 +7,7 @@
         <result column="member_id" property="memberId" javaType="Long"/>
         <result column="member_nickname" property="memberNickname" javaType="String"/>
         <result column="name" property="name" javaType="String"/>
-        <result column="phone" property="phone" javaType="Integer"/>
+        <result column="phone" property="phone" javaType="String"/>
         <result column="province" property="province" javaType="String"/>
         <result column="city" property="city" javaType="String"/>
         <result column="region" property="region" javaType="String"/>

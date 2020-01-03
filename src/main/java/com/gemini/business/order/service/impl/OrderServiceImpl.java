@@ -1,4 +1,4 @@
-package com.gemini.business.order.serviceImpl;
+package com.gemini.business.order.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.gemini.boot.framework.mybatis.service.impl.BaseDetailServiceImpl;

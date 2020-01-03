@@ -1,4 +1,4 @@
-package com.gemini.business.order.controller;
+package com.gemini.business.member.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -7,8 +7,8 @@ import com.gemini.boot.framework.mybatis.entity.LayUiPage;
 import com.gemini.boot.framework.web.entity.CommonFailInfo;
 import com.gemini.boot.framework.web.entity.Message;
 import com.gemini.business.common.annotation.SysLog;
-import com.gemini.business.order.po.OrderPo;
-import com.gemini.business.order.service.OrderService;
+import com.gemini.business.member.po.MemberGradePo;
+import com.gemini.business.member.service.MemberGradeService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,34 +18,34 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
- * 订单表
+ * 会员等级表
  *
  * @author 小明不读书
- * @date Wed Dec 04 09:34:37 CST 2019
+ * @date Fri Jan 03 15:04:36 CST 2020
  */
 @Slf4j
 @Controller
-@RequestMapping("/order")
-public class OrderController {
+@RequestMapping("/member/grade")
+public class MemberGradeController {
 
     @Autowired
-    OrderService orderService;
+    MemberGradeService memberGradeService;
 
     @GetMapping("/gotoList")
     public String gotoList() {
-        return "order/order_list";
+        return "member/grade_list";
     }
 
     @GetMapping
     @ResponseBody
-    public Message list(LayUiPage layUiPage, OrderPo po) {
+    public Message list(LayUiPage layUiPage, MemberGradePo po) {
         try {
-            QueryWrapper<OrderPo> qw = new QueryWrapper<>();
+            QueryWrapper<MemberGradePo> qw = new QueryWrapper<>();
             if (layUiPage.getPageNum() != 0 && layUiPage.getPageSize() != 0) {
-                IPage<OrderPo> list = orderService.page(new Page<>(layUiPage.getPageNum(), layUiPage.getPageSize()), qw);
+                IPage<MemberGradePo> list = memberGradeService.page(new Page<>(layUiPage.getPageNum(), layUiPage.getPageSize()), qw);
                 return Message.success(list);
             } else {
-                List<OrderPo> list = orderService.list(qw);
+                List<MemberGradePo> list = memberGradeService.list(qw);
                 return Message.success(list);
             }
         } catch (Exception e) {
@@ -58,8 +58,8 @@ public class OrderController {
     public Message detail(@PathVariable("id") Long id) {
         try {
             if (!StringUtils.isEmpty(id)) {
-                OrderPo orderPo = orderService.getById(id);
-                return Message.success(orderPo);
+                MemberGradePo memberGradePo = memberGradeService.getById(id);
+                return Message.success(memberGradePo);
             } else {
                 return Message.fail(CommonFailInfo.Id_CAN_NOT_BE_EMPTY);
             }
@@ -68,13 +68,13 @@ public class OrderController {
         }
     }
 
-    @SysLog("添加订单表")
+    @SysLog("添加会员等级表")
     @PostMapping
     @ResponseBody
-    public Message add(@RequestBody OrderPo po) {
+    public Message add(@RequestBody MemberGradePo po) {
         try {
             if (StringUtils.isEmpty(po.getId())) {
-                orderService.insertSync(po, false);
+                memberGradeService.insertSync(po, false);
                 return Message.success(po);
             } else {
                 return Message.fail(CommonFailInfo.Id_ALREADY_EXIST);
@@ -84,13 +84,13 @@ public class OrderController {
         }
     }
 
-    @SysLog("更新订单表")
+    @SysLog("更新会员等级表")
     @PutMapping
     @ResponseBody
-    public Message update(@RequestBody OrderPo po) {
+    public Message update(@RequestBody MemberGradePo po) {
         try {
             if (!StringUtils.isEmpty(po.getId())) {
-                orderService.updateSync(po, false);
+                memberGradeService.updateSync(po, false);
                 return Message.success(po);
             } else {
                 return Message.fail(CommonFailInfo.Id_CAN_NOT_BE_EMPTY);
@@ -100,13 +100,13 @@ public class OrderController {
         }
     }
 
-    @SysLog("删除订单表")
+    @SysLog("删除会员等级表")
     @DeleteMapping("/{id}")
     @ResponseBody
     public Message delete(@PathVariable("id") Long id) {
         try {
             if (!StringUtils.isEmpty(id)) {
-                orderService.deleteByIdSync(id);
+                memberGradeService.deleteByIdSync(id);
                 return Message.success(null);
             } else {
                 return Message.fail(CommonFailInfo.Id_CAN_NOT_BE_EMPTY);

@@ -1,7 +1,7 @@
 package com.gemini.business.order.po;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.gemini.boot.framework.mybatis.po.BaseDetailPo;
+import com.gemini.boot.framework.mybatis.po.BaseObjectPo;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -9,13 +9,19 @@ import java.util.Date;
 
 /**
  * 订单表
+ * 遇到关键字除了要加``，还要指定value =
  *
  * @author 小明不读书
  * @date Wed Dec 04 09:34:37 CST 2019
  */
 @Data
-@TableName("order")
-public class OrderPo extends BaseDetailPo<OrderPo> {
+@TableName(value = "`order`")
+public class OrderPo extends BaseObjectPo {
+
+    /**
+     * id
+     */
+    private Long id;
 
     /**
      * 订单号
@@ -93,7 +99,7 @@ public class OrderPo extends BaseDetailPo<OrderPo> {
     private Long stateId;
 
     /**
-     * 状态编码s
+     * 状态编码
      */
     private String stateCode;
 

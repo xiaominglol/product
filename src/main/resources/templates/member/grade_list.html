@@ -1,15 +1,8 @@
-<div th:replace="member/dict_crud"></div>
+<div th:replace="member/grade_crud"></div>
 
 <div class="layui-fluid">
     <div class="layui-row layui-col-space15">
-        <div class="layui-col-md2">
-            <div class="layui-card">
-                <div class="layui-card-body">
-                    <div id="tree"></div>
-                </div>
-            </div>
-        </div>
-        <div class="layui-col-md10">
+        <div class="layui-col-md12">
             <div class="layui-card">
                 <div class="layui-card-body">
                     <div id="content">
@@ -74,52 +67,31 @@
     layui.use(['form', 'table'], function () {
         var form = layui.form;
         var table = layui.table;
-        var baseUrl = "/goods/category";
-        var moduleName = "分类";
+        var baseUrl = "/member/grade";
+        var moduleName = "会员等级";
         var requestType;
         var baseCols = [[
             {checkbox: true}
+            , {field: 'code', title: '编码'}
             , {field: 'name', title: '名称'}
-            , {field: 'icon', title: 'icon'}
-            , {field: 'sort', title: '排序'}
             , {title: '操作', width: 120, toolbar: '#optToolBar'}
         ]];
-        var baseDetailCols = [
-            {type: 'checkbox', width: 35}
-            , {field: 'name', title: '名称', edit: 'text'}
-            , {field: 'icon', title: 'icon', edit: 'text'}
-            , {field: 'sort', title: '排序', edit: 'text'}
-        ];
         var baseUpdateCols = [
-            {field: 'name', type: "text"}
-            , {field: 'icon', type: "text"}
-            , {field: 'sort', type: "text"}
+            {field: 'code', type: "text"}
+            , {field: 'name', type: "text"}
         ];
 
-        //左侧树
-        renderTree({
-            url: baseUrl
-            , click: function (node) {
-                renderTreeTable({
-                    url: baseUrl
-                    , data: {id: node.id}
-                    , cols: baseCols
-                });
-            }
-        });
 
         //右侧树形表格
-        renderTreeTable({
+        renderTable({
             url: baseUrl
             , cols: baseCols
         });
 
         //查询
         form.on('submit(queryButton)', function (data) {
-            renderTreeTable({
-                url: baseUrl
-                , data: data.field
-                , cols: baseCols
+            refreshTable({
+                where: data.field
             });
             return false;
         });
@@ -128,7 +100,6 @@
         $(".addButton").click(function () {
             requestType = add({
                 title: '添加' + moduleName
-                , cols: baseDetailCols
             });
         });
 
@@ -136,21 +107,19 @@
         $(".editButton").click(function () {
             requestType = edit({
                 title: '修改' + moduleName
-                , url: baseUrl
-                , cols: baseDetailCols
                 , fields: baseUpdateCols
             });
         });
 
         // 添加/修改 保存
         form.on('submit(saveButton)', function (data) {
-            data.field.detailList = table.cache.detailTable;
             saveOrUpdate({
                 url: baseUrl
                 , baseUrl: baseUrl
                 , baseCols: baseCols
                 , type: requestType
                 , data: data.field
+                , isTable: true
             });
             return false;
         });
@@ -163,26 +132,11 @@
                     url: baseUrl + "/" + selectedData.data[0].id
                     , baseUrl: baseUrl
                     , baseCols: baseCols
+                    , isTable: true
                 });
             } else {
                 layer.msg('请选择一条数据', {icon: 0});
             }
-        });
-
-        // 新增一行 明细
-        $(".add_detail").click(function () {
-            addRowButton({
-                table: "detailTable"
-                , cols: baseDetailCols
-            })
-        });
-
-        // 批量删除 明细
-        $(".delete_detail").click(function () {
-            batchDelButton({
-                table: "detailTable"
-                , cols: baseDetailCols
-            })
         });
     });
 

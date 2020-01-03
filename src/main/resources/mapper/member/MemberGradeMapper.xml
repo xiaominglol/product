@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.gemini.business.order.mapper.OrderHistoryMapper">
+<mapper namespace="com.gemini.business.member.mapper.MemberGradeMapper">
 
-    <resultMap id="resultMap" type="com.gemini.business.order.po.OrderHistoryPo">
+    <resultMap id="resultMap" type="com.gemini.business.member.po.MemberGradePo">
         <id column="id" property="id" javaType="Long"/>
-        <result column="order_id" property="orderId" javaType="Long"/>
-        <result column="order_no" property="orderNo" javaType="String"/>
+        <result column="code" property="code" javaType="String"/>
+        <result column="name" property="name" javaType="String"/>
     </resultMap>
 
     <sql id="fields">
-                            h.order_id,
-                    h.order_no
+                            g.code,
+                    g.name
     </sql>
 
     <sql id="table">
-        d_l_risk_dict h
+        d_l_risk_dict g
     </sql>
 
     <sql id="where">
         <where>
-            <if test="orderId != null and orderId != ''">
-                and h.order_id = #{orderId}
+            <if test="code != null and code != ''">
+                and g.code = #{code}
             </if>
-            <if test="orderNo != null and orderNo != ''">
-                and h.order_no = #{orderNo}
+            <if test="name != null and name != ''">
+                and g.name = #{name}
             </if>
         </where>
     </sql>

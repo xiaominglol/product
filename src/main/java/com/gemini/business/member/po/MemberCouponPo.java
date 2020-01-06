@@ -1,7 +1,9 @@
 package com.gemini.business.member.po;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.gemini.boot.framework.mybatis.po.BaseDetailPo;
+import com.gemini.boot.framework.mybatis.entity.Dict;
+import com.gemini.boot.framework.mybatis.po.BaseObjectPo;
+import com.gemini.business.platform.enums.Dicts;
 import lombok.Data;
 
 import java.util.Date;
@@ -14,7 +16,12 @@ import java.util.Date;
  */
 @Data
 @TableName("member_coupon")
-public class MemberCouponPo extends BaseDetailPo<MemberCouponPo> {
+public class MemberCouponPo extends BaseObjectPo {
+
+    /**
+     * id
+     */
+    private Long id;
 
     /**
      * 会员id
@@ -40,4 +47,25 @@ public class MemberCouponPo extends BaseDetailPo<MemberCouponPo> {
      * 创建时间
      */
     private Date createTime;
+
+    /**
+     * 状态id
+     */
+    private Long stateId;
+
+    /**
+     * 状态编码
+     */
+    private String stateCode;
+
+    /**
+     * 状态名称
+     */
+    private String stateName;
+
+    public void initDicts() {
+        Dict stateType = Dicts.get(getStateId());
+        setStateCode(stateType.getCode());
+        setStateName(stateType.getName());
+    }
 }

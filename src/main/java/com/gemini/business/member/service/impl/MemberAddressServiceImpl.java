@@ -1,7 +1,7 @@
 package com.gemini.business.member.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.gemini.boot.framework.mybatis.service.impl.BaseDetailServiceImpl;
+import com.gemini.boot.framework.mybatis.service.impl.BaseServiceImpl;
 import com.gemini.business.member.mapper.MemberAddressMapper;
 import com.gemini.business.member.po.MemberAddressPo;
 import com.gemini.business.member.service.MemberAddressService;
@@ -15,7 +15,7 @@ import org.springframework.util.StringUtils;
  * @date Wed Dec 04 09:34:37 CST 2019
  */
 @Service
-public class MemberAddressServiceImpl extends BaseDetailServiceImpl<MemberAddressPo, MemberAddressPo, MemberAddressMapper, MemberAddressMapper> implements MemberAddressService {
+public class MemberAddressServiceImpl extends BaseServiceImpl<MemberAddressPo, MemberAddressMapper> implements MemberAddressService {
 
     @Override
     public QueryWrapper<MemberAddressPo> wrapper(MemberAddressPo po) {

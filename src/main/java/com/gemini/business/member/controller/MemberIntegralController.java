@@ -32,7 +32,7 @@ public class MemberIntegralController {
 
     @GetMapping("/gotoList")
     public String gotoList() {
-        return "member/_list";
+        return "member/integral_list";
     }
 
     @GetMapping
@@ -73,7 +73,7 @@ public class MemberIntegralController {
     public Message add(@RequestBody MemberIntegralPo po) {
         try {
             if (StringUtils.isEmpty(po.getId())) {
-                memberIntegralService.insertSync(po, po.getDetailList(), false);
+                memberIntegralService.insertSync(po, false);
                 return Message.success(po);
             } else {
                 return Message.fail(CommonFailInfo.Id_ALREADY_EXIST);
@@ -89,7 +89,7 @@ public class MemberIntegralController {
     public Message update(@RequestBody MemberIntegralPo po) {
         try {
             if (!StringUtils.isEmpty(po.getId())) {
-                memberIntegralService.updateSync(po, po.getDetailList(), false);
+                memberIntegralService.updateSync(po, false);
                 return Message.success(po);
             } else {
                 return Message.fail(CommonFailInfo.Id_CAN_NOT_BE_EMPTY);

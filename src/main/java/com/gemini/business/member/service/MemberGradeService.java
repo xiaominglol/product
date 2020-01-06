@@ -1,6 +1,6 @@
 package com.gemini.business.member.service;
 
-import com.gemini.boot.framework.mybatis.service.BaseDetailService;
+import com.gemini.boot.framework.mybatis.service.BaseService;
 import com.gemini.business.member.mapper.MemberGradeMapper;
 import com.gemini.business.member.po.MemberGradePo;
 
@@ -10,5 +10,5 @@ import com.gemini.business.member.po.MemberGradePo;
  * @author 小明不读书
  * @date Fri Jan 03 15:04:36 CST 2020
  */
-public interface MemberGradeService extends BaseDetailService<MemberGradePo, MemberGradePo, MemberGradeMapper, MemberGradeMapper> {
+public interface MemberGradeService extends BaseService<MemberGradePo, MemberGradeMapper> {
 }

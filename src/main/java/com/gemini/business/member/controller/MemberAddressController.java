@@ -32,7 +32,7 @@ public class MemberAddressController {
 
     @GetMapping("/gotoList")
     public String gotoList() {
-        return "member/_list";
+        return "member/address_list";
     }
 
     @GetMapping
@@ -40,6 +40,9 @@ public class MemberAddressController {
     public Message list(LayUiPage layUiPage, MemberAddressPo po) {
         try {
             QueryWrapper<MemberAddressPo> qw = new QueryWrapper<>();
+            if (!StringUtils.isEmpty(po.getMemberId())) {
+                qw.eq("member_id", po.getMemberId());
+            }
             if (layUiPage.getPageNum() != 0 && layUiPage.getPageSize() != 0) {
                 IPage<MemberAddressPo> list = memberAddressService.page(new Page<>(layUiPage.getPageNum(), layUiPage.getPageSize()), qw);
                 return Message.success(list);
@@ -73,7 +76,7 @@ public class MemberAddressController {
     public Message add(@RequestBody MemberAddressPo po) {
         try {
             if (StringUtils.isEmpty(po.getId())) {
-                memberAddressService.insertSync(po, po.getDetailList(), false);
+                memberAddressService.insertSync(po, false);
                 return Message.success(po);
             } else {
                 return Message.fail(CommonFailInfo.Id_ALREADY_EXIST);
@@ -89,7 +92,7 @@ public class MemberAddressController {
     public Message update(@RequestBody MemberAddressPo po) {
         try {
             if (!StringUtils.isEmpty(po.getId())) {
-                memberAddressService.updateSync(po, po.getDetailList(), false);
+                memberAddressService.updateSync(po, false);
                 return Message.success(po);
             } else {
                 return Message.fail(CommonFailInfo.Id_CAN_NOT_BE_EMPTY);

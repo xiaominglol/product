@@ -1,7 +1,7 @@
 package com.gemini.business.member.po;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.gemini.boot.framework.mybatis.po.BaseDetailPo;
+import com.gemini.boot.framework.mybatis.po.BaseObjectPo;
 import lombok.Data;
 
 
@@ -13,7 +13,12 @@ import lombok.Data;
  */
 @Data
 @TableName("member_integral")
-public class MemberIntegralPo extends BaseDetailPo<MemberIntegralPo> {
+public class MemberIntegralPo extends BaseObjectPo {
+
+    /**
+     * id
+     */
+    private Long id;
 
     /**
      * 会员id

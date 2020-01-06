@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.gemini.boot.framework.mybatis.entity.LayUiPage;
+import com.gemini.boot.framework.mybatis.enums.StateEnum;
+import com.gemini.boot.framework.mybatis.utils.BeanUtils;
 import com.gemini.boot.framework.web.entity.CommonFailInfo;
 import com.gemini.boot.framework.web.entity.Message;
 import com.gemini.business.common.annotation.SysLog;
@@ -15,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -74,7 +77,9 @@ public class MemberController {
     public Message add(@RequestBody MemberPo po) {
         try {
             if (StringUtils.isEmpty(po.getId())) {
-                memberService.insertSync(po, po.getDetailList(), false);
+                po.setCreateTime(new Date());
+                BeanUtils.setDict(StateEnum.Enable, po);
+                memberService.insertSync(po, false);
                 return Message.success(po);
             } else {
                 return Message.fail(CommonFailInfo.Id_ALREADY_EXIST);
@@ -90,7 +95,8 @@ public class MemberController {
     public Message update(@RequestBody MemberPo po) {
         try {
             if (!StringUtils.isEmpty(po.getId())) {
-                memberService.updateSync(po, po.getDetailList(), false);
+                po.initDicts();
+                memberService.updateSync(po, false);
                 return Message.success(po);
             } else {
                 return Message.fail(CommonFailInfo.Id_CAN_NOT_BE_EMPTY);

@@ -10,12 +10,6 @@
         <result column="real_name" property="realName" javaType="String"/>
         <result column="id_card_no" property="idCardNo" javaType="Integer"/>
         <result column="create_time" property="createTime" javaType="java.util.Date"/>
-        <result column="state_id" property="stateId" javaType="Long"/>
-        <result column="state_code" property="stateCode" javaType="String"/>
-        <result column="state_name" property="stateName" javaType="String"/>
-        <result column="modify_user_id" property="modifyUserId" javaType="Long"/>
-        <result column="modify_user_name" property="modifyUserName" javaType="String"/>
-        <result column="modify_time" property="modifyTime" javaType="java.util.Date"/>
     </resultMap>
 
     <sql id="fields">
@@ -24,13 +18,7 @@
                     m.password,
                     m.real_name,
                     m.id_card_no,
-                    m.create_time,
-                    m.state_id,
-                    m.state_code,
-                    m.state_name,
-                    m.modify_user_id,
-                    m.modify_user_name,
-                    m.modify_time
+                    m.create_time
     </sql>
 
     <sql id="table">
@@ -56,24 +44,6 @@
             </if>
             <if test="createTime != null and createTime != ''">
                 and m.create_time = #{createTime}
-            </if>
-            <if test="stateId != null and stateId != ''">
-                and m.state_id = #{stateId}
-            </if>
-            <if test="stateCode != null and stateCode != ''">
-                and m.state_code = #{stateCode}
-            </if>
-            <if test="stateName != null and stateName != ''">
-                and m.state_name = #{stateName}
-            </if>
-            <if test="modifyUserId != null and modifyUserId != ''">
-                and m.modify_user_id = #{modifyUserId}
-            </if>
-            <if test="modifyUserName != null and modifyUserName != ''">
-                and m.modify_user_name = #{modifyUserName}
-            </if>
-            <if test="modifyTime != null and modifyTime != ''">
-                and m.modify_time = #{modifyTime}
             </if>
         </where>
     </sql>

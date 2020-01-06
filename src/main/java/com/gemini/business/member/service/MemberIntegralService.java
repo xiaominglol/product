@@ -1,6 +1,6 @@
 package com.gemini.business.member.service;
 
-import com.gemini.boot.framework.mybatis.service.BaseDetailService;
+import com.gemini.boot.framework.mybatis.service.BaseService;
 import com.gemini.business.member.mapper.MemberIntegralMapper;
 import com.gemini.business.member.po.MemberIntegralPo;
 
@@ -10,5 +10,5 @@ import com.gemini.business.member.po.MemberIntegralPo;
  * @author 小明不读书
  * @date Wed Dec 04 09:34:37 CST 2019
  */
-public interface MemberIntegralService extends BaseDetailService<MemberIntegralPo, MemberIntegralPo, MemberIntegralMapper, MemberIntegralMapper> {
+public interface MemberIntegralService extends BaseService<MemberIntegralPo, MemberIntegralMapper> {
 }

@@ -1,7 +1,7 @@
 package com.gemini.business.member.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.gemini.boot.framework.mybatis.service.impl.BaseDetailServiceImpl;
+import com.gemini.boot.framework.mybatis.service.impl.BaseServiceImpl;
 import com.gemini.business.member.mapper.MemberCouponMapper;
 import com.gemini.business.member.po.MemberCouponPo;
 import com.gemini.business.member.service.MemberCouponService;
@@ -15,7 +15,7 @@ import org.springframework.util.StringUtils;
  * @date Wed Dec 04 09:34:37 CST 2019
  */
 @Service
-public class MemberCouponServiceImpl extends BaseDetailServiceImpl<MemberCouponPo, MemberCouponPo, MemberCouponMapper, MemberCouponMapper> implements MemberCouponService {
+public class MemberCouponServiceImpl extends BaseServiceImpl<MemberCouponPo, MemberCouponMapper> implements MemberCouponService {
 
     @Override
     public QueryWrapper<MemberCouponPo> wrapper(MemberCouponPo po) {
@@ -27,9 +27,6 @@ public class MemberCouponServiceImpl extends BaseDetailServiceImpl<MemberCouponP
                 .eq(!StringUtils.isEmpty(po.getCreateTime()), "create_time", po.getCreateTime())
                 .eq(!StringUtils.isEmpty(po.getStateId()), "state_id", po.getStateId())
                 .eq(!StringUtils.isEmpty(po.getStateCode()), "state_code", po.getStateCode())
-                .eq(!StringUtils.isEmpty(po.getStateName()), "state_name", po.getStateName())
-                .eq(!StringUtils.isEmpty(po.getModifyUserId()), "modify_user_id", po.getModifyUserId())
-                .eq(!StringUtils.isEmpty(po.getModifyUserName()), "modify_user_name", po.getModifyUserName())
-                .eq(!StringUtils.isEmpty(po.getModifyTime()), "modify_time", po.getModifyTime());
+                .eq(!StringUtils.isEmpty(po.getStateName()), "state_name", po.getStateName());
     }
 }

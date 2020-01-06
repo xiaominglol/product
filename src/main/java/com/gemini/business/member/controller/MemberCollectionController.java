@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -32,7 +33,7 @@ public class MemberCollectionController {
 
     @GetMapping("/gotoList")
     public String gotoList() {
-        return "member/_list";
+        return "member/collection_list";
     }
 
     @GetMapping
@@ -73,7 +74,8 @@ public class MemberCollectionController {
     public Message add(@RequestBody MemberCollectionPo po) {
         try {
             if (StringUtils.isEmpty(po.getId())) {
-                memberCollectionService.insertSync(po, po.getDetailList(), false);
+                po.setCreateTime(new Date());
+                memberCollectionService.insertSync(po, false);
                 return Message.success(po);
             } else {
                 return Message.fail(CommonFailInfo.Id_ALREADY_EXIST);
@@ -89,7 +91,7 @@ public class MemberCollectionController {
     public Message update(@RequestBody MemberCollectionPo po) {
         try {
             if (!StringUtils.isEmpty(po.getId())) {
-                memberCollectionService.updateSync(po, po.getDetailList(), false);
+                memberCollectionService.updateSync(po, false);
                 return Message.success(po);
             } else {
                 return Message.fail(CommonFailInfo.Id_CAN_NOT_BE_EMPTY);

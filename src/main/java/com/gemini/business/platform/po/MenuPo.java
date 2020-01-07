@@ -5,6 +5,7 @@ import com.gemini.boot.framework.mybatis.entity.Dict;
 import com.gemini.boot.framework.mybatis.po.BaseSubPo;
 import com.gemini.business.platform.enums.Dicts;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  * 菜单表
@@ -12,6 +13,7 @@ import lombok.Data;
  * @author 小明不读书
  */
 @Data
+@EqualsAndHashCode(callSuper = false)
 @TableName("platform_menu")
 public class MenuPo extends BaseSubPo<MenuPo> {
 

@@ -3,6 +3,7 @@ package com.gemini.business.goods.po;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.gemini.boot.framework.mybatis.po.BasePo;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  * 商品参数表
@@ -11,6 +12,7 @@ import lombok.Data;
  * @date Wed Dec 04 09:34:37 CST 2019
  */
 @Data
+@EqualsAndHashCode(callSuper = false)
 @TableName("goods_param")
 public class GoodsParamPo extends BasePo {
 

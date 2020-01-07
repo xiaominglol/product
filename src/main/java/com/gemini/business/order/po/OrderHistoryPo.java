@@ -3,6 +3,7 @@ package com.gemini.business.order.po;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.gemini.boot.framework.mybatis.po.BaseDetailPo;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 
 /**
@@ -12,6 +13,7 @@ import lombok.Data;
  * @date Wed Dec 04 09:34:37 CST 2019
  */
 @Data
+@EqualsAndHashCode(callSuper = false)
 @TableName("order_history")
 public class OrderHistoryPo extends BaseDetailPo<OrderHistoryPo> {
 

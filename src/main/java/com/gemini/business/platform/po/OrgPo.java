@@ -5,6 +5,7 @@ import com.gemini.boot.framework.mybatis.entity.Dict;
 import com.gemini.boot.framework.mybatis.po.BaseSubPo;
 import com.gemini.business.platform.enums.Dicts;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  * 组织架构表
@@ -12,6 +13,7 @@ import lombok.Data;
  * @author 小明不读书
  */
 @Data
+@EqualsAndHashCode(callSuper = false)
 @TableName("platform_org")
 public class OrgPo extends BaseSubPo<OrgPo> {
 

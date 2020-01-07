@@ -3,6 +3,7 @@ package com.gemini.business.goods.po;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.gemini.boot.framework.mybatis.po.BasePo;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  * 商品品牌表
@@ -11,6 +12,7 @@ import lombok.Data;
  * @date Tue Nov 26 21:22:00 CST 2019
  */
 @Data
+@EqualsAndHashCode(callSuper = false)
 @TableName("goods_brand")
 public class GoodsBrandPo extends BasePo {
 

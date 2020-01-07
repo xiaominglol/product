@@ -3,6 +3,7 @@ package com.gemini.business.goods.po;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.gemini.boot.framework.mybatis.po.BasePo;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.math.BigDecimal;
 
@@ -13,6 +14,7 @@ import java.math.BigDecimal;
  * @date Tue Nov 26 21:22:00 CST 2019
  */
 @Data
+@EqualsAndHashCode(callSuper = false)
 @TableName("goods_stock")
 public class GoodsStockPo extends BasePo {
 

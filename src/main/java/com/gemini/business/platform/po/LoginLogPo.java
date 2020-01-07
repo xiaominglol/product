@@ -3,6 +3,7 @@ package com.gemini.business.platform.po;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.gemini.boot.framework.mybatis.po.BaseObjectPo;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.util.Date;
 
@@ -12,6 +13,7 @@ import java.util.Date;
  * @author 小明不读书
  */
 @Data
+@EqualsAndHashCode(callSuper = false)
 @TableName("platform_login_log")
 public class LoginLogPo extends BaseObjectPo {
 

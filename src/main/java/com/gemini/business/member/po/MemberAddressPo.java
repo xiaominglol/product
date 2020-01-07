@@ -3,6 +3,7 @@ package com.gemini.business.member.po;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.gemini.boot.framework.mybatis.po.BaseObjectPo;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 
 /**
@@ -12,6 +13,7 @@ import lombok.Data;
  * @date Wed Dec 04 09:34:37 CST 2019
  */
 @Data
+@EqualsAndHashCode(callSuper = false)
 @TableName("member_address")
 public class MemberAddressPo extends BaseObjectPo {
 

@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.gemini.boot.framework.mybatis.po.BaseSubPo;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.util.List;
 
@@ -14,6 +15,7 @@ import java.util.List;
  * @date Tue Nov 26 21:22:00 CST 2019
  */
 @Data
+@EqualsAndHashCode(callSuper = false)
 @TableName("goods_category")
 public class GoodsCategoryPo extends BaseSubPo<GoodsCategoryPo> {
 

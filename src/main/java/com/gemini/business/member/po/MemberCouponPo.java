@@ -5,6 +5,7 @@ import com.gemini.boot.framework.mybatis.entity.Dict;
 import com.gemini.boot.framework.mybatis.po.BaseObjectPo;
 import com.gemini.business.platform.enums.Dicts;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.util.Date;
 
@@ -15,6 +16,7 @@ import java.util.Date;
  * @date Wed Dec 04 09:34:37 CST 2019
  */
 @Data
+@EqualsAndHashCode(callSuper = false)
 @TableName("member_coupon")
 public class MemberCouponPo extends BaseObjectPo {
 

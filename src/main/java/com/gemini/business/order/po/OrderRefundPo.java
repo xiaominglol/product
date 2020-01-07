@@ -3,6 +3,7 @@ package com.gemini.business.order.po;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.gemini.boot.framework.mybatis.po.BaseDetailPo;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -14,6 +15,7 @@ import java.util.Date;
  * @date Wed Dec 04 09:34:37 CST 2019
  */
 @Data
+@EqualsAndHashCode(callSuper = false)
 @TableName("order_refund")
 public class OrderRefundPo extends BaseDetailPo<OrderRefundPo> {
 

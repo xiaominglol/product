@@ -3,6 +3,7 @@ package com.gemini.business.platform.po;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.gemini.boot.framework.mybatis.po.BaseSubPo;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  * 字典表
@@ -10,6 +11,7 @@ import lombok.Data;
  * @author 小明不读书
  */
 @Data
+@EqualsAndHashCode(callSuper = false)
 @TableName("platform_dict")
 public class DictPo extends BaseSubPo<DictPo> {
 

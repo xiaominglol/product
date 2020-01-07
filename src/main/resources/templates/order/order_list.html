@@ -32,15 +32,6 @@
                                                                 class="layui-btn layui-btn-sm layui-btn-rest">
                                                             <i class="layui-icon layui-icon-refresh-1"></i>重置
                                                         </button>
-                                                        <span class="layui-btn layui-btn-sm addButton">
-                                                <i class="layui-icon layui-icon-add-circle"></i> 添加
-                                            </span>
-                                                        <span class="layui-btn layui-btn-sm layui-btn-warm editButton">
-                                                <i class="layui-icon layui-icon-edit"></i> 修改
-                                            </span>
-                                                        <span class="layui-btn layui-btn-sm layui-btn-danger delButton">
-                                                <i class="layui-icon layui-icon-delete"></i> 删除
-                                            </span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -126,21 +117,6 @@
                 , isTable: true
             });
             return false;
-        });
-
-        // 删除
-        $(".delButton").click(function () {
-            var selectedData = table.checkStatus('table');
-            if (selectedData.data.length != 0) {
-                del({
-                    url: baseUrl + "/" + selectedData.data[0].id
-                    , baseUrl: baseUrl
-                    , baseCols: baseCols
-                    , isTable: true
-                });
-            } else {
-                layer.msg('请选择一条数据', {icon: 0});
-            }
         });
 
     });

@@ -3,19 +3,19 @@
 <mapper namespace="com.gemini.business.goods.mapper.GoodsMapper">
 
     <resultMap id="resultMap" type="com.gemini.business.goods.po.GoodsPo">
-                <id column="id" property="id" javaType="Long"/>
-                <result column="name" property="name" javaType="String"/>
-                <result column="brand_id" property="brandId" javaType="Long"/>
-                <result column="brand_name" property="brandName" javaType="String"/>
-                <result column="classification_id" property="classificationId" javaType="Long"/>
-                <result column="classification_name" property="classificationName" javaType="String"/>
-                <result column="stock_id" property="stockId" javaType="Long"/>
-                <result column="state_id" property="stateId" javaType="Long"/>
-                <result column="state_code" property="stateCode" javaType="String"/>
-                <result column="state_name" property="stateName" javaType="String"/>
-                <result column="modify_user_id" property="modifyUserId" javaType="Long"/>
-                <result column="modify_user_name" property="modifyUserName" javaType="String"/>
-                <result column="modify_time" property="modifyTime" javaType="java.util.Date"/>
+        <id column="id" property="id" javaType="Long"/>
+        <result column="name" property="name" javaType="String"/>
+        <result column="category_id" property="categoryId" javaType="Long"/>
+        <result column="category_name" property="categoryName" javaType="String"/>
+        <result column="brand_id" property="brandId" javaType="Long"/>
+        <result column="brand_name" property="brandName" javaType="String"/>
+        <result column="picture" property="picture" javaType="String"/>
+        <result column="state_id" property="stateId" javaType="Long"/>
+        <result column="state_code" property="stateCode" javaType="String"/>
+        <result column="state_name" property="stateName" javaType="String"/>
+        <result column="modify_user_id" property="modifyUserId" javaType="Long"/>
+        <result column="modify_user_name" property="modifyUserName" javaType="String"/>
+        <result column="modify_time" property="modifyTime" javaType="java.util.Date"/>
     </resultMap>
 
     <sql id="fields">
@@ -39,42 +39,42 @@
 
     <sql id="where">
         <where>
-                    <if test="name != null and name != ''">
-                        and g.name = #{name}
-                    </if>
-                    <if test="brandId != null and brandId != ''">
-                        and g.brand_id = #{brandId}
-                    </if>
-                    <if test="brandName != null and brandName != ''">
-                        and g.brand_name = #{brandName}
-                    </if>
-                    <if test="classificationId != null and classificationId != ''">
-                        and g.classification_id = #{classificationId}
-                    </if>
-                    <if test="classificationName != null and classificationName != ''">
-                        and g.classification_name = #{classificationName}
-                    </if>
-                    <if test="stockId != null and stockId != ''">
-                        and g.stock_id = #{stockId}
-                    </if>
-                    <if test="stateId != null and stateId != ''">
-                        and g.state_id = #{stateId}
-                    </if>
-                    <if test="stateCode != null and stateCode != ''">
-                        and g.state_code = #{stateCode}
-                    </if>
-                    <if test="stateName != null and stateName != ''">
-                        and g.state_name = #{stateName}
-                    </if>
-                    <if test="modifyUserId != null and modifyUserId != ''">
-                        and g.modify_user_id = #{modifyUserId}
-                    </if>
-                    <if test="modifyUserName != null and modifyUserName != ''">
-                        and g.modify_user_name = #{modifyUserName}
-                    </if>
-                    <if test="modifyTime != null and modifyTime != ''">
-                        and g.modify_time = #{modifyTime}
-                    </if>
+            <if test="name != null and name != ''">
+                and g.name = #{name}
+            </if>
+            <if test="brandId != null and brandId != ''">
+                and g.brand_id = #{brandId}
+            </if>
+            <if test="brandName != null and brandName != ''">
+                and g.brand_name = #{brandName}
+            </if>
+            <if test="classificationId != null and classificationId != ''">
+                and g.classification_id = #{classificationId}
+            </if>
+            <if test="classificationName != null and classificationName != ''">
+                and g.classification_name = #{classificationName}
+            </if>
+            <if test="stockId != null and stockId != ''">
+                and g.stock_id = #{stockId}
+            </if>
+            <if test="stateId != null and stateId != ''">
+                and g.state_id = #{stateId}
+            </if>
+            <if test="stateCode != null and stateCode != ''">
+                and g.state_code = #{stateCode}
+            </if>
+            <if test="stateName != null and stateName != ''">
+                and g.state_name = #{stateName}
+            </if>
+            <if test="modifyUserId != null and modifyUserId != ''">
+                and g.modify_user_id = #{modifyUserId}
+            </if>
+            <if test="modifyUserName != null and modifyUserName != ''">
+                and g.modify_user_name = #{modifyUserName}
+            </if>
+            <if test="modifyTime != null and modifyTime != ''">
+                and g.modify_time = #{modifyTime}
+            </if>
         </where>
     </sql>
 

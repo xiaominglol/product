@@ -40,4 +40,9 @@ public class GoodsPo extends BaseDetailPo<GoodsStockPo> {
      * 品牌名称
      */
     private String brandName;
+
+    /**
+     * 图片
+     */
+    private String picture;
 }

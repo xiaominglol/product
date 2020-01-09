@@ -3,17 +3,17 @@
 <mapper namespace="com.gemini.business.goods.mapper.GoodsCategoryMapper">
 
     <resultMap id="resultMap" type="com.gemini.business.goods.po.GoodsCategoryPo">
-                <id column="id" property="id" javaType="Long"/>
-                <result column="pid" property="pid" javaType="Long"/>
-                <result column="name" property="name" javaType="String"/>
-                <result column="icon" property="icon" javaType="String"/>
-                <result column="sort" property="sort" javaType="Byte"/>
-                <result column="state_id" property="stateId" javaType="Long"/>
-                <result column="state_code" property="stateCode" javaType="String"/>
-                <result column="state_name" property="stateName" javaType="String"/>
-                <result column="modify_user_id" property="modifyUserId" javaType="Long"/>
-                <result column="modify_user_name" property="modifyUserName" javaType="String"/>
-                <result column="modify_time" property="modifyTime" javaType="java.util.Date"/>
+        <id column="id" property="id" javaType="Long"/>
+        <result column="pid" property="pid" javaType="Long"/>
+        <result column="name" property="name" javaType="String"/>
+        <result column="icon" property="icon" javaType="String"/>
+        <result column="sort" property="sort" javaType="Byte"/>
+        <result column="state_id" property="stateId" javaType="Long"/>
+        <result column="state_code" property="stateCode" javaType="String"/>
+        <result column="state_name" property="stateName" javaType="String"/>
+        <result column="modify_user_id" property="modifyUserId" javaType="Long"/>
+        <result column="modify_user_name" property="modifyUserName" javaType="String"/>
+        <result column="modify_time" property="modifyTime" javaType="java.util.Date"/>
     </resultMap>
 
     <sql id="fields">
@@ -35,36 +35,36 @@
 
     <sql id="where">
         <where>
-                    <if test="pid != null and pid != ''">
-                        and c.pid = #{pid}
-                    </if>
-                    <if test="name != null and name != ''">
-                        and c.name = #{name}
-                    </if>
-                    <if test="icon != null and icon != ''">
-                        and c.icon = #{icon}
-                    </if>
-                    <if test="sort != null and sort != ''">
-                        and c.sort = #{sort}
-                    </if>
-                    <if test="stateId != null and stateId != ''">
-                        and c.state_id = #{stateId}
-                    </if>
-                    <if test="stateCode != null and stateCode != ''">
-                        and c.state_code = #{stateCode}
-                    </if>
-                    <if test="stateName != null and stateName != ''">
-                        and c.state_name = #{stateName}
-                    </if>
-                    <if test="modifyUserId != null and modifyUserId != ''">
-                        and c.modify_user_id = #{modifyUserId}
-                    </if>
-                    <if test="modifyUserName != null and modifyUserName != ''">
-                        and c.modify_user_name = #{modifyUserName}
-                    </if>
-                    <if test="modifyTime != null and modifyTime != ''">
-                        and c.modify_time = #{modifyTime}
-                    </if>
+            <if test="pid != null and pid != ''">
+                and c.pid = #{pid}
+            </if>
+            <if test="name != null and name != ''">
+                and c.name = #{name}
+            </if>
+            <if test="icon != null and icon != ''">
+                and c.icon = #{icon}
+            </if>
+            <if test="sort != null and sort != ''">
+                and c.sort = #{sort}
+            </if>
+            <if test="stateId != null and stateId != ''">
+                and c.state_id = #{stateId}
+            </if>
+            <if test="stateCode != null and stateCode != ''">
+                and c.state_code = #{stateCode}
+            </if>
+            <if test="stateName != null and stateName != ''">
+                and c.state_name = #{stateName}
+            </if>
+            <if test="modifyUserId != null and modifyUserId != ''">
+                and c.modify_user_id = #{modifyUserId}
+            </if>
+            <if test="modifyUserName != null and modifyUserName != ''">
+                and c.modify_user_name = #{modifyUserName}
+            </if>
+            <if test="modifyTime != null and modifyTime != ''">
+                and c.modify_time = #{modifyTime}
+            </if>
         </where>
     </sql>
 

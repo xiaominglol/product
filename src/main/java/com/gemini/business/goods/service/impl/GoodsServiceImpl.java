@@ -23,10 +23,11 @@ public class GoodsServiceImpl extends BaseDetailServiceImpl<GoodsPo, GoodsStockP
     public QueryWrapper<GoodsPo> wrapper(GoodsPo po) {
         return super.wrapper(po)
                 .eq(!StringUtils.isEmpty(po.getName()), "name", po.getName())
-                .eq(!StringUtils.isEmpty(po.getBrandId()), "brand_id", po.getBrandId())
-                .eq(!StringUtils.isEmpty(po.getBrandName()), "brand_name", po.getBrandName())
                 .eq(!StringUtils.isEmpty(po.getCategoryId()), "category_id", po.getCategoryId())
                 .eq(!StringUtils.isEmpty(po.getCategoryName()), "category_name", po.getCategoryName())
+                .eq(!StringUtils.isEmpty(po.getBrandId()), "brand_id", po.getBrandId())
+                .eq(!StringUtils.isEmpty(po.getBrandName()), "brand_name", po.getBrandName())
+                .eq(!StringUtils.isEmpty(po.getPicture()), "picture", po.getPicture())
                 .eq(!StringUtils.isEmpty(po.getStateId()), "state_id", po.getStateId())
                 .eq(!StringUtils.isEmpty(po.getStateCode()), "state_code", po.getStateCode())
                 .eq(!StringUtils.isEmpty(po.getStateName()), "state_name", po.getStateName())

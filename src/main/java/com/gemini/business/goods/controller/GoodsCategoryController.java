@@ -46,7 +46,7 @@ public class GoodsCategoryController {
                 qw.eq("pid", po.getPid());
             }
             if (!StringUtils.isEmpty(po.getId())) {
-                qw.eq("id", po.getId()).or().eq("pid",po.getId());
+                qw.eq("id", po.getId()).or().eq("pid", po.getId());
             }
             if (layUiPage.getPageNum() != 0 && layUiPage.getPageSize() != 0) {
                 IPage<GoodsCategoryPo> list = goodsCategoryService.page(new Page<>(layUiPage.getPageNum(), layUiPage.getPageSize()), qw);

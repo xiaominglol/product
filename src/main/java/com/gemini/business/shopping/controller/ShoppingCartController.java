@@ -11,9 +11,11 @@ import com.gemini.business.shopping.po.ShoppingCartPo;
 import com.gemini.business.shopping.service.ShoppingCartService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -23,7 +25,7 @@ import java.util.List;
  * @date Wed Dec 04 09:34:37 CST 2019
  */
 @Slf4j
-@RestController
+@Controller
 @RequestMapping("/shopping/cart")
 public class ShoppingCartController {
 
@@ -32,7 +34,7 @@ public class ShoppingCartController {
 
     @GetMapping("/gotoList")
     public String gotoList() {
-        return "shopping/_list";
+        return "shopping/cart_list";
     }
 
     @GetMapping
@@ -40,6 +42,9 @@ public class ShoppingCartController {
     public Message list(LayUiPage layUiPage, ShoppingCartPo po) {
         try {
             QueryWrapper<ShoppingCartPo> qw = new QueryWrapper<>();
+            if (!StringUtils.isEmpty(po.getMemberId())) {
+                qw.eq("member_id", po.getMemberId());
+            }
             if (layUiPage.getPageNum() != 0 && layUiPage.getPageSize() != 0) {
                 IPage<ShoppingCartPo> list = shoppingCartService.page(new Page<>(layUiPage.getPageNum(), layUiPage.getPageSize()), qw);
                 return Message.success(list);
@@ -73,7 +78,8 @@ public class ShoppingCartController {
     public Message add(@RequestBody ShoppingCartPo po) {
         try {
             if (StringUtils.isEmpty(po.getId())) {
-                shoppingCartService.insertSync(po, po.getDetailList(), false);
+                po.setCreateTime(new Date());
+                shoppingCartService.insertSync(po, false);
                 return Message.success(po);
             } else {
                 return Message.fail(CommonFailInfo.Id_ALREADY_EXIST);
@@ -89,7 +95,7 @@ public class ShoppingCartController {
     public Message update(@RequestBody ShoppingCartPo po) {
         try {
             if (!StringUtils.isEmpty(po.getId())) {
-                shoppingCartService.updateSync(po, po.getDetailList(), false);
+                shoppingCartService.updateSync(po, false);
                 return Message.success(po);
             } else {
                 return Message.fail(CommonFailInfo.Id_CAN_NOT_BE_EMPTY);

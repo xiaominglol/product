@@ -1,7 +1,7 @@
-package com.gemini.business.shopping.serviceImpl;
+package com.gemini.business.shopping.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.gemini.boot.framework.mybatis.service.impl.BaseDetailServiceImpl;
+import com.gemini.boot.framework.mybatis.service.impl.BaseServiceImpl;
 import com.gemini.business.shopping.mapper.ShoppingCartMapper;
 import com.gemini.business.shopping.po.ShoppingCartPo;
 import com.gemini.business.shopping.service.ShoppingCartService;
@@ -15,7 +15,7 @@ import org.springframework.util.StringUtils;
  * @date Wed Dec 04 09:34:37 CST 2019
  */
 @Service
-public class ShoppingCartServiceImpl extends BaseDetailServiceImpl<ShoppingCartPo, ShoppingCartPo, ShoppingCartMapper, ShoppingCartMapper> implements ShoppingCartService {
+public class ShoppingCartServiceImpl extends BaseServiceImpl<ShoppingCartPo, ShoppingCartMapper> implements ShoppingCartService {
 
     @Override
     public QueryWrapper<ShoppingCartPo> wrapper(ShoppingCartPo po) {

@@ -1,7 +1,7 @@
 package com.gemini.business.shopping.po;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.gemini.boot.framework.mybatis.po.BaseDetailPo;
+import com.gemini.boot.framework.mybatis.po.BaseObjectPo;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -17,7 +17,12 @@ import java.util.Date;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @TableName("shopping_cart")
-public class ShoppingCartPo extends BaseDetailPo<ShoppingCartPo> {
+public class ShoppingCartPo extends BaseObjectPo {
+
+    /**
+     * id
+     */
+    private Long id;
 
     /**
      * 会员id

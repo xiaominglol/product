@@ -32,7 +32,7 @@ public class OrderServiceImpl extends BaseDetailServiceImpl<OrderPo, OrderPo, Or
                 .eq(!StringUtils.isEmpty(po.getReceiverPhone()), "receiver_phone", po.getReceiverPhone())
                 .eq(!StringUtils.isEmpty(po.getReceiverProvince()), "receiver_province", po.getReceiverProvince())
                 .eq(!StringUtils.isEmpty(po.getReceiverCity()), "receiver_city", po.getReceiverCity())
-                .eq(!StringUtils.isEmpty(po.getReceiverRegion()), "receiver_region", po.getReceiverRegion())
+                .eq(!StringUtils.isEmpty(po.getReceiverCounty()), "receiver_county", po.getReceiverCounty())
                 .eq(!StringUtils.isEmpty(po.getReceiverDetailAddress()), "receiver_detail_address", po.getReceiverDetailAddress())
                 .eq(!StringUtils.isEmpty(po.getStateId()), "state_id", po.getStateId())
                 .eq(!StringUtils.isEmpty(po.getStateCode()), "state_code", po.getStateCode())

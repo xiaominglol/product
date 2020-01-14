@@ -53,9 +53,9 @@ public class MemberAddressPo extends BaseObjectPo {
     private String city;
 
     /**
-     * 区
+     * 区/县
      */
-    private String region;
+    private String county;
 
     /**
      * 详细地址

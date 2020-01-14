@@ -10,7 +10,7 @@
         <result column="phone" property="phone" javaType="String"/>
         <result column="province" property="province" javaType="String"/>
         <result column="city" property="city" javaType="String"/>
-        <result column="region" property="region" javaType="String"/>
+        <result column="county" property="county" javaType="String"/>
         <result column="detail_address" property="detailAddress" javaType="String"/>
         <result column="is_default" property="isDefault" javaType="Byte"/>
     </resultMap>
@@ -22,7 +22,7 @@
                     a.phone,
                     a.province,
                     a.city,
-                    a.region,
+                    a.county,
                     a.detail_address,
                     a.is_default
     </sql>
@@ -51,8 +51,8 @@
             <if test="city != null and city != ''">
                 and a.city = #{city}
             </if>
-            <if test="region != null and region != ''">
-                and a.region = #{region}
+            <if test="county != null and county != ''">
+                and a.county = #{county}
             </if>
             <if test="detailAddress != null and detailAddress != ''">
                 and a.detail_address = #{detailAddress}

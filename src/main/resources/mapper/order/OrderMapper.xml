@@ -16,7 +16,7 @@
         <result column="receiver_phone" property="receiverPhone" javaType="String"/>
         <result column="receiver_province" property="receiverProvince" javaType="String"/>
         <result column="receiver_city" property="receiverCity" javaType="String"/>
-        <result column="receiver_region" property="receiverRegion" javaType="String"/>
+        <result column="receiver_county" property="receiverCounty" javaType="String"/>
         <result column="receiver_detail_address" property="receiverDetailAddress" javaType="String"/>
         <result column="state_id" property="stateId" javaType="Long"/>
         <result column="state_code" property="stateCode" javaType="String"/>
@@ -39,7 +39,7 @@
                     o.receiver_phone,
                     o.receiver_province,
                     o.receiver_city,
-                    o.receiver_region,
+                    o.receiver_county,
                     o.receiver_detail_address,
                     o.state_id,
                     o.state_code,
@@ -91,8 +91,8 @@
             <if test="receiverCity != null and receiverCity != ''">
                 and o.receiver_city = #{receiverCity}
             </if>
-            <if test="receiverRegion != null and receiverRegion != ''">
-                and o.receiver_region = #{receiverRegion}
+            <if test="receiverCounty != null and receiverCounty != ''">
+                and o.receiver_county = #{receiverCounty}
             </if>
             <if test="receiverDetailAddress != null and receiverDetailAddress != ''">
                 and o.receiver_detail_address = #{receiverDetailAddress}

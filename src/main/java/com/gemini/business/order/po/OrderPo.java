@@ -86,9 +86,9 @@ public class OrderPo extends BaseObjectPo {
     private String receiverCity;
 
     /**
-     * 收货人地区
+     * 收货人区/县
      */
-    private String receiverRegion;
+    private String receiverCounty;
 
     /**
      * 收货人详细地址

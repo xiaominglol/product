@@ -26,7 +26,7 @@ public class MemberAddressServiceImpl extends BaseServiceImpl<MemberAddressPo, M
                 .eq(!StringUtils.isEmpty(po.getPhone()), "phone", po.getPhone())
                 .eq(!StringUtils.isEmpty(po.getProvince()), "province", po.getProvince())
                 .eq(!StringUtils.isEmpty(po.getCity()), "city", po.getCity())
-                .eq(!StringUtils.isEmpty(po.getRegion()), "region", po.getRegion())
+                .eq(!StringUtils.isEmpty(po.getCounty()), "county", po.getCounty())
                 .eq(!StringUtils.isEmpty(po.getDetailAddress()), "detail_address", po.getDetailAddress())
                 .eq(!StringUtils.isEmpty(po.getIsDefault()), "is_default", po.getIsDefault());
     }

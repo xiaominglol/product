@@ -9,6 +9,7 @@ import com.gemini.boot.framework.mybatis.utils.BeanUtils;
 import com.gemini.boot.framework.web.entity.CommonFailInfo;
 import com.gemini.boot.framework.web.entity.Message;
 import com.gemini.business.common.annotation.SysLog;
+import com.gemini.business.member.entity.LoginParam;
 import com.gemini.business.member.po.MemberPo;
 import com.gemini.business.member.service.MemberService;
 import lombok.extern.slf4j.Slf4j;
@@ -37,6 +38,35 @@ public class MemberController {
     @GetMapping("/gotoList")
     public String gotoList() {
         return "member/member_list";
+    }
+
+    @SysLog("会员登陆")
+    @PostMapping("/login")
+    @ResponseBody
+    public Message login(@RequestBody LoginParam loginParam) {
+        try {
+            if (!StringUtils.isEmpty(loginParam.getPhone()) && !StringUtils.isEmpty(loginParam.getCode())) {
+                MemberPo po = new MemberPo();
+                po.setPhone(loginParam.getPhone());
+                MemberPo byParam = memberService.getByParam(po);
+                if (StringUtils.isEmpty(byParam)) {
+                    //注册
+                    po.setCreateTime(new Date());
+                    BeanUtils.setDict(StateEnum.Enable, po);
+                    memberService.insertSync(po, false);
+                    po = new MemberPo();
+                    po.setPhone(loginParam.getPhone());
+                    byParam = memberService.getByParam(po);
+                } else {
+                    //登陆
+                }
+                return Message.success(byParam);
+            } else {
+                return Message.fail("手机号或者验证码不能为空");
+            }
+        } catch (Exception e) {
+            return Message.fail(e.getMessage());
+        }
     }
 
     @GetMapping

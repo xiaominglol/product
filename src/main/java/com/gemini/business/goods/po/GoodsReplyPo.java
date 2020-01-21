@@ -5,6 +5,8 @@ import com.gemini.boot.framework.mybatis.po.BaseDetailPo;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import java.util.Date;
+
 /**
  * 商品评论回复表
  *
@@ -17,32 +19,27 @@ import lombok.EqualsAndHashCode;
 public class GoodsReplyPo extends BaseDetailPo<GoodsReplyPo> {
 
     /**
-     * 名称
+     * 评论id
      */
-    private String name;
+    private Long commentId;
 
     /**
-     * logo
+     * 会员id
      */
-    private Long brandId;
+    private Long memberId;
 
     /**
-     * 排序
+     * 会员昵称
      */
-    private String brandName;
+    private String memberNickname;
 
     /**
-     *
+     * 内容
      */
-    private Long classificationId;
+    private String content;
 
     /**
-     *
+     * 创建时间
      */
-    private String classificationName;
-
-    /**
-     *
-     */
-    private Long stockId;
+    private Date createTime;
 }

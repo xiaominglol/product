@@ -29,7 +29,7 @@ import java.util.List;
 public class GoodsStockController {
 
     @Autowired
-    GoodsStockService goodsStockService;
+    GoodsStockService service;
 
     @GetMapping("/gotoList")
     public String gotoList() {
@@ -42,10 +42,10 @@ public class GoodsStockController {
         try {
             QueryWrapper<GoodsStockPo> qw = new QueryWrapper<>();
             if (layUiPage.getPageNum() != 0 && layUiPage.getPageSize() != 0) {
-                IPage<GoodsStockPo> list = goodsStockService.page(new Page<>(layUiPage.getPageNum(), layUiPage.getPageSize()), qw);
+                IPage<GoodsStockPo> list = service.page(new Page<>(layUiPage.getPageNum(), layUiPage.getPageSize()), qw);
                 return Message.success(list);
             } else {
-                List<GoodsStockPo> list = goodsStockService.list(qw);
+                List<GoodsStockPo> list = service.list(qw);
                 return Message.success(list);
             }
         } catch (Exception e) {
@@ -58,8 +58,8 @@ public class GoodsStockController {
     public Message detail(@PathVariable("id") Long id) {
         try {
             if (!StringUtils.isEmpty(id)) {
-                GoodsStockPo goodsStockPo = goodsStockService.getById(id);
-                return Message.success(goodsStockPo);
+                GoodsStockPo po = service.getById(id);
+                return Message.success(po);
             } else {
                 return Message.fail(CommonFailInfo.Id_CAN_NOT_BE_EMPTY);
             }
@@ -74,7 +74,7 @@ public class GoodsStockController {
     public Message add(@RequestBody GoodsStockPo po) {
         try {
             if (StringUtils.isEmpty(po.getId())) {
-                goodsStockService.insertSync(po, true);
+                service.insertSync(po, true);
                 return Message.success(po);
             } else {
                 return Message.fail(CommonFailInfo.Id_ALREADY_EXIST);
@@ -90,7 +90,7 @@ public class GoodsStockController {
     public Message update(@RequestBody GoodsStockPo po) {
         try {
             if (!StringUtils.isEmpty(po.getId())) {
-                goodsStockService.updateSync(po, true);
+                service.updateSync(po, true);
                 return Message.success(po);
             } else {
                 return Message.fail(CommonFailInfo.Id_CAN_NOT_BE_EMPTY);
@@ -106,7 +106,7 @@ public class GoodsStockController {
     public Message delete(@PathVariable("id") Long id) {
         try {
             if (!StringUtils.isEmpty(id)) {
-                goodsStockService.deleteByIdSync(id);
+                service.deleteByIdSync(id);
                 return Message.success(null);
             } else {
                 return Message.fail(CommonFailInfo.Id_CAN_NOT_BE_EMPTY);

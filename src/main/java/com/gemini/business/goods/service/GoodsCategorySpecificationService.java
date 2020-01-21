@@ -2,7 +2,7 @@ package com.gemini.business.goods.service;
 
 import com.gemini.boot.framework.mybatis.service.BaseService;
 import com.gemini.business.goods.mapper.GoodsSpecificationMapper;
-import com.gemini.business.goods.po.GoodsSpecificationPo;
+import com.gemini.business.goods.po.GoodsCategorySpecificationPo;
 
 /**
  * 商品分类规格表
@@ -10,5 +10,5 @@ import com.gemini.business.goods.po.GoodsSpecificationPo;
  * @author 小明不读书
  * @date Tue Nov 26 21:22:00 CST 2019
  */
-public interface GoodsSpecificationService extends BaseService<GoodsSpecificationPo, GoodsSpecificationMapper> {
+public interface GoodsCategorySpecificationService extends BaseService<GoodsCategorySpecificationPo, GoodsSpecificationMapper> {
 }

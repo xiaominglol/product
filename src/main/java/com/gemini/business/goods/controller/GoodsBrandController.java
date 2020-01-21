@@ -29,11 +29,11 @@ import java.util.List;
 public class GoodsBrandController {
 
     @Autowired
-    GoodsBrandService goodsBrandService;
+    GoodsBrandService service;
 
     @GetMapping("/gotoList")
     public String gotoList() {
-        return "brand_list";
+        return "goods/brand_list";
     }
 
     @GetMapping
@@ -41,14 +41,11 @@ public class GoodsBrandController {
     public Message list(LayUiPage layUiPage, GoodsBrandPo po) {
         try {
             QueryWrapper<GoodsBrandPo> qw = new QueryWrapper<>();
-            if (!StringUtils.isEmpty(po.getCategoryId())) {
-                qw.eq("category_id", po.getCategoryId());
-            }
             if (layUiPage.getPageNum() != 0 && layUiPage.getPageSize() != 0) {
-                IPage<GoodsBrandPo> list = goodsBrandService.page(new Page<>(layUiPage.getPageNum(), layUiPage.getPageSize()), qw);
+                IPage<GoodsBrandPo> list = service.page(new Page<>(layUiPage.getPageNum(), layUiPage.getPageSize()), qw);
                 return Message.success(list);
             } else {
-                List<GoodsBrandPo> list = goodsBrandService.list(qw);
+                List<GoodsBrandPo> list = service.list(qw);
                 return Message.success(list);
             }
         } catch (Exception e) {
@@ -61,8 +58,8 @@ public class GoodsBrandController {
     public Message detail(@PathVariable("id") Long id) {
         try {
             if (!StringUtils.isEmpty(id)) {
-                GoodsBrandPo goodsBrandPo = goodsBrandService.getById(id);
-                return Message.success(goodsBrandPo);
+                GoodsBrandPo po = service.getById(id);
+                return Message.success(po);
             } else {
                 return Message.fail(CommonFailInfo.Id_CAN_NOT_BE_EMPTY);
             }
@@ -77,7 +74,7 @@ public class GoodsBrandController {
     public Message add(@RequestBody GoodsBrandPo po) {
         try {
             if (StringUtils.isEmpty(po.getId())) {
-                goodsBrandService.insertSync(po, true);
+                service.insertSync(po, true);
                 return Message.success(po);
             } else {
                 return Message.fail(CommonFailInfo.Id_ALREADY_EXIST);
@@ -93,7 +90,8 @@ public class GoodsBrandController {
     public Message update(@RequestBody GoodsBrandPo po) {
         try {
             if (!StringUtils.isEmpty(po.getId())) {
-                goodsBrandService.updateSync(po, true);
+                po.initDicts();
+                service.updateSync(po, true);
                 return Message.success(po);
             } else {
                 return Message.fail(CommonFailInfo.Id_CAN_NOT_BE_EMPTY);
@@ -109,7 +107,7 @@ public class GoodsBrandController {
     public Message delete(@PathVariable("id") Long id) {
         try {
             if (!StringUtils.isEmpty(id)) {
-                goodsBrandService.deleteByIdSync(id);
+                service.deleteByIdSync(id);
                 return Message.success(null);
             } else {
                 return Message.fail(CommonFailInfo.Id_CAN_NOT_BE_EMPTY);

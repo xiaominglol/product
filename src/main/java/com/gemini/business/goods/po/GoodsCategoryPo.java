@@ -57,5 +57,5 @@ public class GoodsCategoryPo extends BaseSubPo<GoodsCategoryPo> {
     @TableField(
             exist = false
     )
-    private List<GoodsSpecificationPo> specificationDetailList;
+    private List<GoodsCategorySpecificationPo> specificationDetailList;
 }

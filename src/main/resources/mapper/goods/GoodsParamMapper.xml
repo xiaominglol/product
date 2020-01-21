@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.gemini.business.goods.mapper.GoodsSpecificationMapper">
+<mapper namespace="com.gemini.business.goods.mapper.GoodsParamMapper">
 
-    <resultMap id="resultMap" type="com.gemini.business.goods.po.GoodsSpecificationPo">
+    <resultMap id="resultMap" type="com.gemini.business.goods.po.GoodsParamPo">
         <id column="id" property="id" javaType="Long"/>
         <result column="name" property="name" javaType="String"/>
-        <result column="category_id" property="categoryId" javaType="Long"/>
-        <result column="category_name" property="categoryName" javaType="String"/>
+        <result column="goods_id" property="goodsId" javaType="Long"/>
+        <result column="goods_name" property="goodsName" javaType="String"/>
         <result column="value" property="value" javaType="String"/>
         <result column="sort" property="sort" javaType="Byte"/>
         <result column="state_id" property="stateId" javaType="Long"/>
@@ -18,57 +18,57 @@
     </resultMap>
 
     <sql id="fields">
-                            s.name,
-                    s.category_id,
-                    s.category_name,
-                    s.value,
-                    s.sort,
-                    s.state_id,
-                    s.state_code,
-                    s.state_name,
-                    s.modify_user_id,
-                    s.modify_user_name,
-                    s.modify_time
+                            p.name,
+                    p.goods_id,
+                    p.goods_name,
+                    p.value,
+                    p.sort,
+                    p.state_id,
+                    p.state_code,
+                    p.state_name,
+                    p.modify_user_id,
+                    p.modify_user_name,
+                    p.modify_time
     </sql>
 
     <sql id="table">
-        d_l_risk_dict s
+        d_l_risk_dict p
     </sql>
 
     <sql id="where">
         <where>
             <if test="name != null and name != ''">
-                and s.name = #{name}
+                and p.name = #{name}
             </if>
-            <if test="categoryId != null and categoryId != ''">
-                and s.category_id = #{categoryId}
+            <if test="goodsId != null and goodsId != ''">
+                and p.goods_id = #{goodsId}
             </if>
-            <if test="categoryName != null and categoryName != ''">
-                and s.category_name = #{categoryName}
+            <if test="goodsName != null and goodsName != ''">
+                and p.goods_name = #{goodsName}
             </if>
             <if test="value != null and value != ''">
-                and s.value = #{value}
+                and p.value = #{value}
             </if>
             <if test="sort != null and sort != ''">
-                and s.sort = #{sort}
+                and p.sort = #{sort}
             </if>
             <if test="stateId != null and stateId != ''">
-                and s.state_id = #{stateId}
+                and p.state_id = #{stateId}
             </if>
             <if test="stateCode != null and stateCode != ''">
-                and s.state_code = #{stateCode}
+                and p.state_code = #{stateCode}
             </if>
             <if test="stateName != null and stateName != ''">
-                and s.state_name = #{stateName}
+                and p.state_name = #{stateName}
             </if>
             <if test="modifyUserId != null and modifyUserId != ''">
-                and s.modify_user_id = #{modifyUserId}
+                and p.modify_user_id = #{modifyUserId}
             </if>
             <if test="modifyUserName != null and modifyUserName != ''">
-                and s.modify_user_name = #{modifyUserName}
+                and p.modify_user_name = #{modifyUserName}
             </if>
             <if test="modifyTime != null and modifyTime != ''">
-                and s.modify_time = #{modifyTime}
+                and p.modify_time = #{modifyTime}
             </if>
         </where>
     </sql>
@@ -84,5 +84,6 @@
             </if>
         </if>
     </sql>
+
 
 </mapper>

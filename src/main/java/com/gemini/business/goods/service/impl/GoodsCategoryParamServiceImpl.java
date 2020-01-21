@@ -20,7 +20,6 @@ public class GoodsCategoryParamServiceImpl extends BaseDetailServiceImpl<GoodsCa
     @Override
     public QueryWrapper<GoodsCategoryParamPo> wrapper(GoodsCategoryParamPo po) {
         return super.wrapper(po)
-                .eq(!StringUtils.isEmpty(po.getPid()), "pid", po.getPid())
                 .eq(!StringUtils.isEmpty(po.getName()), "name", po.getName())
                 .eq(!StringUtils.isEmpty(po.getCategoryId()), "category_id", po.getCategoryId())
                 .eq(!StringUtils.isEmpty(po.getCategoryName()), "category_name", po.getCategoryName())

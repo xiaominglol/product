@@ -1,15 +1,8 @@
-<div th:replace="goods/reply_crud"></div>
+<div th:replace="goods/brand_crud"></div>
 
 <div class="layui-fluid">
     <div class="layui-row layui-col-space15">
-        <div class="layui-col-md2">
-            <div class="layui-card">
-                <div class="layui-card-body">
-                    <div id="tree"></div>
-                </div>
-            </div>
-        </div>
-        <div class="layui-col-md10">
+        <div class="layui-col-md12">
             <div class="layui-card">
                 <div class="layui-card-body">
                     <div id="content">
@@ -74,47 +67,33 @@
     layui.use(['form', 'table'], function () {
         var form = layui.form;
         var table = layui.table;
-        var baseUrl = "/sys/dict";
+        var baseUrl = "/goods/brand";
+        var moduleName = "品牌";
         var requestType;
         var baseCols = [[
             {checkbox: true}
-            , {field: 'code', title: '字典编码', width: 160}
-            , {field: 'name', title: '字典名称', width: 160}
-            , {field: 'description', title: '描述'}
-            , {field: 'stateName', title: '状态', width: 80}
+            , {field: 'name', title: '名称'}
+            , {field: 'logo', title: 'icon'}
+            , {field: 'sort', title: '排序'}
+            , {field: 'stateName', title: '状态'}
             , {title: '操作', width: 120, toolbar: '#optToolBar'}
         ]];
-        var baseDetailCols = [
-            {type: 'checkbox', width: 35},
-            {field: 'code', title: '字典编码', width: 200, align: 'left', edit: 'text'},
-            {field: 'name', title: '字典名称', width: 200, align: 'left', edit: 'text'},
-            {field: 'description', title: '描述', align: 'left', edit: 'text'}
+        var baseUpdateCols = [
+            {field: 'name', type: "text"}
+            , {field: 'logo', type: "text"}
+            , {field: 'sort', type: "text"}
         ];
 
-        //左侧树
-        renderTree({
-            url: baseUrl
-            , click: function (node) {
-                renderTreeTable({
-                    url: baseUrl
-                    , data: {id: node.id}
-                    , cols: baseCols
-                });
-            }
-        });
-
-        //右侧树形表格
-        renderTreeTable({
+        //表格
+        renderTable({
             url: baseUrl
             , cols: baseCols
         });
 
         //查询
         form.on('submit(queryButton)', function (data) {
-            renderTreeTable({
-                url: baseUrl
-                , data: data.field
-                , cols: baseCols
+            refreshTable({
+                where: data.field
             });
             return false;
         });
@@ -122,34 +101,27 @@
         //添加
         $(".addButton").click(function () {
             requestType = add({
-                title: '添加字典'
-                , cols: baseDetailCols
+                title: '添加' + moduleName
             });
         });
 
         // 修改
         $(".editButton").click(function () {
             requestType = edit({
-                title: '修改字典'
-                , url: baseUrl
-                , cols: baseDetailCols
-                , fields: [
-                    {field: 'code', type: "text"}
-                    , {field: 'name', type: "text"}
-                    , {field: 'description', type: "text"}
-                ]
+                title: '修改' + moduleName
+                , fields: baseUpdateCols
             });
         });
 
         // 添加/修改 保存
         form.on('submit(saveButton)', function (data) {
-            data.field.detailList = table.cache.detailTable;
             saveOrUpdate({
                 url: baseUrl
                 , baseUrl: baseUrl
                 , baseCols: baseCols
                 , type: requestType
                 , data: data.field
+                , isTable: true
             });
             return false;
         });
@@ -162,35 +134,49 @@
                     url: baseUrl + "/" + selectedData.data[0].id
                     , baseUrl: baseUrl
                     , baseCols: baseCols
+                    , isTable: true
                 });
             } else {
                 layer.msg('请选择一条数据', {icon: 0});
             }
         });
 
-        // 新增一行 明细
-        $(".add_detail").click(function () {
-            var data = {code: "", name: "", description: ""};
-            addRowButton({
-                table: "detailTable"
-                , id: "code"
-                , data: data
-            })
+        table.on('tool(table)', function (obj) {
+            var data = obj.data;
+            var layEvent = obj.event;
+            //启用
+            if (layEvent == "enabled") {
+                data.stateId = 391933416176131;
+                confirmUpdate({
+                    msg: "启用"
+                    , url: baseUrl
+                    , baseUrl: baseUrl
+                    , baseCols: baseCols
+                    , data: data
+                    , isTable: true
+                })
+            }
+            //禁用
+            if (layEvent == "disable") {
+                data.stateId = 391933416176129;
+                confirmUpdate({
+                    msg: "禁用"
+                    , url: baseUrl
+                    , baseUrl: baseUrl
+                    , baseCols: baseCols
+                    , data: data
+                    , isTable: true
+                })
+            }
+
         });
 
-        // 批量删除 明细
-        $(".delete_detail").click(function () {
-            batchDelButton({
-                table: "detailTable"
-                , id: "code"
-            })
-        });
     });
 
 </script>
 
 <script type="text/html" id="optToolBar">
-    {{#  if(d.status == 1){ }}
+    {{#  if(d.stateCode == 'Enable'){ }}
     <a class="layui-btn layui-btn-sm layui-btn-danger" lay-event="disable"><i
             class="layui-icon layui-icon-password"></i>禁用</a>
     {{#  } else { }}

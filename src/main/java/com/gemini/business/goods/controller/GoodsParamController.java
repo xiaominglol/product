@@ -28,7 +28,7 @@ import java.util.List;
 public class GoodsParamController {
 
     @Autowired
-    GoodsParamService goodsParamService;
+    GoodsParamService service;
 
     @GetMapping("/gotoList")
     public String gotoList() {
@@ -41,10 +41,10 @@ public class GoodsParamController {
         try {
             QueryWrapper<GoodsParamPo> qw = new QueryWrapper<>();
             if (layUiPage.getPageNum() != 0 && layUiPage.getPageSize() != 0) {
-                IPage<GoodsParamPo> list = goodsParamService.page(new Page<>(layUiPage.getPageNum(), layUiPage.getPageSize()), qw);
+                IPage<GoodsParamPo> list = service.page(new Page<>(layUiPage.getPageNum(), layUiPage.getPageSize()), qw);
                 return Message.success(list);
             } else {
-                List<GoodsParamPo> list = goodsParamService.list(qw);
+                List<GoodsParamPo> list = service.list(qw);
                 return Message.success(list);
             }
         } catch (Exception e) {
@@ -57,8 +57,8 @@ public class GoodsParamController {
     public Message detail(@PathVariable("id") Long id) {
         try {
             if (!StringUtils.isEmpty(id)) {
-                GoodsParamPo goodsParamPo = goodsParamService.getById(id);
-                return Message.success(goodsParamPo);
+                GoodsParamPo po = service.getById(id);
+                return Message.success(po);
             } else {
                 return Message.fail(CommonFailInfo.Id_CAN_NOT_BE_EMPTY);
             }
@@ -73,7 +73,7 @@ public class GoodsParamController {
     public Message add(@RequestBody GoodsParamPo po) {
         try {
             if (StringUtils.isEmpty(po.getId())) {
-                goodsParamService.insertSync(po, true);
+                service.insertSync(po, true);
                 return Message.success(po);
             } else {
                 return Message.fail(CommonFailInfo.Id_ALREADY_EXIST);
@@ -89,7 +89,7 @@ public class GoodsParamController {
     public Message update(@RequestBody GoodsParamPo po) {
         try {
             if (!StringUtils.isEmpty(po.getId())) {
-                goodsParamService.updateSync(po, true);
+                service.updateSync(po, true);
                 return Message.success(po);
             } else {
                 return Message.fail(CommonFailInfo.Id_CAN_NOT_BE_EMPTY);
@@ -105,7 +105,7 @@ public class GoodsParamController {
     public Message delete(@PathVariable("id") Long id) {
         try {
             if (!StringUtils.isEmpty(id)) {
-                goodsParamService.deleteByIdSync(id);
+                service.deleteByIdSync(id);
                 return Message.success(null);
             } else {
                 return Message.fail(CommonFailInfo.Id_CAN_NOT_BE_EMPTY);

@@ -1,7 +1,7 @@
 package com.gemini.business.goods.po;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.gemini.boot.framework.mybatis.po.BaseSubPo;
+import com.gemini.boot.framework.mybatis.po.BaseDetailPo;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -14,7 +14,7 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @TableName("goods_category_param")
-public class GoodsCategoryParamPo extends BaseSubPo<GoodsCategoryParamPo> {
+public class GoodsCategoryParamPo extends BaseDetailPo<GoodsCategoryParamPo> {
 
 
     /**

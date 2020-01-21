@@ -5,8 +5,6 @@
     <resultMap id="resultMap" type="com.gemini.business.goods.po.GoodsBrandPo">
         <id column="id" property="id" javaType="Long"/>
         <result column="name" property="name" javaType="String"/>
-        <result column="category_id" property="categoryId" javaType="Long"/>
-        <result column="category_name" property="categoryName" javaType="String"/>
         <result column="logo" property="logo" javaType="String"/>
         <result column="sort" property="sort" javaType="Byte"/>
         <result column="state_id" property="stateId" javaType="Long"/>

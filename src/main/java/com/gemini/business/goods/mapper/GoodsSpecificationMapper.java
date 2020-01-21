@@ -1,7 +1,7 @@
 package com.gemini.business.goods.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.gemini.business.goods.po.GoodsSpecificationPo;
+import com.gemini.business.goods.po.GoodsCategorySpecificationPo;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
@@ -11,5 +11,5 @@ import org.apache.ibatis.annotations.Mapper;
  * @date Tue Nov 26 21:22:00 CST 2019
  */
 @Mapper
-public interface GoodsSpecificationMapper extends BaseMapper<GoodsSpecificationPo> {
+public interface GoodsSpecificationMapper extends BaseMapper<GoodsCategorySpecificationPo> {
 }

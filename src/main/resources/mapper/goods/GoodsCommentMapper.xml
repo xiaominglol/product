@@ -4,12 +4,15 @@
 
     <resultMap id="resultMap" type="com.gemini.business.goods.po.GoodsCommentPo">
         <id column="id" property="id" javaType="Long"/>
-        <result column="name" property="name" javaType="String"/>
-        <result column="brand_id" property="brandId" javaType="Long"/>
-        <result column="brand_name" property="brandName" javaType="String"/>
-        <result column="classification_id" property="classificationId" javaType="Long"/>
-        <result column="classification_name" property="classificationName" javaType="String"/>
-        <result column="stock_id" property="stockId" javaType="Long"/>
+        <result column="goods_id" property="goodsId" javaType="Long"/>
+        <result column="goods_name" property="goodsName" javaType="String"/>
+        <result column="member_id" property="memberId" javaType="Long"/>
+        <result column="member_nickname" property="memberNickname" javaType="String"/>
+        <result column="content" property="content" javaType="String"/>
+        <result column="star_type_id" property="starTypeId" javaType="Long"/>
+        <result column="star_type_code" property="starTypeCode" javaType="String"/>
+        <result column="star_type_name" property="starTypeName" javaType="String"/>
+        <result column="create_time" property="createTime" javaType="java.util.Date"/>
         <result column="state_id" property="stateId" javaType="Long"/>
         <result column="state_code" property="stateCode" javaType="String"/>
         <result column="state_name" property="stateName" javaType="String"/>
@@ -19,12 +22,15 @@
     </resultMap>
 
     <sql id="fields">
-                            c.name,
-                    c.brand_id,
-                    c.brand_name,
-                    c.classification_id,
-                    c.classification_name,
-                    c.stock_id,
+                            c.goods_id,
+                    c.goods_name,
+                    c.member_id,
+                    c.member_nickname,
+                    c.content,
+                    c.star_type_id,
+                    c.star_type_code,
+                    c.star_type_name,
+                    c.create_time,
                     c.state_id,
                     c.state_code,
                     c.state_name,
@@ -39,23 +45,32 @@
 
     <sql id="where">
         <where>
-            <if test="name != null and name != ''">
-                and c.name = #{name}
+            <if test="goodsId != null and goodsId != ''">
+                and c.goods_id = #{goodsId}
             </if>
-            <if test="brandId != null and brandId != ''">
-                and c.brand_id = #{brandId}
+            <if test="goodsName != null and goodsName != ''">
+                and c.goods_name = #{goodsName}
             </if>
-            <if test="brandName != null and brandName != ''">
-                and c.brand_name = #{brandName}
+            <if test="memberId != null and memberId != ''">
+                and c.member_id = #{memberId}
             </if>
-            <if test="classificationId != null and classificationId != ''">
-                and c.classification_id = #{classificationId}
+            <if test="memberNickname != null and memberNickname != ''">
+                and c.member_nickname = #{memberNickname}
             </if>
-            <if test="classificationName != null and classificationName != ''">
-                and c.classification_name = #{classificationName}
+            <if test="content != null and content != ''">
+                and c.content = #{content}
             </if>
-            <if test="stockId != null and stockId != ''">
-                and c.stock_id = #{stockId}
+            <if test="starTypeId != null and starTypeId != ''">
+                and c.star_type_id = #{starTypeId}
+            </if>
+            <if test="starTypeCode != null and starTypeCode != ''">
+                and c.star_type_code = #{starTypeCode}
+            </if>
+            <if test="starTypeName != null and starTypeName != ''">
+                and c.star_type_name = #{starTypeName}
+            </if>
+            <if test="createTime != null and createTime != ''">
+                and c.create_time = #{createTime}
             </if>
             <if test="stateId != null and stateId != ''">
                 and c.state_id = #{stateId}
@@ -90,76 +105,5 @@
         </if>
     </sql>
 
-    <select id="get" parameterType="java.lang.Long" resultType="java.util.HashMap">
-        select
-        <include refid="fields"/>
-        from
-        <include refid="table"/>
-        where rd.id = #{id}
-    </select>
-
-    <select id="list" resultType="java.util.HashMap">
-        select
-        <include refid="fields"/>
-        from
-        <include refid="table"/>
-        <include refid="where"/>
-        <include refid="order"/>
-    </select>
-
-    <insert id="insert">
-        insert into goods_comment (
-                            name,
-                    brand_id,
-                    brand_name,
-                    classification_id,
-                    classification_name,
-                    stock_id,
-                    state_id,
-                    state_code,
-                    state_name,
-                    modify_user_id,
-                    modify_user_name,
-                    modify_time
-        ) values (
-                            #{name},
-                    #{brandId},
-                    #{brandName},
-                    #{classificationId},
-                    #{classificationName},
-                    #{stockId},
-                    #{stateId},
-                    #{stateCode},
-                    #{stateName},
-                    #{modifyUserId},
-                    #{modifyUserName},
-                    #{modifyTime}
-        )
-    </insert>
-
-    <update id="update" parameterType="java.lang.Long">
-        update goods_comment
-        <set>
-            name = #{name},
-            brand_id = #{brandId},
-            brand_name = #{brandName},
-            classification_id = #{classificationId},
-            classification_name = #{classificationName},
-            stock_id = #{stockId},
-            state_id = #{stateId},
-            state_code = #{stateCode},
-            state_name = #{stateName},
-            modify_user_id = #{modifyUserId},
-            modify_user_name = #{modifyUserName},
-            modify_time = #{modifyTime}
-        </set>
-        where id = #{id}
-    </update>
-
-    <delete id="delete" parameterType="java.lang.Long">
-        delete from
-        <include refid="table"/>
-        where c.id = #{id}
-    </delete>
 
 </mapper>

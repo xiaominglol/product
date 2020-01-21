@@ -7,8 +7,8 @@ import com.gemini.boot.framework.mybatis.entity.LayUiPage;
 import com.gemini.boot.framework.web.entity.CommonFailInfo;
 import com.gemini.boot.framework.web.entity.Message;
 import com.gemini.business.common.annotation.SysLog;
-import com.gemini.business.goods.po.GoodsSpecificationPo;
-import com.gemini.business.goods.service.GoodsSpecificationService;
+import com.gemini.business.goods.po.GoodsCategorySpecificationPo;
+import com.gemini.business.goods.service.GoodsCategorySpecificationService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,10 +26,10 @@ import java.util.List;
 @Slf4j
 @Controller
 @RequestMapping("/goods/specification")
-public class GoodsSpecificationController {
+public class GoodsCategorySpecificationController {
 
     @Autowired
-    GoodsSpecificationService goodsSpecificationService;
+    GoodsCategorySpecificationService service;
 
     @GetMapping("/gotoList")
     public String gotoList() {
@@ -38,17 +38,17 @@ public class GoodsSpecificationController {
 
     @GetMapping
     @ResponseBody
-    public Message list(LayUiPage layUiPage, GoodsSpecificationPo po) {
+    public Message list(LayUiPage layUiPage, GoodsCategorySpecificationPo po) {
         try {
-            QueryWrapper<GoodsSpecificationPo> qw = new QueryWrapper<>();
+            QueryWrapper<GoodsCategorySpecificationPo> qw = new QueryWrapper<>();
             if (!StringUtils.isEmpty(po.getCategoryId())) {
                 qw.eq("category_id", po.getCategoryId());
             }
             if (layUiPage.getPageNum() != 0 && layUiPage.getPageSize() != 0) {
-                IPage<GoodsSpecificationPo> list = goodsSpecificationService.page(new Page<>(layUiPage.getPageNum(), layUiPage.getPageSize()), qw);
+                IPage<GoodsCategorySpecificationPo> list = service.page(new Page<>(layUiPage.getPageNum(), layUiPage.getPageSize()), qw);
                 return Message.success(list);
             } else {
-                List<GoodsSpecificationPo> list = goodsSpecificationService.list(qw);
+                List<GoodsCategorySpecificationPo> list = service.list(qw);
                 return Message.success(list);
             }
         } catch (Exception e) {
@@ -61,8 +61,8 @@ public class GoodsSpecificationController {
     public Message detail(@PathVariable("id") Long id) {
         try {
             if (!StringUtils.isEmpty(id)) {
-                GoodsSpecificationPo goodsSpecificationPo = goodsSpecificationService.getById(id);
-                return Message.success(goodsSpecificationPo);
+                GoodsCategorySpecificationPo po = service.getById(id);
+                return Message.success(po);
             } else {
                 return Message.fail(CommonFailInfo.Id_CAN_NOT_BE_EMPTY);
             }
@@ -74,10 +74,10 @@ public class GoodsSpecificationController {
     @SysLog("添加商品分类规格表")
     @PostMapping
     @ResponseBody
-    public Message add(@RequestBody GoodsSpecificationPo po) {
+    public Message add(@RequestBody GoodsCategorySpecificationPo po) {
         try {
             if (StringUtils.isEmpty(po.getId())) {
-                goodsSpecificationService.insertSync(po, true);
+                service.insertSync(po, true);
                 return Message.success(po);
             } else {
                 return Message.fail(CommonFailInfo.Id_ALREADY_EXIST);
@@ -90,10 +90,10 @@ public class GoodsSpecificationController {
     @SysLog("更新商品分类规格表")
     @PutMapping
     @ResponseBody
-    public Message update(@RequestBody GoodsSpecificationPo po) {
+    public Message update(@RequestBody GoodsCategorySpecificationPo po) {
         try {
             if (!StringUtils.isEmpty(po.getId())) {
-                goodsSpecificationService.updateSync(po, true);
+                service.updateSync(po, true);
                 return Message.success(po);
             } else {
                 return Message.fail(CommonFailInfo.Id_CAN_NOT_BE_EMPTY);
@@ -109,7 +109,7 @@ public class GoodsSpecificationController {
     public Message delete(@PathVariable("id") Long id) {
         try {
             if (!StringUtils.isEmpty(id)) {
-                goodsSpecificationService.deleteByIdSync(id);
+                service.deleteByIdSync(id);
                 return Message.success(null);
             } else {
                 return Message.fail(CommonFailInfo.Id_CAN_NOT_BE_EMPTY);

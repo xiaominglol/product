@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.gemini.business.goods.mapper.GoodsCategoryParamMapper">
+<mapper namespace="com.gemini.business.goods.mapper.GoodsCategoryBrandMapper">
 
-    <resultMap id="resultMap" type="com.gemini.business.goods.po.GoodsCategoryParamPo">
+    <resultMap id="resultMap" type="com.gemini.business.goods.po.GoodsCategoryBrandPo">
         <id column="id" property="id" javaType="Long"/>
-        <result column="name" property="name" javaType="String"/>
+        <result column="brand_id" property="brandId" javaType="Long"/>
+        <result column="brand_name" property="brandName" javaType="String"/>
         <result column="category_id" property="categoryId" javaType="Long"/>
         <result column="category_name" property="categoryName" javaType="String"/>
-        <result column="value" property="value" javaType="String"/>
+        <result column="logo" property="logo" javaType="String"/>
         <result column="sort" property="sort" javaType="Byte"/>
         <result column="state_id" property="stateId" javaType="Long"/>
         <result column="state_code" property="stateCode" javaType="String"/>
@@ -18,60 +19,61 @@
     </resultMap>
 
     <sql id="fields">
-                    p.name,
-                    p.category_id,
-                    p.category_name,
-                    p.value,
-                    p.sort,
-                    p.state_id,
-                    p.state_code,
-                    p.state_name,
-                    p.modify_user_id,
-                    p.modify_user_name,
-                    p.modify_time
+                            b.brand_id,
+                    b.brand_name,
+                    b.category_id,
+                    b.category_name,
+                    b.logo,
+                    b.sort,
+                    b.state_id,
+                    b.state_code,
+                    b.state_name,
+                    b.modify_user_id,
+                    b.modify_user_name,
+                    b.modify_time
     </sql>
 
     <sql id="table">
-        d_l_risk_dict p
+        d_l_risk_dict b
     </sql>
 
     <sql id="where">
         <where>
-            <if test="pid != null and pid != ''">
-                and p.pid = #{pid}
+            <if test="brandId != null and brandId != ''">
+                and b.brand_id = #{brandId}
             </if>
-            <if test="name != null and name != ''">
-                and p.name = #{name}
+            <if test="brandName != null and brandName != ''">
+                and b.brand_name = #{brandName}
             </if>
             <if test="categoryId != null and categoryId != ''">
-                and p.category_id = #{categoryId}
+                and b.category_id = #{categoryId}
             </if>
             <if test="categoryName != null and categoryName != ''">
-                and p.category_name = #{categoryName}
+                and b.category_name = #{categoryName}
             </if>
-            <if test="value != null and value != ''">
-                and p.value = #{value}
+            <if test="logo != null and logo != ''">
+                and b.logo = #{logo}
             </if>
             <if test="sort != null and sort != ''">
-                and p.sort = #{sort}
+                and b.sort = #{sort}
             </if>
             <if test="stateId != null and stateId != ''">
-                and p.state_id = #{stateId}
+                and b.state_id = #{stateId}
             </if>
             <if test="stateCode != null and stateCode != ''">
-                and p.state_code = #{stateCode}
+                and b.state_code = #{stateCode}
             </if>
             <if test="stateName != null and stateName != ''">
-                and p.state_name = #{stateName}
+                and b.state_name = #{stateName}
             </if>
             <if test="modifyUserId != null and modifyUserId != ''">
-                and p.modify_user_id = #{modifyUserId}
+                and b.modify_user_id = #{modifyUserId}
             </if>
             <if test="modifyUserName != null and modifyUserName != ''">
-                and p.modify_user_name = #{modifyUserName}
+                and b.modify_user_name = #{modifyUserName}
             </if>
             <if test="modifyTime != null and modifyTime != ''">
-                and p.modify_time = #{modifyTime}
+                and b.modify_time = #{modifyTime}
             </if>
         </where>
     </sql>
@@ -87,5 +89,6 @@
             </if>
         </if>
     </sql>
+
 
 </mapper>

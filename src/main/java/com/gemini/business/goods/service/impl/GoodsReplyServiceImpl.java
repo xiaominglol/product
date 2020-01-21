@@ -20,12 +20,11 @@ public class GoodsReplyServiceImpl extends BaseServiceImpl<GoodsReplyPo, GoodsRe
     @Override
     public QueryWrapper<GoodsReplyPo> wrapper(GoodsReplyPo po) {
         return super.wrapper(po)
-                .eq(!StringUtils.isEmpty(po.getName()), "name", po.getName())
-                .eq(!StringUtils.isEmpty(po.getBrandId()), "brand_id", po.getBrandId())
-                .eq(!StringUtils.isEmpty(po.getBrandName()), "brand_name", po.getBrandName())
-                .eq(!StringUtils.isEmpty(po.getClassificationId()), "classification_id", po.getClassificationId())
-                .eq(!StringUtils.isEmpty(po.getClassificationName()), "classification_name", po.getClassificationName())
-                .eq(!StringUtils.isEmpty(po.getStockId()), "stock_id", po.getStockId())
+                .eq(!StringUtils.isEmpty(po.getCommentId()), "comment_id", po.getCommentId())
+                .eq(!StringUtils.isEmpty(po.getMemberId()), "member_id", po.getMemberId())
+                .eq(!StringUtils.isEmpty(po.getMemberNickname()), "member_nickname", po.getMemberNickname())
+                .eq(!StringUtils.isEmpty(po.getContent()), "content", po.getContent())
+                .eq(!StringUtils.isEmpty(po.getCreateTime()), "create_time", po.getCreateTime())
                 .eq(!StringUtils.isEmpty(po.getStateId()), "state_id", po.getStateId())
                 .eq(!StringUtils.isEmpty(po.getStateCode()), "state_code", po.getStateCode())
                 .eq(!StringUtils.isEmpty(po.getStateName()), "state_name", po.getStateName())

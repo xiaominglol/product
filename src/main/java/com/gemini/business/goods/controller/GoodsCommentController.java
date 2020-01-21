@@ -29,11 +29,11 @@ import java.util.List;
 public class GoodsCommentController {
 
     @Autowired
-    GoodsCommentService goodsCommentService;
+    GoodsCommentService service;
 
     @GetMapping("/gotoList")
     public String gotoList() {
-        return "comment_list";
+        return "goods/comment_list";
     }
 
     @GetMapping
@@ -42,10 +42,10 @@ public class GoodsCommentController {
         try {
             QueryWrapper<GoodsCommentPo> qw = new QueryWrapper<>();
             if (layUiPage.getPageNum() != 0 && layUiPage.getPageSize() != 0) {
-                IPage<GoodsCommentPo> list = goodsCommentService.page(new Page<>(layUiPage.getPageNum(), layUiPage.getPageSize()), qw);
+                IPage<GoodsCommentPo> list = service.page(new Page<>(layUiPage.getPageNum(), layUiPage.getPageSize()), qw);
                 return Message.success(list);
             } else {
-                List<GoodsCommentPo> list = goodsCommentService.list(qw);
+                List<GoodsCommentPo> list = service.list(qw);
                 return Message.success(list);
             }
         } catch (Exception e) {
@@ -58,8 +58,8 @@ public class GoodsCommentController {
     public Message detail(@PathVariable("id") Long id) {
         try {
             if (!StringUtils.isEmpty(id)) {
-                GoodsCommentPo goodsCommentPo = goodsCommentService.getById(id);
-                return Message.success(goodsCommentPo);
+                GoodsCommentPo po = service.getById(id);
+                return Message.success(po);
             } else {
                 return Message.fail(CommonFailInfo.Id_CAN_NOT_BE_EMPTY);
             }
@@ -74,7 +74,7 @@ public class GoodsCommentController {
     public Message add(@RequestBody GoodsCommentPo po) {
         try {
             if (StringUtils.isEmpty(po.getId())) {
-                goodsCommentService.insertSync(po, po.getDetailList(), true);
+                service.insertSync(po, po.getDetailList(), true);
                 return Message.success(po);
             } else {
                 return Message.fail(CommonFailInfo.Id_ALREADY_EXIST);
@@ -90,7 +90,7 @@ public class GoodsCommentController {
     public Message update(@RequestBody GoodsCommentPo po) {
         try {
             if (!StringUtils.isEmpty(po.getId())) {
-                goodsCommentService.updateSync(po, po.getDetailList(), true);
+                service.updateSync(po, po.getDetailList(), true);
                 return Message.success(po);
             } else {
                 return Message.fail(CommonFailInfo.Id_CAN_NOT_BE_EMPTY);
@@ -106,7 +106,7 @@ public class GoodsCommentController {
     public Message delete(@PathVariable("id") Long id) {
         try {
             if (!StringUtils.isEmpty(id)) {
-                goodsCommentService.deleteByIdSync(id);
+                service.deleteByIdSync(id);
                 return Message.success(null);
             } else {
                 return Message.fail(CommonFailInfo.Id_CAN_NOT_BE_EMPTY);

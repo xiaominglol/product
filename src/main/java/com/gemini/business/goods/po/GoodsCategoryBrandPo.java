@@ -6,20 +6,25 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 /**
- * 商品分类规格表
+ * 商品品牌表
  *
  * @author 小明不读书
  * @date Tue Nov 26 21:22:00 CST 2019
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@TableName("goods_specification")
-public class GoodsSpecificationPo extends BasePo {
+@TableName("goods_category_brand")
+public class GoodsCategoryBrandPo extends BasePo {
 
     /**
-     * 名称
+     * 商品id
      */
-    private String name;
+    private Long brandId;
+
+    /**
+     * 品牌名称
+     */
+    private String brandName;
 
     /**
      * 分类id
@@ -32,9 +37,9 @@ public class GoodsSpecificationPo extends BasePo {
     private String categoryName;
 
     /**
-     * 值
+     * logo
      */
-    private String value;
+    private String logo;
 
     /**
      * 排序

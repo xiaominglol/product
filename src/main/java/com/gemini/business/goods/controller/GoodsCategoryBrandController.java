@@ -7,8 +7,8 @@ import com.gemini.boot.framework.mybatis.entity.LayUiPage;
 import com.gemini.boot.framework.web.entity.CommonFailInfo;
 import com.gemini.boot.framework.web.entity.Message;
 import com.gemini.business.common.annotation.SysLog;
-import com.gemini.business.goods.po.GoodsCategoryParamPo;
-import com.gemini.business.goods.service.GoodsCategoryParamService;
+import com.gemini.business.goods.po.GoodsCategoryBrandPo;
+import com.gemini.business.goods.service.GoodsCategoryBrandService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,37 +18,37 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
- * 商品参数表
+ * 商品品牌表
  *
  * @author 小明不读书
  * @date Tue Nov 26 21:22:00 CST 2019
  */
 @Slf4j
 @Controller
-@RequestMapping("/goods/category/param")
-public class GoodsCategoryParamController {
+@RequestMapping("/goods/category/brand")
+public class GoodsCategoryBrandController {
 
     @Autowired
-    GoodsCategoryParamService service;
+    GoodsCategoryBrandService service;
 
     @GetMapping("/gotoList")
     public String gotoList() {
-        return "goods/category_param_list";
+        return "category_brand_list";
     }
 
     @GetMapping
     @ResponseBody
-    public Message list(LayUiPage layUiPage, GoodsCategoryParamPo po) {
+    public Message list(LayUiPage layUiPage, GoodsCategoryBrandPo po) {
         try {
-            QueryWrapper<GoodsCategoryParamPo> qw = new QueryWrapper<>();
+            QueryWrapper<GoodsCategoryBrandPo> qw = new QueryWrapper<>();
             if (!StringUtils.isEmpty(po.getCategoryId())) {
                 qw.eq("category_id", po.getCategoryId());
             }
             if (layUiPage.getPageNum() != 0 && layUiPage.getPageSize() != 0) {
-                IPage<GoodsCategoryParamPo> list = service.page(new Page<>(layUiPage.getPageNum(), layUiPage.getPageSize()), qw);
+                IPage<GoodsCategoryBrandPo> list = service.page(new Page<>(layUiPage.getPageNum(), layUiPage.getPageSize()), qw);
                 return Message.success(list);
             } else {
-                List<GoodsCategoryParamPo> list = service.list(qw);
+                List<GoodsCategoryBrandPo> list = service.list(qw);
                 return Message.success(list);
             }
         } catch (Exception e) {
@@ -61,7 +61,7 @@ public class GoodsCategoryParamController {
     public Message detail(@PathVariable("id") Long id) {
         try {
             if (!StringUtils.isEmpty(id)) {
-                GoodsCategoryParamPo po = service.getById(id);
+                GoodsCategoryBrandPo po = service.getById(id);
                 return Message.success(po);
             } else {
                 return Message.fail(CommonFailInfo.Id_CAN_NOT_BE_EMPTY);
@@ -71,13 +71,13 @@ public class GoodsCategoryParamController {
         }
     }
 
-    @SysLog("添加商品参数表")
+    @SysLog("添加商品品牌表")
     @PostMapping
     @ResponseBody
-    public Message add(@RequestBody GoodsCategoryParamPo po) {
+    public Message add(@RequestBody GoodsCategoryBrandPo po) {
         try {
             if (StringUtils.isEmpty(po.getId())) {
-                service.insertSync(po, po.getDetailList(), true);
+                service.insertSync(po, true);
                 return Message.success(po);
             } else {
                 return Message.fail(CommonFailInfo.Id_ALREADY_EXIST);
@@ -87,13 +87,13 @@ public class GoodsCategoryParamController {
         }
     }
 
-    @SysLog("更新商品参数表")
+    @SysLog("更新商品品牌表")
     @PutMapping
     @ResponseBody
-    public Message update(@RequestBody GoodsCategoryParamPo po) {
+    public Message update(@RequestBody GoodsCategoryBrandPo po) {
         try {
             if (!StringUtils.isEmpty(po.getId())) {
-                service.updateSync(po, po.getDetailList(), true);
+                service.updateSync(po, true);
                 return Message.success(po);
             } else {
                 return Message.fail(CommonFailInfo.Id_CAN_NOT_BE_EMPTY);
@@ -103,7 +103,7 @@ public class GoodsCategoryParamController {
         }
     }
 
-    @SysLog("删除商品参数表")
+    @SysLog("删除商品品牌表")
     @DeleteMapping("/{id}")
     @ResponseBody
     public Message delete(@PathVariable("id") Long id) {

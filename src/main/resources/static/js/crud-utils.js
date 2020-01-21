@@ -159,19 +159,24 @@ function del(param) {
  * @param param
  */
 function confirmUpdate(param) {
+    var close = param.close == null ? true : param.close;
     layer.msg('确定' + param.msg + '？', {
         time: 0
         , btn: ['确定', '取消']
         , yes: function (index) {
             $.ajax({
                 url: param.url
-                , data: param.data
+                , data: JSON.stringify(param.data)
                 , type: 'PUT'
+                , contentType: 'application/json;charset=utf-8'
                 , success: function (data) {
                     if (data.success) {
-                        refreshTable();
+                        console.log("data", data)
+                        success(param);
                         layer.msg(param.msg + '成功', {icon: 1});
-                        layer.close(index);
+                        if (close) {
+                            layer.close(index);
+                        }
                     } else {
                         layer.msg(data.message, {icon: 5});
                     }

@@ -48,11 +48,11 @@ public class GoodsCategoryController {
             if (!StringUtils.isEmpty(po.getId())) {
                 qw.eq("id", po.getId()).or().eq("pid", po.getId());
             }
+            qw.orderByAsc("pid", "sort");
             if (layUiPage.getPageNum() != 0 && layUiPage.getPageSize() != 0) {
                 IPage<GoodsCategoryPo> list = service.page(new Page<>(layUiPage.getPageNum(), layUiPage.getPageSize()), qw);
                 return Message.success(list);
             } else {
-                qw.orderByAsc("pid", "sort");
                 List<GoodsCategoryPo> list = service.list(qw);
                 return Message.success(list);
             }

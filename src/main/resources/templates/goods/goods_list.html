@@ -186,12 +186,42 @@
                 , cols: baseDetailCols
             })
         });
+
+        table.on('tool(table)', function (obj) {
+            var data = obj.data;
+            var layEvent = obj.event;
+            //启用
+            if (layEvent == "enabled") {
+                data.stateId = 391933416176131;
+                confirmUpdate({
+                    msg: "启用"
+                    , url: baseUrl
+                    , baseUrl: baseUrl
+                    , baseCols: baseCols
+                    , data: data
+                    , isTable: true
+                })
+            }
+            //禁用
+            if (layEvent == "disable") {
+                data.stateId = 391933416176129;
+                confirmUpdate({
+                    msg: "禁用"
+                    , url: baseUrl
+                    , baseUrl: baseUrl
+                    , baseCols: baseCols
+                    , data: data
+                    , isTable: true
+                })
+            }
+
+        });
     });
 
 </script>
 
 <script type="text/html" id="optToolBar">
-    {{#  if(d.status == 1){ }}
+    {{#  if(d.stateCode == 'Enable'){ }}
     <a class="layui-btn layui-btn-sm layui-btn-danger" lay-event="disable"><i
             class="layui-icon layui-icon-password"></i>禁用</a>
     {{#  } else { }}

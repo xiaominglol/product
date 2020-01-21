@@ -171,7 +171,6 @@ function confirmUpdate(param) {
                 , contentType: 'application/json;charset=utf-8'
                 , success: function (data) {
                     if (data.success) {
-                        console.log("data", data)
                         success(param);
                         layer.msg(param.msg + '成功', {icon: 1});
                         if (close) {

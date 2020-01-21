@@ -41,6 +41,7 @@ public class GoodsBrandController {
     public Message list(LayUiPage layUiPage, GoodsBrandPo po) {
         try {
             QueryWrapper<GoodsBrandPo> qw = new QueryWrapper<>();
+            qw.orderByAsc("sort");
             if (layUiPage.getPageNum() != 0 && layUiPage.getPageSize() != 0) {
                 IPage<GoodsBrandPo> list = service.page(new Page<>(layUiPage.getPageNum(), layUiPage.getPageSize()), qw);
                 return Message.success(list);

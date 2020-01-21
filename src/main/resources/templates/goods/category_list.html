@@ -190,20 +190,26 @@
             var layEvent = obj.event;
             //启用
             if (layEvent == "enabled") {
-                data.status = 1;
+                data.stateId = 391933416176131;
                 confirmUpdate({
                     msg: "启用"
                     , url: baseUrl
+                    , baseUrl: baseUrl
+                    , baseCols: baseCols
                     , data: data
+                    , isTable: true
                 })
             }
             //禁用
             if (layEvent == "disable") {
-                data.status = 0;
+                data.stateId = 391933416176129;
                 confirmUpdate({
                     msg: "禁用"
                     , url: baseUrl
+                    , baseUrl: baseUrl
+                    , baseCols: baseCols
                     , data: data
+                    , isTable: true
                 })
             }
 

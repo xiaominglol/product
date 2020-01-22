@@ -16,12 +16,13 @@ function add(param) {
 
         $("#addOrUpdate [name='id']").val("");
         // 如果有明细表格，则显示，因为有可能只是单表
-        if(param.cols) {
+        if (param.baseDetailCols) {
             table.render({
                 elem: '#detailTable'
                 , data: []
                 , id: 'detailTable'
-                , cols: [param.cols]
+                , cols: [param.baseDetailCols]
+                , page: true
                 , done: function (res, curr, count) {
                     checkboxMultiSelect($, "detailTable");
                 }
@@ -29,7 +30,8 @@ function add(param) {
         }
         // 打开添加框
         openPopup({
-            title: param.title
+            title: param.title,
+            id: param.id
         });
     });
     return requestType;
@@ -49,7 +51,7 @@ function edit(param) {
         if (selectedData.data.length == 1) {
             $("#addOrUpdate [name='id']").val(selectedData.data[0].id);
             for (var i in param.fields) {
-                if(param.fields[i].type == 'text'){
+                if (param.fields[i].type == 'text') {
                     $("#addOrUpdate [name='" + param.fields[i].field + "']").val(selectedData.data[0][param.fields[i].field]);
                 } else if (param.fields[i].type == 'select') {
                     $("#addOrUpdate [name='" + param.fields[i].field + "']").val(selectedData.data[0][param.fields[i].field]);
@@ -58,14 +60,14 @@ function edit(param) {
                 }
             }
             // 如果有明细表格
-            if(param.cols) {
+            if (param.baseDetailCols) {
                 renderTable({
                     dom: "detailTable"
                     , url: param.url
                     , height: ''
                     , page: false
                     , where: {"pid": selectedData.data[0].id}
-                    , cols: [param.cols]
+                    , cols: [param.baseDetailCols]
                     , hasSelect: param.hasSelect
                 });
             }

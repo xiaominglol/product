@@ -274,6 +274,7 @@ function addRowButton(param) {
             , data: tableData
             , id: param.table
             , cols: [param.cols]
+            , page: true
             , done: function (res, curr, count) {
                 checkboxMultiSelect($, "detailTable");
             }

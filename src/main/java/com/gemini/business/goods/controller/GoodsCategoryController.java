@@ -1,5 +1,6 @@
 package com.gemini.business.goods.controller;
 
+import com.alibaba.fastjson.JSONArray;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -88,6 +89,27 @@ public class GoodsCategoryController {
                 return Message.fail(CommonFailInfo.Id_ALREADY_EXIST);
             }
         } catch (Exception e) {
+            return Message.fail(e.getMessage());
+        }
+    }
+
+    @SysLog("批量添加商品分类表")
+    @PostMapping("/batchAdd")
+    @ResponseBody
+    public Message batchAdd(@RequestBody String batchData) {
+        try {
+//            if (StringUtils.isEmpty(batchData)) {
+            List<GoodsCategoryPo> list = JSONArray.parseArray(batchData, GoodsCategoryPo.class);
+            for (GoodsCategoryPo po : list) {
+                service.insertSync(po, po.getDetailList(), true);
+            }
+            return Message.success(list);
+//                return null;
+//            } else {
+//                return Message.fail(CommonFailInfo.Id_ALREADY_EXIST);
+//            }
+        } catch (Exception e) {
+            e.printStackTrace();
             return Message.fail(e.getMessage());
         }
     }

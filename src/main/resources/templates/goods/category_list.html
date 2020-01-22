@@ -42,6 +42,9 @@
                                                         <span class="layui-btn layui-btn-sm addButton">
                                                 <i class="layui-icon layui-icon-add-circle"></i> 添加
                                             </span>
+                                                        <span class="layui-btn layui-btn-sm batchAddButton">
+                                                <i class="layui-icon layui-icon-add-circle"></i> 批量添加
+                                            </span>
                                                         <span class="layui-btn layui-btn-sm layui-btn-warm editButton">
                                                 <i class="layui-icon layui-icon-edit"></i> 修改
                                             </span>
@@ -128,7 +131,7 @@
         $(".addButton").click(function () {
             requestType = add({
                 title: '添加' + moduleName
-                , cols: baseDetailCols
+                , baseDetailCols: baseDetailCols
             });
         });
 
@@ -137,7 +140,7 @@
             requestType = edit({
                 title: '修改' + moduleName
                 , url: baseUrl
-                , cols: baseDetailCols
+                , baseDetailCols: baseDetailCols
                 , fields: baseUpdateCols
             });
         });
@@ -147,6 +150,26 @@
             data.field.detailList = table.cache.detailTable;
             saveOrUpdate({
                 url: baseUrl
+                , baseUrl: baseUrl
+                , baseCols: baseCols
+                , type: requestType
+                , data: data.field
+            });
+            return false;
+        });
+
+        // 批量添加
+        $(".batchAddButton").click(function () {
+            requestType = add({
+                id: "batchAddOrUpdate"
+                , title: '批量添加' + moduleName
+            });
+        });
+
+        form.on('submit(batchSaveButton)', function (data) {
+            console.log("data", data)
+            saveOrUpdate({
+                url: baseUrl + "/batchAdd"
                 , baseUrl: baseUrl
                 , baseCols: baseCols
                 , type: requestType

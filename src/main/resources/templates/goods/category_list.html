@@ -99,6 +99,19 @@
             , {field: 'sort', type: "text"}
         ];
 
+        var specificationCols = [
+            {type: 'checkbox', width: 35}
+            , {field: 'name', type: "text"}
+            , {field: 'value', type: "text"}
+            , {field: 'sort', type: "text"}
+        ];
+        var paramCols = [
+            {type: 'checkbox', width: 35}
+            , {field: 'name', type: "text"}
+            , {field: 'value', type: "text"}
+            , {field: 'sort', type: "text"}
+        ];
+
         //左侧树
         renderTree({
             url: baseUrl
@@ -126,12 +139,33 @@
             });
             return false;
         });
-
         //添加
         $(".addButton").click(function () {
             requestType = add({
                 title: '添加' + moduleName
                 , baseDetailCols: baseDetailCols
+            });
+
+            table.render({
+                elem: '#specificationDetailTable'
+                , data: []
+                , id: 'specificationDetailTable'
+                , cols: [specificationCols]
+                , page: true
+                , done: function (res, curr, count) {
+                    checkboxMultiSelect($, "specificationDetailTable");
+                }
+            });
+
+            table.render({
+                elem: '#paramDetailTable'
+                , data: []
+                , id: 'paramDetailTable'
+                , cols: [paramCols]
+                , page: true
+                , done: function (res, curr, count) {
+                    checkboxMultiSelect($, "paramDetailTable");
+                }
             });
         });
 

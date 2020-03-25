@@ -21,12 +21,14 @@ spring:
 gemini:
   #用户头像上传目录 /home/gemini/prod/picture
   pictureUploadPath: E:/file/picture/
-
-
 logging:
-  pattern:
-    # 在控制台输出的日志的格式
-    console: '[%-5level] [%d{yyyy-MM-dd HH:mm:ss.SSS}] [%thread] [%logger{50}] %n%msg%n%n'
-    # 指定文件中日志输出的格式
-    file: '[%-5level] [%d{yyyy-MM-dd HH:mm:ss.SSS}] [%thread] [%logger{50}] %n%msg%n%n'
+  level:
+    org.springframework.web: TRACE
+
+#logging:
+#  pattern:
+#    # 在控制台输出的日志的格式
+#    console: '[%-5level] [%d{yyyy-MM-dd HH:mm:ss.SSS}] [%thread] [%logger{50}] %n%msg%n%n'
+#    # 指定文件中日志输出的格式
+#    file: '[%-5level] [%d{yyyy-MM-dd HH:mm:ss.SSS}] [%thread] [%logger{50}] %n%msg%n%n'
 

@@ -77,7 +77,7 @@ public class GoodsCategoryParamController {
     public Message add(@RequestBody GoodsCategoryParamPo po) {
         try {
             if (StringUtils.isEmpty(po.getId())) {
-                service.insertSync(po, po.getDetailList(), true);
+                service.insertSync(po, true);
                 return Message.success(po);
             } else {
                 return Message.fail(CommonFailInfo.Id_ALREADY_EXIST);
@@ -93,7 +93,7 @@ public class GoodsCategoryParamController {
     public Message update(@RequestBody GoodsCategoryParamPo po) {
         try {
             if (!StringUtils.isEmpty(po.getId())) {
-                service.updateSync(po, po.getDetailList(), true);
+                service.updateSync(po, true);
                 return Message.success(po);
             } else {
                 return Message.fail(CommonFailInfo.Id_CAN_NOT_BE_EMPTY);

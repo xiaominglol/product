@@ -25,7 +25,7 @@ import java.util.List;
  */
 @Slf4j
 @Controller
-@RequestMapping("/goods/specification")
+@RequestMapping("/goods/category/specification")
 public class GoodsCategorySpecificationController {
 
     @Autowired

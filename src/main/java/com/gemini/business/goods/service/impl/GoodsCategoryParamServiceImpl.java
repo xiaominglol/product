@@ -2,6 +2,7 @@ package com.gemini.business.goods.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.gemini.boot.framework.mybatis.service.impl.BaseDetailServiceImpl;
+import com.gemini.boot.framework.mybatis.service.impl.BaseServiceImpl;
 import com.gemini.business.goods.mapper.GoodsCategoryParamMapper;
 import com.gemini.business.goods.po.GoodsCategoryParamPo;
 import com.gemini.business.goods.service.GoodsCategoryParamService;
@@ -15,7 +16,7 @@ import org.springframework.util.StringUtils;
  * @date Tue Nov 26 21:22:00 CST 2019
  */
 @Service
-public class GoodsCategoryParamServiceImpl extends BaseDetailServiceImpl<GoodsCategoryParamPo, GoodsCategoryParamPo, GoodsCategoryParamMapper, GoodsCategoryParamMapper> implements GoodsCategoryParamService {
+public class GoodsCategoryParamServiceImpl extends BaseServiceImpl<GoodsCategoryParamPo, GoodsCategoryParamMapper> implements GoodsCategoryParamService {
 
     @Override
     public QueryWrapper<GoodsCategoryParamPo> wrapper(GoodsCategoryParamPo po) {
